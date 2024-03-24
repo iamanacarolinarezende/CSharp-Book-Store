@@ -32,10 +32,13 @@ namespace Final_Project.BLL
         public void UpdateUser(User user) => UserDB.UpdateRecord(user);
         public void DeleteUser(string Username) => UserDB.DeleteRecord(Username);
 
+        //check if username is unique at table of users.
         public bool IsUniqueUName(string userName) => UserDB.IsUniqueUserName(userName);
 
-        public bool ExistEmployeeID (string employeeID) => UserDB.ExistEmployeeID (employeeID);
+        //check if employee exist at the table of employees.
+        public bool ExistEmployeeID_ET (string employeeID) => UserDB.ExistEmployeeID_empTable(employeeID);
 
-        public bool ExistUsernameUser(string employeeID) => UserDB.ExistUsernameUser(employeeID);
+        //check if user ID exist at table of users.
+        public bool ExistEmployeeID_UT(string employeeID) => UserDB.ExistUserIdUser(employeeID);
     }
 }

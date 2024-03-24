@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Final_Project.DAL
@@ -19,7 +20,7 @@ namespace Final_Project.DAL
 
             SqlCommand cmdInsert = new SqlCommand();
             cmdInsert.Connection = conn;
-            cmdInsert.CommandText = "INSERT INTO Users (Username , Password, EmployeeID) " +
+            cmdInsert.CommandText = "INSERT INTO Users (Username , Password, EmployeeIDUser) " +
                                     "VALUES(@Username,@Password, @EmployeeID)";
             cmdInsert.Parameters.AddWithValue("@Username", user.UserName);
             cmdInsert.Parameters.AddWithValue("@Password", user.Password);
@@ -41,7 +42,7 @@ namespace Final_Project.DAL
             {
                 user = new User();
                 user.UserName = reader["Username"].ToString();
-                user.EmployeeID = reader["EmployeeID"].ToString();
+                user.EmployeeID = reader["EmployeeIDUser"].ToString();
                 listUser.Add(user);
             }
             conn.Close();
@@ -62,7 +63,7 @@ namespace Final_Project.DAL
             if (reader.Read())
             {
                 user.UserName = reader["Username"].ToString().Trim();
-                user.EmployeeID = reader["EmployeeID"].ToString();
+                user.EmployeeID = reader["EmployeeIDUser"].ToString();
 
             }
             else
@@ -83,11 +84,11 @@ namespace Final_Project.DAL
             // Create and customize an object of type SqlCommand
             SqlCommand cmdInsert = new SqlCommand();
             cmdInsert.Connection = conn;
-            cmdInsert.CommandText = "UPDATE Users " + //@Password, @EmployeeID
+            cmdInsert.CommandText = "UPDATE Users " + //@Password, @UserName
                                     "    set Username=@Username," +
                                     "        Password=@Password," +
-                                    "        EmployeeID=@EmployeeID " +
-                                    " WHERE  Username=@Username";
+                                    "        EmployeeIDUser=@EmployeeID " +
+                                    " WHERE  EmployeeIDUser=@EmployeeID";
             cmdInsert.Parameters.AddWithValue("@Username", userUpdate.UserName);
             cmdInsert.Parameters.AddWithValue("@Password", userUpdate.Password);
             cmdInsert.Parameters.AddWithValue("@EmployeeID", userUpdate.EmployeeID);
@@ -123,8 +124,8 @@ namespace Final_Project.DAL
             return true;
         }
 
-        //Employee Exist
-        public static bool ExistEmployeeID(string employeeID)
+        //Employee Exist at table of employee
+        public static bool ExistEmployeeID_empTable(string employeeID)
         {
             SqlConnection conn = UtilityDB.GetDBConnection();
             SqlCommand cmdCheckExistence = new SqlCommand();
@@ -140,15 +141,21 @@ namespace Final_Project.DAL
             return count > 0;
         }
 
-        //Update or Delete User by UserName
-        public static bool ExistUsernameUser(string UsName)
+        //Employee exist at table os users
+        public static bool ExistUserIdUser(string UsIDUser)
         {
-            User user = SearchRecord(UsName);
-            if (user != null)
-            {
-                return true;
-            }
-            return false;
+            SqlConnection conn = UtilityDB.GetDBConnection();
+            SqlCommand cmdCheckExistence = new SqlCommand();
+            cmdCheckExistence.Connection = conn;
+            cmdCheckExistence.CommandText = "SELECT COUNT(*) FROM Users WHERE EmployeeIDUser = @EmployeeID";
+            cmdCheckExistence.Parameters.AddWithValue("@EmployeeID", UsIDUser);
+
+            int count = (int)cmdCheckExistence.ExecuteScalar();
+
+            conn.Close();
+
+            // If count is greater than 0, it means that the EmployeeID already has a user associated with it
+            return count > 0;
         }
 
     }

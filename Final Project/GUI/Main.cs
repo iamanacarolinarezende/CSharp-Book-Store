@@ -42,6 +42,8 @@ namespace Final_Project.GUI
         private void buttonSaveUser_Click(object sender, EventArgs e)
         {
             string userName = textBoxUserName.Text.Trim();
+            string inputPass = textBoxPassword.Text.Trim();
+            string input = textBoxEID.Text.Trim();
 
             //Check Empty
             if (string.IsNullOrEmpty(userName))
@@ -63,14 +65,13 @@ namespace Final_Project.GUI
             User user = new User();
             if (!user.IsUniqueUName(userName))
             {
-                MessageBox.Show("This UserName already exists.\nPlease enter another one.", "Invalid UserName", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("This Email already exists.\nPlease enter another one.", "Invalid UserName", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBoxUserName.Clear();
                 textBoxUserName.Focus();
                 return;
             }
 
             //Validate Password
-            String inputPass = textBoxPassword.Text.Trim();
             if (!Validator.IsValidPassword(inputPass))
             {
                 MessageBox.Show("Password must contain at least 8 letters, one upper case,one lower case and one number.\nPlease enter another one.", "Invalid Password", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -79,11 +80,19 @@ namespace Final_Project.GUI
                 return;
             }
 
-            //Chack if Employee Exist
-            String input = textBoxEID.Text.Trim();
-            if (!user.ExistEmployeeID(input))
+            //Check if Employee Exist at table of employee
+            if (!user.ExistEmployeeID_ET(input))
             {
-                MessageBox.Show("This EmployeeID does not exist.\nPlease enter another one.", "Invalid EmployeeID", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("This EmployeeID does not exist or cannot be empty.\nPlease enter another one.", "Invalid EmployeeID", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxEID.Clear();
+                textBoxEID.Focus();
+                return;
+            }
+
+            //Check if employeeID exist at table of users, so the employee does not have 2 acess.
+            if (user.ExistEmployeeID_UT(input))
+            {
+                MessageBox.Show("This EmployeeID already have an User.\nPlease enter another one.", "Invalid EmployeeID", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBoxEID.Clear();
                 textBoxEID.Focus();
                 return;
@@ -124,17 +133,8 @@ namespace Final_Project.GUI
                 return;
             }
 
-            //Check if email exist
-            if (!Validator.IsValidEmailFormat(userName))
-            {
-                MessageBox.Show("Invalid Email format.", "Invalid UserName", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBoxUserName.Clear();
-                textBoxUserName.Focus();
-                return;
-            }
-
-            //Check if employeeID exist
-            if (!userUpdate.ExistEmployeeID(empID))
+            //Check if employeeID exist at table of users
+            if (!userUpdate.ExistEmployeeID_UT(empID))
             {
                 MessageBox.Show("This EmployeeID does not exist.\nPlease enter another one.", "Invalid EmployeeID", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBoxEID.Clear();
@@ -156,16 +156,16 @@ namespace Final_Project.GUI
 
         private void buttonDeleteUser_Click(object sender, EventArgs e)
         {
-            string username = textBoxUserName.Text.Trim();
+            string userName = textBoxUserName.Text.Trim();
             //Check Empty
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrEmpty(userName))
             {
                 MessageBox.Show("Please enter a username.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             //Check Email format
-            if (!Validator.IsValidEmailFormat(username))
+            if (!Validator.IsValidEmailFormat(userName))
             {
                 MessageBox.Show("Invalid Email format.", "Invalid UserName", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBoxUserName.Clear();
@@ -173,13 +173,13 @@ namespace Final_Project.GUI
                 return;
             }
 
-            //Check if UserName exist
+            //Check if UserName exist, if email exist
             User userDel = new User();
-            if (!userDel.ExistUsernameUser(username))
+            if (userDel.IsUniqueUName(userName))
             {
-                MessageBox.Show("This UserName does not exist.\nPlease enter another one.", "Invalid UserName", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBoxEID.Clear();
-                textBoxEID.Focus();
+                MessageBox.Show("This UserName already exists.\nPlease enter another one.", "Invalid UserName", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxUserName.Clear();
+                textBoxUserName.Focus();
                 return;
             }
 
@@ -187,7 +187,7 @@ namespace Final_Project.GUI
             var answer = MessageBox.Show("Do you really want to delete this employee?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (answer == DialogResult.Yes)
             {
-                userDel.DeleteUser(username);
+                userDel.DeleteUser(userName);
                 MessageBox.Show("Employee data has been deleted successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
