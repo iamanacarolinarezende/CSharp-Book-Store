@@ -196,5 +196,19 @@ namespace Final_Project.GUI
             textBoxEID.Clear();
             textBoxUserName.Focus();
         }
+
+        private void buttonList_Click(object sender, EventArgs e)
+        {
+            listViewUser.Items.Clear();
+            User user = new User();
+            List<User> listU = user.GetUserList();
+
+            foreach (User uname in listU)
+            {
+                ListViewItem item = new ListViewItem(uname.UserName);
+                item.SubItems.Add(uname.EmployeeID);
+                listViewUser.Items.Add(item);
+            }
+        }
     }
 }

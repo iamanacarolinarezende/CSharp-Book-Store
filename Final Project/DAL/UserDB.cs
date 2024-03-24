@@ -141,7 +141,7 @@ namespace Final_Project.DAL
             return count > 0;
         }
 
-        //Employee exist at table os users
+        //Employee exist at table of users
         public static bool ExistUserIdUser(string UsIDUser)
         {
             SqlConnection conn = UtilityDB.GetDBConnection();
