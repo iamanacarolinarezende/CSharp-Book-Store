@@ -1,4 +1,4 @@
-# C# Book Store System
+# C# Book Store System (Working)
 
 This repository contains a C# Book Store System project developed as a Windows Form application for a college assignment. The system is designed to manage book inventory, sales, and user accounts. Currently, the Employee screen and User screen functionalities are implemented.
 
