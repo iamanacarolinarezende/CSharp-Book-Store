@@ -63,8 +63,33 @@ namespace Final_Project.DAL
             if (reader.Read())
             {
                 user.UserName = reader["Username"].ToString().Trim();
+                user.Password = string.Empty;
                 user.EmployeeID = reader["EmployeeIDUser"].ToString();
+            }
+            else
+            {
+                user = null;
+            }
+            conn.Close();
+            return user;
+        }
 
+        //Search by EmployeeID
+        public static User SearchRecordEID(string UsName)
+        {
+            User user = new User();
+            SqlConnection conn = UtilityDB.GetDBConnection();
+            SqlCommand cmdSearchByID = new SqlCommand();
+            cmdSearchByID.Connection = conn;
+            cmdSearchByID.CommandText = "SELECT * FROM Users " +
+                                        "WHERE EmployeeIDUser=@EmployeeID";
+            cmdSearchByID.Parameters.AddWithValue("@EmployeeID", UsName);
+            SqlDataReader reader = cmdSearchByID.ExecuteReader();
+            if (reader.Read())
+            {
+                user.UserName = reader["Username"].ToString().Trim();
+                user.Password = string.Empty;
+                user.EmployeeID = reader["EmployeeIDUser"].ToString();
             }
             else
             {

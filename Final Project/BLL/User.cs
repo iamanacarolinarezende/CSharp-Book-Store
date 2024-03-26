@@ -13,23 +13,31 @@ namespace Final_Project.BLL
         public string Password { get; set; }
         public string EmployeeID { get; set; }
 
-        // save user
-        public void SaveUser(User user)
-        {
-            UserDB.SaveInfo(user);
-        }
-
+        //Save User
+        public void SaveUser(User user) =>UserDB.SaveInfo(user);
+        
+        //List all users
         public List<User> GetUserList()
         {
             return UserDB.GetAllInfos();
         }
 
-        public User SearchUser(string userID)
+        //Search user by Username
+        public User SearchUser(string userName)
         {
-            return UserDB.SearchRecord(userID);
+            return UserDB.SearchRecord(userName);
         }
 
+        //Search user by Employee ID
+        public User SearchUserEmpID(string userID)
+        {
+            return UserDB.SearchRecordEID(userID);
+        }
+
+        //Update the user
         public void UpdateUser(User user) => UserDB.UpdateRecord(user);
+
+        //Delete User
         public void DeleteUser(string Username) => UserDB.DeleteRecord(Username);
 
         //check if username is unique at table of users.

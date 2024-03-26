@@ -14,6 +14,8 @@ using Final_Project.DAL;
 using Final_Project.VALIDATION;
 using Final_Project.BLL;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Security.Cryptography;
+using System.Xml.Linq;
 
 namespace Final_Project.GUI
 {
@@ -120,7 +122,7 @@ namespace Final_Project.GUI
             //Check Empty
             if (string.IsNullOrEmpty(userName))
             {
-                MessageBox.Show("Please enter a username.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter an username.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -142,7 +144,7 @@ namespace Final_Project.GUI
                 return;
             }
 
-            
+
             userUpdate.UserName = textBoxUserName.Text.Trim();
             userUpdate.Password = textBoxPassword.Text.Trim();
             userUpdate.EmployeeID = textBoxEID.Text.Trim();
@@ -208,6 +210,318 @@ namespace Final_Project.GUI
                 ListViewItem item = new ListViewItem(uname.UserName);
                 item.SubItems.Add(uname.EmployeeID);
                 listViewUser.Items.Add(item);
+            }
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            if (comboBoxSearchOption.SelectedIndex == -1 || comboBoxSearchOption.SelectedIndex == 0)
+            {
+                MessageBox.Show("Please select one option first", "Search option", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // search by UserName
+            User uName = new User();
+            string input = "";
+            switch (comboBoxSearchOption.SelectedIndex)
+            {
+                case 1: //Search by UserName
+                    input = textBoxSearch.Text.Trim();
+                    if (!Validator.IsValidEmailFormat(input))
+                    {
+                        listViewUser.Items.Clear();
+                        MessageBox.Show("Username must be an valid Email.", "Invalid Employee Email", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBoxUserName.Clear();
+                        textBoxUserName.Focus();
+                        return;
+                    }
+                    uName = uName.SearchUser(input);
+                    if (uName != null)
+                    {
+                        textBoxUserName.Text = uName.UserName.ToString();
+                        textBoxPassword.Text = uName.Password.ToString();
+                        textBoxEID.Text = uName.EmployeeID.ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Employee not found!", "Invalid Employee Id", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBoxSearch.Clear();
+                        textBoxSearch.Focus();
+
+                        textBoxUserName.Clear();
+                        textBoxPassword.Clear();
+
+                    }
+                    break;
+                case 2: //Search by Employee ID (falta fazer o overload)
+                    input = textBoxSearch.Text.Trim();
+                    uName = uName.SearchUserEmpID(input);
+                    if (uName != null)
+                    {
+                        textBoxUserName.Text = uName.UserName.ToString();
+                        textBoxPassword.Text = uName.Password.ToString();
+                        textBoxEID.Text = uName.EmployeeID.ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Employee not found!", "Invalid Employee Id", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBoxSearch.Clear();
+                        textBoxSearch.Focus();
+
+                        textBoxUserName.Clear();
+                        textBoxPassword.Clear();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void comboBoxSearchOption_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int indexSelected = comboBoxSearchOption.SelectedIndex;
+            switch (indexSelected)
+            {
+                case 1:
+                    labelMessageU.Text = "Please enter the UserName";
+                    textBoxSearch.Clear();
+                    textBoxSearch.Focus();
+                    break;
+                case 2:
+                    labelMessageU.Text = "Please enter the Employee ID";
+                    textBoxSearch.Clear();
+                    textBoxSearch.Focus();
+                    break;
+            }
+
+        }
+
+        //===================================== EMPLOYEE FORM ==========================================
+        private void Main_Load(object sender, EventArgs e)
+        {
+            textBoxLN.Visible = false;
+            labelLN.Visible = false;
+        }
+
+        private void buttonExitE_Click(object sender, EventArgs e)
+        {
+            var answer = MessageBox.Show("Do you really want to exit the application?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void buttonSaveEmp_Click(object sender, EventArgs e)
+        {
+            string EID = textBoxEmployeeId.Text.Trim();
+            string FName = textBoxFirstName.Text.Trim();
+            string LName = textBoxLastName.Text.Trim();
+            string JTitle = textBoxJobTitle.Text.Trim();
+            string Phone = textBoxPhoneEmp.Text.Trim();
+
+
+            //Check Empty textbox
+            if (string.IsNullOrEmpty(EID) && string.IsNullOrEmpty(FName) && string.IsNullOrEmpty(LName) && string.IsNullOrEmpty(JTitle))
+            {
+                MessageBox.Show("Please fill in all required fields (*).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //Check ID format
+            if (!Validator.IsValidId(EID))
+            {
+                MessageBox.Show("Employee Id must be 4-digit number.", "Invalid Employee ID", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxEmployeeId.Clear();
+                textBoxEmployeeId.Focus();
+                return;
+            }
+
+            // Check if employee ID is unique
+            Employee emp = new Employee();
+            if (!emp.IsUniqueEmployeeId(Convert.ToInt32(EID)))
+            {
+                MessageBox.Show("Employee Id must be unique.\n" + "Please enter another EmployeeId.", "Duplicate EmployeeId", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxEmployeeId.Clear();
+                textBoxEmployeeId.Focus();
+                return;
+
+            }
+
+            //Validate First Name
+            if (!Validator.IsValidName(FName))
+            {
+                MessageBox.Show("Invalid First Name.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxFirstName.Clear();
+                textBoxFirstName.Focus();
+                return;
+
+            }
+
+            //Validate Last Name
+            if (!Validator.IsValidName(LName))
+            {
+                MessageBox.Show("Invalid Last Name.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxLastName.Clear();
+                textBoxLastName.Focus();
+                return;
+
+            }
+
+            //Validate job title
+            if (!Validator.IsValidName(JTitle))
+            {
+                MessageBox.Show("Invalid Job Title.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxJobTitle.Clear();
+                textBoxJobTitle.Focus();
+                return;
+
+            }
+
+            //Valid Phone
+            if (!Validator.IsValidPhone(Phone))
+            {
+                MessageBox.Show("Invalid Phone Number. Must be: 123-456-7890 or 123 456 7890\r\n or 1234567890\r\n", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxJobTitle.Clear();
+                textBoxJobTitle.Focus();
+                return;
+
+            }
+
+            //Save Employee
+            emp.EmployeeID = Convert.ToInt32(textBoxEmployeeId.Text.Trim());
+            emp.FirstName = textBoxFirstName.Text.Trim();
+            emp.LastName = textBoxLastName.Text.Trim();
+            emp.JobTitle = textBoxJobTitle.Text.Trim();
+            emp.Phone = textBoxPhoneEmp.Text.Trim();
+            emp.SaveEmployee(emp);
+            MessageBox.Show("Employee data has been saved successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            textBoxEmployeeId.Clear();
+            textBoxFirstName.Clear();
+            textBoxLastName.Clear();
+            textBoxJobTitle.Clear();
+            textBoxPhoneEmp.Clear();
+            textBoxEmployeeId.Focus();
+
+        }
+
+        private void buttonUpdateEmp_Click(object sender, EventArgs e)
+        {
+            string EID = textBoxEmployeeId.Text.Trim();
+            string FName = textBoxFirstName.Text.Trim();
+            string LName = textBoxLastName.Text.Trim();
+            string JTitle = textBoxJobTitle.Text.Trim();
+            string Phone = textBoxPhoneEmp.Text.Trim();
+
+            // Check if employee ID is exist
+            Employee emp = new Employee();
+            if (emp.IsUniqueEmployeeId(Convert.ToInt32(EID)))
+            {
+                MessageBox.Show("Employee Id does not exist.\n" + "Please enter another EmployeeId.", "Duplicate EmployeeId", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxEmployeeId.Clear();
+                textBoxEmployeeId.Focus();
+                return;
+
+            }
+
+            //Validate First Name
+            if (!Validator.IsValidName(FName))
+            {
+                MessageBox.Show("Invalid First Name.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxFirstName.Clear();
+                textBoxFirstName.Focus();
+                return;
+
+            }
+
+            //Validate Last Name
+            if (!Validator.IsValidName(LName))
+            {
+                MessageBox.Show("Invalid Last Name.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxLastName.Clear();
+                textBoxLastName.Focus();
+                return;
+
+            }
+
+            //Validate job title
+            if (!Validator.IsValidName(JTitle))
+            {
+                MessageBox.Show("Invalid Job Title.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxJobTitle.Clear();
+                textBoxJobTitle.Focus();
+                return;
+
+            }
+
+            //Valid Phone
+            if (!Validator.IsValidPhone(Phone))
+            {
+                MessageBox.Show("Invalid Phone Number. Must be: 123-456-7890 or 123 456 7890\r\n or 1234567890\r\n", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxPhoneEmp.Clear();
+                textBoxPhoneEmp.Focus();
+                return;
+
+            }
+
+            Employee empUpdated = new Employee();
+            empUpdated.EmployeeID = Convert.ToInt32(textBoxEmployeeId.Text.Trim());
+            empUpdated.FirstName = textBoxFirstName.Text.Trim();
+            empUpdated.LastName = textBoxLastName.Text.Trim();
+            empUpdated.JobTitle = textBoxJobTitle.Text.Trim();
+            empUpdated.Phone = textBoxPhoneEmp.Text.Trim();
+            empUpdated.UpdateEmployee(empUpdated);
+            MessageBox.Show("Employee data has been updated successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            textBoxEmployeeId.Clear();
+            textBoxFirstName.Clear();
+            textBoxLastName.Clear();
+            textBoxJobTitle.Clear();
+            textBoxPhoneEmp.Clear();
+            textBoxEmployeeId.Focus();
+        }
+
+        private void buttonDeleteEmp_Click(object sender, EventArgs e)
+        {
+            string EID = textBoxEmployeeId.Text.Trim();
+            if (string.IsNullOrEmpty(EID))
+            {
+                MessageBox.Show("Please fill in the Emploee ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Employee empDeleted = new Employee();
+            var answer = MessageBox.Show("Do you really want to delete this employee?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes)
+            {
+                empDeleted.DeleteEmployee(Convert.ToInt32(textBoxEmployeeId.Text.Trim()));
+                MessageBox.Show("Employee data has been deleted successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            textBoxEmployeeId.Clear();
+            textBoxFirstName.Clear();
+            textBoxLastName.Clear();
+            textBoxJobTitle.Clear();
+            textBoxPhoneEmp.Clear();
+            textBoxEmployeeId.Focus();
+        }
+
+        private void buttonListAllEmployee_Click(object sender, EventArgs e)
+        {
+            listViewEmployee.Items.Clear();
+            Employee employee = new Employee();
+            List<Employee> listE = employee.GetEmployeeList();
+
+            foreach (Employee emp in listE)
+            {
+                ListViewItem item = new ListViewItem(emp.EmployeeID.ToString());
+                item.SubItems.Add(emp.FirstName);
+                item.SubItems.Add(emp.LastName);
+                item.SubItems.Add(emp.JobTitle);
+                item.SubItems.Add(emp.Phone);
+                listViewEmployee.Items.Add(item);
             }
         }
     }
