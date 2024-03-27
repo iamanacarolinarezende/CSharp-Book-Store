@@ -215,6 +215,7 @@ namespace Final_Project.GUI
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
+            listViewUser.Items.Clear();
             if (comboBoxSearchOption.SelectedIndex == -1 || comboBoxSearchOption.SelectedIndex == 0)
             {
                 MessageBox.Show("Please select one option first", "Search option", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -287,11 +288,19 @@ namespace Final_Project.GUI
                     labelMessageU.Text = "Please enter the UserName";
                     textBoxSearch.Clear();
                     textBoxSearch.Focus();
+
+                    textBoxUserName.Clear();
+                    textBoxPassword.Clear();
+                    textBoxEID.Clear();
                     break;
                 case 2:
                     labelMessageU.Text = "Please enter the Employee ID";
                     textBoxSearch.Clear();
                     textBoxSearch.Focus();
+
+                    textBoxUserName.Clear();
+                    textBoxPassword.Clear();
+                    textBoxEID.Clear();
                     break;
             }
 

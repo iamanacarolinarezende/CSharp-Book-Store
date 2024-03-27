@@ -503,7 +503,7 @@
             this.buttonUpdateUser.Name = "buttonUpdateUser";
             this.buttonUpdateUser.Size = new System.Drawing.Size(101, 32);
             this.buttonUpdateUser.TabIndex = 4;
-            this.buttonUpdateUser.Text = "&UpdateUser";
+            this.buttonUpdateUser.Text = "&Update User";
             this.buttonUpdateUser.UseVisualStyleBackColor = true;
             this.buttonUpdateUser.Click += new System.EventHandler(this.buttonUpdateUser_Click);
             // 
@@ -563,7 +563,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(127, 196);
+            this.label3.Location = new System.Drawing.Point(121, 196);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(73, 17);
