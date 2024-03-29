@@ -533,5 +533,63 @@ namespace Final_Project.GUI
                 listViewEmployee.Items.Add(item);
             }
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int indexSelectedE = comboBoxSearchOption.SelectedIndex;
+            switch (indexSelectedE)
+            {
+                case 0:
+                    listViewEmployee.Items.Clear();
+                    textBoxLN.Visible = false;
+                    labelLN.Visible = false;
+                    break;
+
+                case 1:
+                    listViewEmployee.Items.Clear();
+                    textBoxLN.Visible = false;
+                    labelLN.Visible = false;
+
+                    labelMessageE.Text = "Please enter the Employee ID";
+                    textBoxSearch.Clear();
+                    textBoxSearch.Focus();
+                    break;
+
+                case 2:
+                    listViewEmployee.Items.Clear();
+                    textBoxLN.Visible = false;
+                    labelLN.Visible = false;
+
+                    labelMessageE.Text = "Please enter the First Name";
+                    textBoxSearch.Clear();
+                    textBoxSearch.Focus();
+                    break;
+
+                case 3:
+                    listViewEmployee.Items.Clear();
+                    textBoxLN.Visible = false;
+                    labelLN.Visible = false;
+
+                    labelMessageE.Text = "Please enter the Last Name";
+                    textBoxSearch.Clear();
+                    textBoxSearch.Focus();
+                    break;
+
+                case 4:
+                    listViewEmployee.Items.Clear();
+                    textBoxLN.Visible = true;
+                    labelLN.Visible = true;
+
+                    labelMessageE.Text = "Please enter the First Name";
+                    labelELN.Text = "Please enter the Last Name";
+                    textBoxSearch.Clear();
+                    textBoxLN.Clear();
+                    textBoxSearch.Focus();
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 }
