@@ -9,13 +9,13 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 using Final_Project.DAL;
 using Final_Project.VALIDATION;
 using Final_Project.BLL;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Security.Cryptography;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Final_Project.GUI
 {
@@ -309,8 +309,9 @@ namespace Final_Project.GUI
         //===================================== EMPLOYEE FORM ==========================================
         private void Main_Load(object sender, EventArgs e)
         {
-            textBoxLN.Visible = false;
-            labelLN.Visible = false;
+            textBoxLNE.Visible = false; 
+            textBoxSearchE.Visible = false;
+
         }
 
         private void buttonExitE_Click(object sender, EventArgs e)
@@ -536,58 +537,172 @@ namespace Final_Project.GUI
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int indexSelectedE = comboBoxSearchOption.SelectedIndex;
-            switch (indexSelectedE)
+            int indexselect = comboBox1.SelectedIndex;
+            switch (indexselect)
             {
                 case 0:
                     listViewEmployee.Items.Clear();
-                    textBoxLN.Visible = false;
-                    labelLN.Visible = false;
+                    labelSearchE.Visible = false;
+                    textBoxSearchE.Visible=false;
+                    labelLNE.Visible = false;
+                    textBoxLNE.Visible = false;
+
+                    textBoxEmployeeId.Clear();
+                    textBoxFirstName.Clear();
+                    textBoxLastName.Clear();
+                    textBoxJobTitle.Clear();
+                    textBoxPhoneEmp.Clear();
                     break;
 
                 case 1:
-                    listViewEmployee.Items.Clear();
-                    textBoxLN.Visible = false;
-                    labelLN.Visible = false;
+                    listViewEmployee.Items.Clear ();
+                    labelSearchE.Visible = true;
+                    textBoxSearchE.Visible = true;
+                    labelSearchE.Text = "Enter the Employee ID";
+                    labelLNE.Visible = false;
+                    textBoxLNE.Visible = false;
+                    textBoxSearchE.Clear();
 
-                    labelMessageE.Text = "Please enter the Employee ID";
-                    textBoxSearch.Clear();
-                    textBoxSearch.Focus();
+                    textBoxEmployeeId.Clear();
+                    textBoxFirstName.Clear();
+                    textBoxLastName.Clear();
+                    textBoxJobTitle.Clear();
+                    textBoxPhoneEmp.Clear();
                     break;
 
                 case 2:
                     listViewEmployee.Items.Clear();
-                    textBoxLN.Visible = false;
-                    labelLN.Visible = false;
+                    labelSearchE.Visible = true;
+                    textBoxSearchE.Visible = true;
+                    labelSearchE.Text = "Enter the First OR Last Name";
+                    labelLNE.Visible = false;
+                    textBoxLNE.Visible = false;
+                    textBoxSearchE.Clear();
 
-                    labelMessageE.Text = "Please enter the First Name";
-                    textBoxSearch.Clear();
-                    textBoxSearch.Focus();
+                    textBoxEmployeeId.Clear();
+                    textBoxFirstName.Clear();
+                    textBoxLastName.Clear();
+                    textBoxJobTitle.Clear();
+                    textBoxPhoneEmp.Clear();
                     break;
 
                 case 3:
                     listViewEmployee.Items.Clear();
-                    textBoxLN.Visible = false;
-                    labelLN.Visible = false;
+                    labelSearchE.Visible = true;
+                    textBoxSearchE.Visible = true;
+                    labelSearchE.Text = "Enter the First Name";
+                    labelLNE.Visible = true;
+                    labelLNE.Text = "Enter the Last Name";
+                    textBoxLNE.Visible = true;
+                    textBoxSearchE.Clear();
+                    textBoxLNE.Clear();
 
-                    labelMessageE.Text = "Please enter the Last Name";
-                    textBoxSearch.Clear();
-                    textBoxSearch.Focus();
+                    textBoxEmployeeId.Clear();
+                    textBoxFirstName.Clear();
+                    textBoxLastName.Clear();
+                    textBoxJobTitle.Clear();
+                    textBoxPhoneEmp.Clear();
+                    break;
+            }
+        }
+
+        private void buttonSearchEmp_Click(object sender, EventArgs e)
+        {
+            listViewEmployee.Items.Clear();
+
+            Employee emp = new Employee();
+            string input = "";
+            switch (comboBox1.SelectedIndex)
+            {
+                case -1:
+                    MessageBox.Show("Please select the Search option first", "Search option", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
 
-                case 4:
+                case 0:
+                    MessageBox.Show("Please select the Search option first", "Search option", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+
+                case 1: //Search by Employee ID
+                    input = textBoxSearchE.Text.Trim();
+                    if (!Validator.IsValidId(input, 4))
+                    {
+                        MessageBox.Show("Invalid Employee ID", "Error Employee ID", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBoxSearch.Clear();
+                        textBoxSearch.Focus();
+                        return;
+                    }
+                    emp = emp.SearchEmployeeID(Convert.ToInt32(input));
+                    if (emp != null)
+                    {
+                        textBoxEmployeeId.Text = emp.EmployeeID.ToString();
+                        textBoxFirstName.Text = emp.FirstName.ToString();
+                        textBoxLastName.Text = emp.LastName.ToString();
+                        textBoxJobTitle.Text = emp.JobTitle.ToString();
+                        textBoxPhoneEmp.Text = emp.Phone.ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Employee not found!", "Invalid Employee Id", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBoxSearch.Clear();
+                        textBoxSearch.Focus();
+                    }
+                    break;
+
+                case 2://Search by First Name OR Last Name
+                    input = textBoxSearchE.Text.Trim();
+                    List<Employee> listE = new List<Employee>();
+
+                    listE = emp.SearchEmployeeName(input);
                     listViewEmployee.Items.Clear();
-                    textBoxLN.Visible = true;
-                    labelLN.Visible = true;
 
-                    labelMessageE.Text = "Please enter the First Name";
-                    labelELN.Text = "Please enter the Last Name";
-                    textBoxSearch.Clear();
-                    textBoxLN.Clear();
-                    textBoxSearch.Focus();
+                    if (listE != null && listE.Count > 0)
+                    {
+                        foreach (Employee empItem in listE)
+                        {
+                            // MessageBox.Show(empItem.EmployeeId.ToString());
+                            ListViewItem item = new ListViewItem(empItem.EmployeeID.ToString());
+                            item.SubItems.Add(empItem.FirstName);
+                            item.SubItems.Add(empItem.LastName);
+                            item.SubItems.Add(empItem.JobTitle);
+                            item.SubItems.Add(empItem.Phone);
+                            listViewEmployee.Items.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Employee not found!");
+                        textBoxSearch.Clear();
+                        textBoxSearch.Focus();
+                    }
                     break;
 
-                default:
+                case 3://Search by First and Last Name
+                    string input1 = textBoxSearchE.Text.Trim();
+                    string input2 = textBoxLNE.Text.Trim();
+
+                    listE = emp.SearchEmployeeFLName(input1, input2);
+                    listViewEmployee.Items.Clear();
+
+                    if (listE != null && listE.Count > 0)
+                    {
+                        foreach (Employee empItem in listE)
+                        {
+                            // MessageBox.Show(empItem.EmployeeId.ToString());
+                            ListViewItem item = new ListViewItem(empItem.EmployeeID.ToString());
+                            item.SubItems.Add(empItem.FirstName);
+                            item.SubItems.Add(empItem.LastName);
+                            item.SubItems.Add(empItem.JobTitle);
+                            item.SubItems.Add(empItem.Phone);
+                            listViewEmployee.Items.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Employee not found!");
+                        textBoxSearch.Clear();
+                        textBoxSearch.Focus();
+                    }
+                    break;
                     break;
             }
         }

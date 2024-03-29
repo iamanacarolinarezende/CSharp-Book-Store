@@ -28,10 +28,15 @@ namespace Final_Project.BLL
         public bool IsUniqueEmployeeId(int empId) => EmployeeDB.IsUniqueId(empId);
 
         //List all employees
-        public List<Employee> GetEmployeeList()
-        {
-            return EmployeeDB.GetAllRecords();
-        }
+        public List<Employee> GetEmployeeList() => EmployeeDB.GetAllRecords();
 
+        //Search by Employee ID
+        public Employee SearchEmployeeID (int empId) => EmployeeDB.SearchRecord(empId);
+
+        //Search by Employee Name or Last Name
+        public List<Employee> SearchEmployeeName(string inputN) => EmployeeDB.SearchRecord(inputN);
+
+        //Search by Employee First name
+        public List<Employee> SearchEmployeeFLName(string inputF, string inputL) => EmployeeDB.SearchRecord(inputF, inputL);
     }
 }

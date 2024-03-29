@@ -90,6 +90,7 @@ namespace Final_Project.DAL
                 emp.FirstName = reader["FirstName"].ToString().Trim();
                 emp.LastName = reader["LastName"].ToString();
                 emp.JobTitle = reader["JobTitle"].ToString();
+                emp.Phone = reader["Phone"].ToString();
             }
             else //not found
             {
@@ -109,7 +110,7 @@ namespace Final_Project.DAL
             cmdSearchByName.Connection = conn;
             cmdSearchByName.CommandText = "SELECT * FROM Employees " +
                                           "WHERE FirstName = @FirstName " +
-                                          " or LastName=@LastName";
+                                          "or LastName = @LastName ";
 
             cmdSearchByName.Parameters.AddWithValue("@FirstName", input);
             cmdSearchByName.Parameters.AddWithValue("@LastName", input);
@@ -124,13 +125,14 @@ namespace Final_Project.DAL
                     emp.FirstName = reader["FirstName"].ToString();
                     emp.LastName = reader["LastName"].ToString();
                     emp.JobTitle = reader["JobTitle"].ToString();
+                    emp.Phone = reader["Phone"].ToString();
                     listE.Add(emp);
                 }
-
             }
             conn.Close();
             return listE;
         }
+
         //First and Last Name
         public static List<Employee> SearchRecord(string input1, string input2) 
         {

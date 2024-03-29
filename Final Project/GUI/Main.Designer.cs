@@ -28,19 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControlCustomer = new System.Windows.Forms.TabControl();
             this.Employee = new System.Windows.Forms.TabPage();
             this.label15 = new System.Windows.Forms.Label();
             this.textBoxPhoneEmp = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.labelLN = new System.Windows.Forms.Label();
-            this.textBoxLN = new System.Windows.Forms.TextBox();
-            this.buttonSearchEmployee = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.listViewEmployee = new System.Windows.Forms.ListView();
             this.colEmployeeId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colFirstName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -84,35 +80,45 @@
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxUserName = new System.Windows.Forms.TextBox();
-            this.tabControl1.SuspendLayout();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.labelSearchE = new System.Windows.Forms.Label();
+            this.textBoxSearchE = new System.Windows.Forms.TextBox();
+            this.textBoxLNE = new System.Windows.Forms.TextBox();
+            this.labelLNE = new System.Windows.Forms.Label();
+            this.buttonSearchEmp = new System.Windows.Forms.Button();
+            this.tabControlCustomer.SuspendLayout();
             this.Employee.SuspendLayout();
             this.User.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tabControlCustomer
             // 
-            this.tabControl1.Controls.Add(this.Employee);
-            this.tabControl1.Controls.Add(this.User);
-            this.tabControl1.Location = new System.Drawing.Point(9, 10);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(750, 426);
-            this.tabControl1.TabIndex = 0;
+            this.tabControlCustomer.Controls.Add(this.Employee);
+            this.tabControlCustomer.Controls.Add(this.User);
+            this.tabControlCustomer.Controls.Add(this.tabPage1);
+            this.tabControlCustomer.Location = new System.Drawing.Point(9, 10);
+            this.tabControlCustomer.Margin = new System.Windows.Forms.Padding(2);
+            this.tabControlCustomer.Name = "tabControlCustomer";
+            this.tabControlCustomer.SelectedIndex = 0;
+            this.tabControlCustomer.Size = new System.Drawing.Size(750, 426);
+            this.tabControlCustomer.TabIndex = 0;
             // 
             // Employee
             // 
+            this.Employee.Controls.Add(this.buttonSearchEmp);
+            this.Employee.Controls.Add(this.labelLNE);
+            this.Employee.Controls.Add(this.textBoxLNE);
+            this.Employee.Controls.Add(this.textBoxSearchE);
+            this.Employee.Controls.Add(this.labelSearchE);
+            this.Employee.Controls.Add(this.comboBox1);
             this.Employee.Controls.Add(this.label15);
             this.Employee.Controls.Add(this.textBoxPhoneEmp);
             this.Employee.Controls.Add(this.label14);
             this.Employee.Controls.Add(this.label13);
             this.Employee.Controls.Add(this.labelLN);
-            this.Employee.Controls.Add(this.textBoxLN);
-            this.Employee.Controls.Add(this.buttonSearchEmployee);
             this.Employee.Controls.Add(this.label4);
             this.Employee.Controls.Add(this.label6);
-            this.Employee.Controls.Add(this.comboBox1);
-            this.Employee.Controls.Add(this.textBox1);
             this.Employee.Controls.Add(this.listViewEmployee);
             this.Employee.Controls.Add(this.buttonExitE);
             this.Employee.Controls.Add(this.buttonListAllEmployee);
@@ -188,26 +194,6 @@
             this.labelLN.Size = new System.Drawing.Size(0, 13);
             this.labelLN.TabIndex = 43;
             // 
-            // textBoxLN
-            // 
-            this.textBoxLN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxLN.Location = new System.Drawing.Point(613, 290);
-            this.textBoxLN.Margin = new System.Windows.Forms.Padding(2);
-            this.textBoxLN.Name = "textBoxLN";
-            this.textBoxLN.Size = new System.Drawing.Size(106, 21);
-            this.textBoxLN.TabIndex = 11;
-            // 
-            // buttonSearchEmployee
-            // 
-            this.buttonSearchEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearchEmployee.Location = new System.Drawing.Point(613, 315);
-            this.buttonSearchEmployee.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonSearchEmployee.Name = "buttonSearchEmployee";
-            this.buttonSearchEmployee.Size = new System.Drawing.Size(106, 30);
-            this.buttonSearchEmployee.TabIndex = 12;
-            this.buttonSearchEmployee.Text = "&Search Employee";
-            this.buttonSearchEmployee.UseVisualStyleBackColor = true;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -228,32 +214,6 @@
             this.label6.Size = new System.Drawing.Size(73, 17);
             this.label6.TabIndex = 39;
             this.label6.Text = "Search By";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "",
-            "Employee ID",
-            "First Name",
-            "Last Name",
-            "First & Last Name"});
-            this.comboBox1.Location = new System.Drawing.Point(609, 196);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(115, 24);
-            this.comboBox1.TabIndex = 9;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(613, 244);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(106, 21);
-            this.textBox1.TabIndex = 10;
             // 
             // listViewEmployee
             // 
@@ -719,17 +679,86 @@
             this.textBoxUserName.Size = new System.Drawing.Size(198, 21);
             this.textBoxUserName.TabIndex = 0;
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(742, 400);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Customer";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "",
+            "Employee ID",
+            "First First OR Last Name",
+            "First AND Last Name"});
+            this.comboBox1.Location = new System.Drawing.Point(609, 198);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 59;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // labelSearchE
+            // 
+            this.labelSearchE.AutoSize = true;
+            this.labelSearchE.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSearchE.Location = new System.Drawing.Point(605, 229);
+            this.labelSearchE.Name = "labelSearchE";
+            this.labelSearchE.Size = new System.Drawing.Size(0, 13);
+            this.labelSearchE.TabIndex = 60;
+            // 
+            // textBoxSearchE
+            // 
+            this.textBoxSearchE.Location = new System.Drawing.Point(609, 248);
+            this.textBoxSearchE.Name = "textBoxSearchE";
+            this.textBoxSearchE.Size = new System.Drawing.Size(121, 20);
+            this.textBoxSearchE.TabIndex = 61;
+            // 
+            // textBoxLNE
+            // 
+            this.textBoxLNE.Location = new System.Drawing.Point(609, 290);
+            this.textBoxLNE.Name = "textBoxLNE";
+            this.textBoxLNE.Size = new System.Drawing.Size(121, 20);
+            this.textBoxLNE.TabIndex = 62;
+            // 
+            // labelLNE
+            // 
+            this.labelLNE.AutoSize = true;
+            this.labelLNE.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLNE.Location = new System.Drawing.Point(606, 276);
+            this.labelLNE.Name = "labelLNE";
+            this.labelLNE.Size = new System.Drawing.Size(0, 13);
+            this.labelLNE.TabIndex = 63;
+            // 
+            // buttonSearchEmp
+            // 
+            this.buttonSearchEmp.BackColor = System.Drawing.Color.LightGray;
+            this.buttonSearchEmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearchEmp.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonSearchEmp.Location = new System.Drawing.Point(614, 316);
+            this.buttonSearchEmp.Name = "buttonSearchEmp";
+            this.buttonSearchEmp.Size = new System.Drawing.Size(103, 30);
+            this.buttonSearchEmp.TabIndex = 64;
+            this.buttonSearchEmp.Text = "S&earch";
+            this.buttonSearchEmp.UseVisualStyleBackColor = false;
+            this.buttonSearchEmp.Click += new System.EventHandler(this.buttonSearchEmp_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(766, 440);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabControlCustomer);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Main";
-            this.Text = "Main";
+            this.Text = "Hi-Tech Distribution";
             this.Load += new System.EventHandler(this.Main_Load);
-            this.tabControl1.ResumeLayout(false);
+            this.tabControlCustomer.ResumeLayout(false);
             this.Employee.ResumeLayout(false);
             this.Employee.PerformLayout();
             this.User.ResumeLayout(false);
@@ -740,7 +769,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControlCustomer;
         private System.Windows.Forms.TabPage Employee;
         private System.Windows.Forms.TabPage User;
         private System.Windows.Forms.Label labelMessageU;
@@ -760,12 +789,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxUserName;
         private System.Windows.Forms.Label labelLN;
-        private System.Windows.Forms.TextBox textBoxLN;
-        private System.Windows.Forms.Button buttonSearchEmployee;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ListView listViewEmployee;
         private System.Windows.Forms.ColumnHeader colEmployeeId;
         private System.Windows.Forms.ColumnHeader colFirstName;
@@ -796,5 +821,12 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ColumnHeader colPhone;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textBoxSearchE;
+        private System.Windows.Forms.Label labelSearchE;
+        private System.Windows.Forms.TextBox textBoxLNE;
+        private System.Windows.Forms.Label labelLNE;
+        private System.Windows.Forms.Button buttonSearchEmp;
     }
 }
