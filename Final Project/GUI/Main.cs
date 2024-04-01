@@ -186,11 +186,11 @@ namespace Final_Project.GUI
             }
 
             //Delete User
-            var answer = MessageBox.Show("Do you really want to delete this employee?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var answer = MessageBox.Show("Do you really want to delete this user?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (answer == DialogResult.Yes)
             {
                 userDel.DeleteUser(userName);
-                MessageBox.Show("Employee data has been deleted successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("User data has been deleted successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             textBoxUserName.Clear();
@@ -309,8 +309,15 @@ namespace Final_Project.GUI
         //===================================== EMPLOYEE FORM ==========================================
         private void Main_Load(object sender, EventArgs e)
         {
-            textBoxLNE.Visible = false; 
+            textBoxLNE.Visible = false;
             textBoxSearchE.Visible = false;
+
+            // Populate the comboBoxEmpPositions with positions from the Positions table
+            List<Positions> positions = PositionsDB.GetAllPositions();
+            comboBoxEmpPositions.DataSource = positions;
+            comboBoxEmpPositions.DisplayMember = "PositionName";
+            comboBoxEmpPositions.ValueMember = "PositionID";
+            comboBoxEmpPositions.SelectedIndex = -1;
 
         }
 
@@ -328,12 +335,11 @@ namespace Final_Project.GUI
             string EID = textBoxEmployeeId.Text.Trim();
             string FName = textBoxFirstName.Text.Trim();
             string LName = textBoxLastName.Text.Trim();
-            string JTitle = textBoxJobTitle.Text.Trim();
             string Phone = textBoxPhoneEmp.Text.Trim();
 
 
             //Check Empty textbox
-            if (string.IsNullOrEmpty(EID) && string.IsNullOrEmpty(FName) && string.IsNullOrEmpty(LName) && string.IsNullOrEmpty(JTitle))
+            if (string.IsNullOrEmpty(EID) || string.IsNullOrEmpty(FName) || string.IsNullOrEmpty(LName))
             {
                 MessageBox.Show("Please fill in all required fields (*).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -379,39 +385,40 @@ namespace Final_Project.GUI
 
             }
 
-            //Validate job title
-            if (!Validator.IsValidName(JTitle))
-            {
-                MessageBox.Show("Invalid Job Title.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBoxJobTitle.Clear();
-                textBoxJobTitle.Focus();
-                return;
-
-            }
-
             //Valid Phone
             if (!Validator.IsValidPhone(Phone))
             {
                 MessageBox.Show("Invalid Phone Number. Must be: 123-456-7890 or 123 456 7890\r\n or 1234567890\r\n", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBoxJobTitle.Clear();
-                textBoxJobTitle.Focus();
+                textBoxPhoneEmp.Clear();
+                textBoxPhoneEmp.Focus();
                 return;
 
             }
 
-            //Save Employee
-            emp.EmployeeID = Convert.ToInt32(textBoxEmployeeId.Text.Trim());
-            emp.FirstName = textBoxFirstName.Text.Trim();
-            emp.LastName = textBoxLastName.Text.Trim();
-            emp.JobTitle = textBoxJobTitle.Text.Trim();
-            emp.Phone = textBoxPhoneEmp.Text.Trim();
-            emp.SaveEmployee(emp);
-            MessageBox.Show("Employee data has been saved successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (comboBoxEmpPositions.SelectedItem != null)
+            {
+                // Get the selected position from the combobox
+                Positions selectedPosition = (Positions)comboBoxEmpPositions.SelectedItem;
+
+                // Now you can use the selectedPosition object
+                // Save Employee
+                emp.EmployeeID = Convert.ToInt32(textBoxEmployeeId.Text.Trim());
+                emp.FirstName = textBoxFirstName.Text.Trim();
+                emp.LastName = textBoxLastName.Text.Trim();
+                emp.JobTitle = selectedPosition.PositionID;
+                emp.Phone = textBoxPhoneEmp.Text.Trim();
+                emp.SaveEmployee(emp);
+                MessageBox.Show("Employee data has been saved successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Please select a position.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             textBoxEmployeeId.Clear();
             textBoxFirstName.Clear();
             textBoxLastName.Clear();
-            textBoxJobTitle.Clear();
+            comboBoxEmpPositions.SelectedIndex = -1;
             textBoxPhoneEmp.Clear();
             textBoxEmployeeId.Focus();
 
@@ -422,7 +429,7 @@ namespace Final_Project.GUI
             string EID = textBoxEmployeeId.Text.Trim();
             string FName = textBoxFirstName.Text.Trim();
             string LName = textBoxLastName.Text.Trim();
-            string JTitle = textBoxJobTitle.Text.Trim();
+            int JTitle;
             string Phone = textBoxPhoneEmp.Text.Trim();
 
             // Check if employee ID is exist
@@ -456,16 +463,6 @@ namespace Final_Project.GUI
 
             }
 
-            //Validate job title
-            if (!Validator.IsValidName(JTitle))
-            {
-                MessageBox.Show("Invalid Job Title.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBoxJobTitle.Clear();
-                textBoxJobTitle.Focus();
-                return;
-
-            }
-
             //Valid Phone
             if (!Validator.IsValidPhone(Phone))
             {
@@ -476,19 +473,28 @@ namespace Final_Project.GUI
 
             }
 
-            Employee empUpdated = new Employee();
-            empUpdated.EmployeeID = Convert.ToInt32(textBoxEmployeeId.Text.Trim());
-            empUpdated.FirstName = textBoxFirstName.Text.Trim();
-            empUpdated.LastName = textBoxLastName.Text.Trim();
-            empUpdated.JobTitle = textBoxJobTitle.Text.Trim();
-            empUpdated.Phone = textBoxPhoneEmp.Text.Trim();
-            empUpdated.UpdateEmployee(empUpdated);
-            MessageBox.Show("Employee data has been updated successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (comboBoxEmpPositions.SelectedItem != null)
+            {
+                Employee empUpdated = new Employee();
+                Positions selectedPosition = (Positions)comboBoxEmpPositions.SelectedItem;
+
+                empUpdated.EmployeeID = Convert.ToInt32(textBoxEmployeeId.Text.Trim());
+                empUpdated.FirstName = textBoxFirstName.Text.Trim();
+                empUpdated.LastName = textBoxLastName.Text.Trim();
+                empUpdated.JobTitle = selectedPosition.PositionID;
+                empUpdated.Phone = textBoxPhoneEmp.Text.Trim();
+                empUpdated.UpdateEmployee(empUpdated);
+                MessageBox.Show("Employee data has been updated successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Please select a position.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             textBoxEmployeeId.Clear();
             textBoxFirstName.Clear();
             textBoxLastName.Clear();
-            textBoxJobTitle.Clear();
+            comboBoxEmpPositions.SelectedIndex = -1;
             textBoxPhoneEmp.Clear();
             textBoxEmployeeId.Focus();
         }
@@ -499,6 +505,16 @@ namespace Final_Project.GUI
             if (string.IsNullOrEmpty(EID))
             {
                 MessageBox.Show("Please fill in the Emploee ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //Check if employeeID exist at table of users, so the employee does not have 2 acess.
+            User user = new User();
+            if (user.ExistEmployeeID_UT(EID))
+            {
+                MessageBox.Show("This EmployeeID have an User.\nPlease delete the user first.", "Erro EmployeeID", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxEmployeeId.Clear();
+                textBoxEmployeeId.Focus();
                 return;
             }
 
@@ -513,7 +529,7 @@ namespace Final_Project.GUI
             textBoxEmployeeId.Clear();
             textBoxFirstName.Clear();
             textBoxLastName.Clear();
-            textBoxJobTitle.Clear();
+            comboBoxEmpPositions.SelectedIndex = -1;
             textBoxPhoneEmp.Clear();
             textBoxEmployeeId.Focus();
         }
@@ -522,14 +538,18 @@ namespace Final_Project.GUI
         {
             listViewEmployee.Items.Clear();
             Employee employee = new Employee();
+            
             List<Employee> listE = employee.GetEmployeeList();
+            List<Positions> positions = new Positions().GetPositionList();
 
             foreach (Employee emp in listE)
             {
+                string jobTitleName = positions.FirstOrDefault(p => p.PositionID == emp.JobTitle)?.PositionName;
+
                 ListViewItem item = new ListViewItem(emp.EmployeeID.ToString());
                 item.SubItems.Add(emp.FirstName);
                 item.SubItems.Add(emp.LastName);
-                item.SubItems.Add(emp.JobTitle);
+                item.SubItems.Add(jobTitleName);
                 item.SubItems.Add(emp.Phone);
                 listViewEmployee.Items.Add(item);
             }
@@ -550,7 +570,7 @@ namespace Final_Project.GUI
                     textBoxEmployeeId.Clear();
                     textBoxFirstName.Clear();
                     textBoxLastName.Clear();
-                    textBoxJobTitle.Clear();
+                    comboBoxEmpPositions.SelectedIndex = -1;
                     textBoxPhoneEmp.Clear();
                     break;
 
@@ -566,7 +586,7 @@ namespace Final_Project.GUI
                     textBoxEmployeeId.Clear();
                     textBoxFirstName.Clear();
                     textBoxLastName.Clear();
-                    textBoxJobTitle.Clear();
+                    comboBoxEmpPositions.SelectedIndex = -1;
                     textBoxPhoneEmp.Clear();
                     break;
 
@@ -582,7 +602,7 @@ namespace Final_Project.GUI
                     textBoxEmployeeId.Clear();
                     textBoxFirstName.Clear();
                     textBoxLastName.Clear();
-                    textBoxJobTitle.Clear();
+                    comboBoxEmpPositions.SelectedIndex = -1;
                     textBoxPhoneEmp.Clear();
                     break;
 
@@ -600,7 +620,7 @@ namespace Final_Project.GUI
                     textBoxEmployeeId.Clear();
                     textBoxFirstName.Clear();
                     textBoxLastName.Clear();
-                    textBoxJobTitle.Clear();
+                    comboBoxEmpPositions.SelectedIndex = -1;
                     textBoxPhoneEmp.Clear();
                     break;
             }
@@ -611,6 +631,8 @@ namespace Final_Project.GUI
             listViewEmployee.Items.Clear();
 
             Employee emp = new Employee();
+            List<Positions> pos = new Positions().GetPositionList();
+
             string input = "";
             switch (comboBox1.SelectedIndex)
             {
@@ -622,8 +644,10 @@ namespace Final_Project.GUI
                     MessageBox.Show("Please select the Search option first", "Search option", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
 
-                case 1: //Search by Employee ID
+                //Search by Employee ID
+                case 1: 
                     input = textBoxSearchE.Text.Trim();
+
                     if (!Validator.IsValidId(input, 4))
                     {
                         MessageBox.Show("Invalid Employee ID", "Error Employee ID", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -631,13 +655,14 @@ namespace Final_Project.GUI
                         textBoxSearch.Focus();
                         return;
                     }
+
                     emp = emp.SearchEmployeeID(Convert.ToInt32(input));
                     if (emp != null)
                     {
                         textBoxEmployeeId.Text = emp.EmployeeID.ToString();
                         textBoxFirstName.Text = emp.FirstName.ToString();
                         textBoxLastName.Text = emp.LastName.ToString();
-                        textBoxJobTitle.Text = emp.JobTitle.ToString();
+                        comboBoxEmpPositions.SelectedIndex = emp.JobTitle;
                         textBoxPhoneEmp.Text = emp.Phone.ToString();
                     }
                     else
@@ -648,9 +673,11 @@ namespace Final_Project.GUI
                     }
                     break;
 
-                case 2://Search by First Name OR Last Name
+                //Search by First Name OR Last Name
+                case 2:
                     input = textBoxSearchE.Text.Trim();
                     List<Employee> listE = new List<Employee>();
+                    
 
                     listE = emp.SearchEmployeeName(input);
                     listViewEmployee.Items.Clear();
@@ -659,11 +686,13 @@ namespace Final_Project.GUI
                     {
                         foreach (Employee empItem in listE)
                         {
+                            string jobTitleName = pos.FirstOrDefault(p => p.PositionID == empItem.JobTitle)?.PositionName;
+
                             // MessageBox.Show(empItem.EmployeeId.ToString());
                             ListViewItem item = new ListViewItem(empItem.EmployeeID.ToString());
                             item.SubItems.Add(empItem.FirstName);
                             item.SubItems.Add(empItem.LastName);
-                            item.SubItems.Add(empItem.JobTitle);
+                            item.SubItems.Add(jobTitleName);
                             item.SubItems.Add(empItem.Phone);
                             listViewEmployee.Items.Add(item);
                         }
@@ -676,7 +705,8 @@ namespace Final_Project.GUI
                     }
                     break;
 
-                case 3://Search by First and Last Name
+                //Search by First and Last Name
+                case 3:
                     string input1 = textBoxSearchE.Text.Trim();
                     string input2 = textBoxLNE.Text.Trim();
 
@@ -687,11 +717,13 @@ namespace Final_Project.GUI
                     {
                         foreach (Employee empItem in listE)
                         {
+                            string jobTitleName = pos.FirstOrDefault(p => p.PositionID == empItem.JobTitle)?.PositionName;
+
                             // MessageBox.Show(empItem.EmployeeId.ToString());
                             ListViewItem item = new ListViewItem(empItem.EmployeeID.ToString());
                             item.SubItems.Add(empItem.FirstName);
                             item.SubItems.Add(empItem.LastName);
-                            item.SubItems.Add(empItem.JobTitle);
+                            item.SubItems.Add(jobTitleName);
                             item.SubItems.Add(empItem.Phone);
                             listViewEmployee.Items.Add(item);
                         }
@@ -705,6 +737,11 @@ namespace Final_Project.GUI
                     break;
                     break;
             }
+        }
+
+        private void comboBoxEmpPositions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

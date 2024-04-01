@@ -30,6 +30,13 @@
         {
             this.tabControlCustomer = new System.Windows.Forms.TabControl();
             this.Employee = new System.Windows.Forms.TabPage();
+            this.comboBoxEmpPositions = new System.Windows.Forms.ComboBox();
+            this.buttonSearchEmp = new System.Windows.Forms.Button();
+            this.labelLNE = new System.Windows.Forms.Label();
+            this.textBoxLNE = new System.Windows.Forms.TextBox();
+            this.textBoxSearchE = new System.Windows.Forms.TextBox();
+            this.labelSearchE = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.textBoxPhoneEmp = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -48,7 +55,6 @@
             this.buttonDeleteEmp = new System.Windows.Forms.Button();
             this.buttonUpdateEmp = new System.Windows.Forms.Button();
             this.buttonSaveEmp = new System.Windows.Forms.Button();
-            this.textBoxJobTitle = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.textBoxLastName = new System.Windows.Forms.TextBox();
@@ -81,12 +87,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxUserName = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.labelSearchE = new System.Windows.Forms.Label();
-            this.textBoxSearchE = new System.Windows.Forms.TextBox();
-            this.textBoxLNE = new System.Windows.Forms.TextBox();
-            this.labelLNE = new System.Windows.Forms.Label();
-            this.buttonSearchEmp = new System.Windows.Forms.Button();
             this.tabControlCustomer.SuspendLayout();
             this.Employee.SuspendLayout();
             this.User.SuspendLayout();
@@ -106,6 +106,7 @@
             // 
             // Employee
             // 
+            this.Employee.Controls.Add(this.comboBoxEmpPositions);
             this.Employee.Controls.Add(this.buttonSearchEmp);
             this.Employee.Controls.Add(this.labelLNE);
             this.Employee.Controls.Add(this.textBoxLNE);
@@ -125,7 +126,6 @@
             this.Employee.Controls.Add(this.buttonDeleteEmp);
             this.Employee.Controls.Add(this.buttonUpdateEmp);
             this.Employee.Controls.Add(this.buttonSaveEmp);
-            this.Employee.Controls.Add(this.textBoxJobTitle);
             this.Employee.Controls.Add(this.label7);
             this.Employee.Controls.Add(this.label8);
             this.Employee.Controls.Add(this.textBoxLastName);
@@ -141,6 +141,74 @@
             this.Employee.TabIndex = 0;
             this.Employee.Text = "Employee";
             this.Employee.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxEmpPositions
+            // 
+            this.comboBoxEmpPositions.FormattingEnabled = true;
+            this.comboBoxEmpPositions.Location = new System.Drawing.Point(457, 54);
+            this.comboBoxEmpPositions.Name = "comboBoxEmpPositions";
+            this.comboBoxEmpPositions.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxEmpPositions.TabIndex = 65;
+            this.comboBoxEmpPositions.SelectedIndexChanged += new System.EventHandler(this.comboBoxEmpPositions_SelectedIndexChanged);
+            // 
+            // buttonSearchEmp
+            // 
+            this.buttonSearchEmp.BackColor = System.Drawing.Color.LightGray;
+            this.buttonSearchEmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearchEmp.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonSearchEmp.Location = new System.Drawing.Point(614, 316);
+            this.buttonSearchEmp.Name = "buttonSearchEmp";
+            this.buttonSearchEmp.Size = new System.Drawing.Size(103, 30);
+            this.buttonSearchEmp.TabIndex = 64;
+            this.buttonSearchEmp.Text = "S&earch";
+            this.buttonSearchEmp.UseVisualStyleBackColor = false;
+            this.buttonSearchEmp.Click += new System.EventHandler(this.buttonSearchEmp_Click);
+            // 
+            // labelLNE
+            // 
+            this.labelLNE.AutoSize = true;
+            this.labelLNE.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLNE.Location = new System.Drawing.Point(606, 276);
+            this.labelLNE.Name = "labelLNE";
+            this.labelLNE.Size = new System.Drawing.Size(0, 13);
+            this.labelLNE.TabIndex = 63;
+            // 
+            // textBoxLNE
+            // 
+            this.textBoxLNE.Location = new System.Drawing.Point(609, 290);
+            this.textBoxLNE.Name = "textBoxLNE";
+            this.textBoxLNE.Size = new System.Drawing.Size(121, 20);
+            this.textBoxLNE.TabIndex = 62;
+            // 
+            // textBoxSearchE
+            // 
+            this.textBoxSearchE.Location = new System.Drawing.Point(609, 248);
+            this.textBoxSearchE.Name = "textBoxSearchE";
+            this.textBoxSearchE.Size = new System.Drawing.Size(121, 20);
+            this.textBoxSearchE.TabIndex = 61;
+            // 
+            // labelSearchE
+            // 
+            this.labelSearchE.AutoSize = true;
+            this.labelSearchE.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSearchE.Location = new System.Drawing.Point(605, 229);
+            this.labelSearchE.Name = "labelSearchE";
+            this.labelSearchE.Size = new System.Drawing.Size(0, 13);
+            this.labelSearchE.TabIndex = 60;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "",
+            "Employee ID",
+            "First First OR Last Name",
+            "First AND Last Name"});
+            this.comboBox1.Location = new System.Drawing.Point(609, 198);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 59;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label15
             // 
@@ -320,15 +388,6 @@
             this.buttonSaveEmp.UseVisualStyleBackColor = true;
             this.buttonSaveEmp.Click += new System.EventHandler(this.buttonSaveEmp_Click);
             // 
-            // textBoxJobTitle
-            // 
-            this.textBoxJobTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxJobTitle.Location = new System.Drawing.Point(472, 54);
-            this.textBoxJobTitle.Margin = new System.Windows.Forms.Padding(2);
-            this.textBoxJobTitle.Name = "textBoxJobTitle";
-            this.textBoxJobTitle.Size = new System.Drawing.Size(106, 21);
-            this.textBoxJobTitle.TabIndex = 3;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -336,9 +395,9 @@
             this.label7.Location = new System.Drawing.Point(469, 21);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(67, 17);
+            this.label7.Size = new System.Drawing.Size(62, 17);
             this.label7.TabIndex = 29;
-            this.label7.Text = "Job Title*";
+            this.label7.Text = "Job Title";
             // 
             // label8
             // 
@@ -347,9 +406,9 @@
             this.label8.Location = new System.Drawing.Point(317, 21);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(81, 17);
+            this.label8.Size = new System.Drawing.Size(76, 17);
             this.label8.TabIndex = 28;
-            this.label8.Text = "Last Name*";
+            this.label8.Text = "Last Name";
             // 
             // textBoxLastName
             // 
@@ -367,9 +426,9 @@
             this.label9.Location = new System.Drawing.Point(173, 21);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(81, 17);
+            this.label9.Size = new System.Drawing.Size(76, 17);
             this.label9.TabIndex = 26;
-            this.label9.Text = "First Name*";
+            this.label9.Text = "First Name";
             // 
             // textBoxFirstName
             // 
@@ -387,9 +446,9 @@
             this.label10.Location = new System.Drawing.Point(25, 21);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(92, 17);
+            this.label10.Size = new System.Drawing.Size(87, 17);
             this.label10.TabIndex = 24;
-            this.label10.Text = "Employee ID*";
+            this.label10.Text = "Employee ID";
             // 
             // textBoxEmployeeId
             // 
@@ -689,65 +748,6 @@
             this.tabPage1.Text = "Customer";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "",
-            "Employee ID",
-            "First First OR Last Name",
-            "First AND Last Name"});
-            this.comboBox1.Location = new System.Drawing.Point(609, 198);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 59;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // labelSearchE
-            // 
-            this.labelSearchE.AutoSize = true;
-            this.labelSearchE.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSearchE.Location = new System.Drawing.Point(605, 229);
-            this.labelSearchE.Name = "labelSearchE";
-            this.labelSearchE.Size = new System.Drawing.Size(0, 13);
-            this.labelSearchE.TabIndex = 60;
-            // 
-            // textBoxSearchE
-            // 
-            this.textBoxSearchE.Location = new System.Drawing.Point(609, 248);
-            this.textBoxSearchE.Name = "textBoxSearchE";
-            this.textBoxSearchE.Size = new System.Drawing.Size(121, 20);
-            this.textBoxSearchE.TabIndex = 61;
-            // 
-            // textBoxLNE
-            // 
-            this.textBoxLNE.Location = new System.Drawing.Point(609, 290);
-            this.textBoxLNE.Name = "textBoxLNE";
-            this.textBoxLNE.Size = new System.Drawing.Size(121, 20);
-            this.textBoxLNE.TabIndex = 62;
-            // 
-            // labelLNE
-            // 
-            this.labelLNE.AutoSize = true;
-            this.labelLNE.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLNE.Location = new System.Drawing.Point(606, 276);
-            this.labelLNE.Name = "labelLNE";
-            this.labelLNE.Size = new System.Drawing.Size(0, 13);
-            this.labelLNE.TabIndex = 63;
-            // 
-            // buttonSearchEmp
-            // 
-            this.buttonSearchEmp.BackColor = System.Drawing.Color.LightGray;
-            this.buttonSearchEmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearchEmp.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonSearchEmp.Location = new System.Drawing.Point(614, 316);
-            this.buttonSearchEmp.Name = "buttonSearchEmp";
-            this.buttonSearchEmp.Size = new System.Drawing.Size(103, 30);
-            this.buttonSearchEmp.TabIndex = 64;
-            this.buttonSearchEmp.Text = "S&earch";
-            this.buttonSearchEmp.UseVisualStyleBackColor = false;
-            this.buttonSearchEmp.Click += new System.EventHandler(this.buttonSearchEmp_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -756,7 +756,7 @@
             this.Controls.Add(this.tabControlCustomer);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Main";
-            this.Text = "Hi-Tech Distribution";
+            this.Text = "Hi-Tech Order Management System";
             this.Load += new System.EventHandler(this.Main_Load);
             this.tabControlCustomer.ResumeLayout(false);
             this.Employee.ResumeLayout(false);
@@ -801,7 +801,6 @@
         private System.Windows.Forms.Button buttonDeleteEmp;
         private System.Windows.Forms.Button buttonUpdateEmp;
         private System.Windows.Forms.Button buttonSaveEmp;
-        private System.Windows.Forms.TextBox textBoxJobTitle;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBoxLastName;
@@ -828,5 +827,6 @@
         private System.Windows.Forms.TextBox textBoxLNE;
         private System.Windows.Forms.Label labelLNE;
         private System.Windows.Forms.Button buttonSearchEmp;
+        private System.Windows.Forms.ComboBox comboBoxEmpPositions;
     }
 }

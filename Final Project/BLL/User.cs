@@ -12,6 +12,7 @@ namespace Final_Project.BLL
         public string UserName { get; set; }
         public string Password { get; set; }
         public string EmployeeID { get; set; }
+        public string Positions { get; set; }
 
         //Save User
         public void SaveUser(User user) =>UserDB.SaveInfo(user);
@@ -47,6 +48,9 @@ namespace Final_Project.BLL
         public bool ExistEmployeeID_ET (string employeeID) => UserDB.ExistEmployeeID_empTable(employeeID);
 
         //check if user ID exist at table of users.
-        public bool ExistEmployeeID_UT(string employeeID) => UserDB.ExistUserIdUser(employeeID);
+        public bool ExistEmployeeID_UT(string employeeID) => UserDB.ExistEmpIdUser(employeeID);
+
+        //Is valid User and Password
+        public bool UserLogin (string userName, string password) => UserDB.UserExistsLogin(userName, password);
     }
 }

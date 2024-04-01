@@ -1,6 +1,7 @@
 ﻿using Final_Project.BLL;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
@@ -49,7 +50,7 @@ namespace Final_Project.DAL
             return listUser;
         }
 
-        //Search By
+        //Search By EmployeeID
         public static User SearchRecord(string UsName)
         {
             User user = new User();
@@ -74,7 +75,7 @@ namespace Final_Project.DAL
             return user;
         }
 
-        //Search by EmployeeID
+        //Search by Employee UserName
         public static User SearchRecordEID(string UsName)
         {
             User user = new User();
@@ -102,11 +103,7 @@ namespace Final_Project.DAL
         //Update User
         public static void UpdateRecord(User userUpdate)
         {
-            // Step 1 : Open DB
             SqlConnection conn = UtilityDB.GetDBConnection();
-
-            //Step 2: Perform INSERT operation
-            // Create and customize an object of type SqlCommand
             SqlCommand cmdInsert = new SqlCommand();
             cmdInsert.Connection = conn;
             cmdInsert.CommandText = "UPDATE Users " + //@Password, @UserName
@@ -118,7 +115,7 @@ namespace Final_Project.DAL
             cmdInsert.Parameters.AddWithValue("@Password", userUpdate.Password);
             cmdInsert.Parameters.AddWithValue("@EmployeeID", userUpdate.EmployeeID);
             cmdInsert.ExecuteNonQuery();
-            //Step 3 : Close DB
+
             conn.Close();
         }
 
@@ -167,13 +164,31 @@ namespace Final_Project.DAL
         }
 
         //Employee exist at table of users
-        public static bool ExistUserIdUser(string UsIDUser)
+        public static bool ExistEmpIdUser(string UsIDUser)
         {
             SqlConnection conn = UtilityDB.GetDBConnection();
             SqlCommand cmdCheckExistence = new SqlCommand();
             cmdCheckExistence.Connection = conn;
             cmdCheckExistence.CommandText = "SELECT COUNT(*) FROM Users WHERE EmployeeIDUser = @EmployeeID";
             cmdCheckExistence.Parameters.AddWithValue("@EmployeeID", UsIDUser);
+
+            int count = (int)cmdCheckExistence.ExecuteScalar();
+
+            conn.Close();
+
+            // If count is greater than 0, it means that the EmployeeID already has a user associated with it
+            return count > 0;
+        }
+
+        //Check if username and Password is valid to login
+        public static bool UserExistsLogin(string username, string password)
+        {
+            SqlConnection conn = UtilityDB.GetDBConnection();
+            SqlCommand cmdCheckExistence = new SqlCommand();
+            cmdCheckExistence.Connection = conn;
+            cmdCheckExistence.CommandText = "SELECT COUNT(*) FROM Users WHERE Username = @Username AND Password = @Password";
+            cmdCheckExistence.Parameters.AddWithValue("@Username", username);
+            cmdCheckExistence.Parameters.AddWithValue ("@Password", password);
 
             int count = (int)cmdCheckExistence.ExecuteScalar();
 

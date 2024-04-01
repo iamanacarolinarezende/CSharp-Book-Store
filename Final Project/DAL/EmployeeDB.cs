@@ -89,7 +89,7 @@ namespace Final_Project.DAL
                 emp.EmployeeID = Convert.ToInt32(reader["EmployeeId"]);
                 emp.FirstName = reader["FirstName"].ToString().Trim();
                 emp.LastName = reader["LastName"].ToString();
-                emp.JobTitle = reader["JobTitle"].ToString();
+                emp.JobTitle = Convert.ToInt32(reader["JobTitle"]);
                 emp.Phone = reader["Phone"].ToString();
             }
             else //not found
@@ -124,7 +124,7 @@ namespace Final_Project.DAL
                     emp.EmployeeID = Convert.ToInt32(reader["EmployeeId"]);
                     emp.FirstName = reader["FirstName"].ToString();
                     emp.LastName = reader["LastName"].ToString();
-                    emp.JobTitle = reader["JobTitle"].ToString();
+                    emp.JobTitle = Convert.ToInt32(reader["JobTitle"]);
                     emp.Phone = reader["Phone"].ToString();
                     listE.Add(emp);
                 }
@@ -154,7 +154,7 @@ namespace Final_Project.DAL
                 emp.EmployeeID = Convert.ToInt32(reader["EmployeeID"]);
                 emp.FirstName = reader["FirstName"].ToString();
                 emp.LastName = reader["LastName"].ToString();
-                emp.JobTitle = reader["JobTitle"].ToString();
+                emp.JobTitle = Convert.ToInt32(reader["JobTitle"]);
                 emp.Phone = reader["Phone"].ToString();
                 listE.Add(emp);
             }
@@ -186,7 +186,7 @@ namespace Final_Project.DAL
                 emp.EmployeeID = Convert.ToInt32(reader["EmployeeID"]);
                 emp.FirstName = reader["FirstName"].ToString();
                 emp.LastName = reader["LastName"].ToString();
-                emp.JobTitle = reader["JobTitle"].ToString();
+                emp.JobTitle = Convert.ToInt32(reader["JobTitle"]);
                 emp.Phone = reader["Phone"].ToString();
                 listE.Add(emp); 
             }
