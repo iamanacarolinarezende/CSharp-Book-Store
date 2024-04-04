@@ -36,7 +36,7 @@ namespace Final_Project.VALIDATION
             if (string.IsNullOrWhiteSpace(input))
                 return false;
 
-            string pattern = @"^(\d{3})[-\s]?(\d{3})[-\s]?(\d{4})$";
+            string pattern = @"^(\d{3})-(\d{3})-(\d{4})$";
 
             return Regex.IsMatch(input, pattern);
         }
@@ -79,5 +79,27 @@ namespace Final_Project.VALIDATION
 
             return true;
         }
+
+        public static bool IsValidZip(string postalCode)
+        {
+            if (postalCode.Length == 0)
+            {
+                return false;
+            }
+
+            postalCode = postalCode.Trim().ToUpper();
+
+            if ((postalCode.StartsWith("G") || postalCode.StartsWith("H") || postalCode.StartsWith("J"))
+                 && char.IsDigit(postalCode[1]))
+            {
+                string postalCodePattern = @"^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$";
+                return System.Text.RegularExpressions.Regex.IsMatch(postalCode, postalCodePattern);
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
+    
 }

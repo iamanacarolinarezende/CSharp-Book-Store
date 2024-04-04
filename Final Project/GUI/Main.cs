@@ -332,6 +332,7 @@ namespace Final_Project.GUI
 
         private void buttonSaveEmp_Click(object sender, EventArgs e)
         {
+            
             string EID = textBoxEmployeeId.Text.Trim();
             string FName = textBoxFirstName.Text.Trim();
             string LName = textBoxLastName.Text.Trim();
@@ -388,7 +389,7 @@ namespace Final_Project.GUI
             //Valid Phone
             if (!Validator.IsValidPhone(Phone))
             {
-                MessageBox.Show("Invalid Phone Number. Must be: 123-456-7890 or 123 456 7890\r\n or 1234567890\r\n", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Invalid Phone Number. Must be: 123-456-7890", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBoxPhoneEmp.Clear();
                 textBoxPhoneEmp.Focus();
                 return;
@@ -466,7 +467,7 @@ namespace Final_Project.GUI
             //Valid Phone
             if (!Validator.IsValidPhone(Phone))
             {
-                MessageBox.Show("Invalid Phone Number. Must be: 123-456-7890 or 123 456 7890\r\n or 1234567890\r\n", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Invalid Phone Number. Must be: 123-456-7890", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBoxPhoneEmp.Clear();
                 textBoxPhoneEmp.Focus();
                 return;
@@ -741,6 +742,240 @@ namespace Final_Project.GUI
 
         private void comboBoxEmpPositions_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+        }
+
+        //===================================== CUSTOMER FORM ==========================================
+
+        private void buttonExitCust_Click(object sender, EventArgs e)
+        {
+            var answer = MessageBox.Show("Do you really want to exit the application?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void buttonCustomerSave_Click(object sender, EventArgs e)
+        {
+            string CFName = textBoxCustFN.Text.Trim();
+            string CLName = textBoxCustLN.Text.Trim();
+            string CPhone = textBoxCustPhone.Text.Trim();
+            string CFax = textBoxCustFax.Text.Trim();
+            string CStreet = textBoxCustStreet.Text.Trim();
+            string CCity = textBoxCustCity.Text.Trim();
+            string CZip = textBoxCustPC.Text.Trim();
+            decimal creditLimit;
+
+            //Check Empty textbox
+            if (string.IsNullOrEmpty(CFName) ||
+            string.IsNullOrEmpty(CLName) ||
+            string.IsNullOrEmpty(CPhone) ||
+            string.IsNullOrEmpty(CStreet) ||
+            string.IsNullOrEmpty(CCity) ||
+            string.IsNullOrEmpty(CZip))
+            {
+                MessageBox.Show("Please fill in all required fields (*).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //Validate First Name
+            if (!Validator.IsValidName(CFName))
+            {
+                MessageBox.Show("Invalid First Name.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxCustFN.Clear();
+                textBoxCustFN.Focus();
+                return;
+
+            }
+
+            //Validate Last Name
+            if (!Validator.IsValidName(CLName))
+            {
+                MessageBox.Show("Invalid Last Name.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxCustLN.Clear();
+                textBoxCustLN.Focus();
+                return;
+
+            }
+
+            //Valid Phone
+            if (!Validator.IsValidPhone(CPhone))
+            {
+                MessageBox.Show("Invalid Phone Number. Must be: 123-456-7890", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxCustPhone.Clear();
+                textBoxCustPhone.Focus();
+                return;
+
+            }
+
+            //Validate address
+            if (!Validator.IsValidZip(CZip))
+            {
+                MessageBox.Show("Invalid Zip Code. Must be: X0X 0X0 and from any city at Quebec Province", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxCustPC.Clear();
+                textBoxCustPC.Focus();
+                return;
+            }
+
+            //Validate Credit Limit
+            if (!decimal.TryParse(textBoxCustCredit.Text.Trim(), out creditLimit))
+            {
+                MessageBox.Show("Invalid credit limit. Please enter a valid decimal value.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Customer cust = new Customer();
+            if (!cust.IsUniqueCustomer(CPhone))
+            {
+                MessageBox.Show("This Phone Number already exists.\nPlease enter another one.", "Invalid Phone Number", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxCustPhone.Clear();
+                textBoxCustPhone.Focus();
+                return;
+            }
+
+            //Save Customer
+
+            cust.FirstName = textBoxCustFN.Text.Trim();
+            cust.LastName = textBoxCustLN.Text.Trim();
+            cust.PhoneNumber = textBoxCustPhone.Text.Trim();
+            cust.FaxNumber = textBoxCustFax.Text.Trim();
+            cust.Street = textBoxCustStreet.Text.Trim();
+            cust.City = textBoxCustCity.Text.Trim();
+            cust.PostalCode = textBoxCustPC.Text.Trim();
+            cust.CreditLimit = creditLimit;
+            cust.SaveCustomer(cust);
+
+            MessageBox.Show("Customer Data has been saved successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            textBoxCustFN.Clear();
+            textBoxCustLN.Clear();
+            textBoxCustPhone.Clear();
+            textBoxCustFax.Clear();
+            textBoxCustStreet.Clear();
+            textBoxCustCity.Clear();
+            textBoxCustPC.Clear();
+            textBoxCustFN.Focus();
+        }
+
+        // Update the customer (Falta)
+        private void buttonCustomerUpdate_Click(object sender, EventArgs e)
+        {
+            string CFName = textBoxCustFN.Text.Trim();
+            string CLName = textBoxCustLN.Text.Trim();
+            string CPhone = textBoxCustPhone.Text.Trim();
+            string CFax = textBoxCustFax.Text.Trim();
+            string CStreet = textBoxCustStreet.Text.Trim();
+            string CCity = textBoxCustCity.Text.Trim();
+            string CZip = textBoxCustPC.Text.Trim();
+            decimal creditLimit;
+
+            //Check Empty textbox
+            if (string.IsNullOrEmpty(CFName) ||
+            string.IsNullOrEmpty(CLName) ||
+            string.IsNullOrEmpty(CPhone) ||
+            string.IsNullOrEmpty(CStreet) ||
+            string.IsNullOrEmpty(CCity) ||
+            string.IsNullOrEmpty(CZip))
+            {
+                MessageBox.Show("Please fill in all required fields (*).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //Validate First Name
+            if (!Validator.IsValidName(CFName))
+            {
+                MessageBox.Show("Invalid First Name.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxCustFN.Clear();
+                textBoxCustFN.Focus();
+                return;
+
+            }
+
+            //Validate Last Name
+            if (!Validator.IsValidName(CLName))
+            {
+                MessageBox.Show("Invalid Last Name.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxCustLN.Clear();
+                textBoxCustLN.Focus();
+                return;
+
+            }
+
+            //Valid Phone
+            if (!Validator.IsValidPhone(CPhone))
+            {
+                MessageBox.Show("Invalid Phone Number. Must be: 123-456-7890", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxCustPhone.Clear();
+                textBoxCustPhone.Focus();
+                return;
+
+            }
+
+            //Validate address
+            if (!Validator.IsValidZip(CZip))
+            {
+                MessageBox.Show("Invalid Zip Code. Must be: X0X 0X0 and from any city at Quebec Province", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxCustPC.Clear();
+                textBoxCustPC.Focus();
+                return;
+            }
+
+            //Validate Credit Limit
+            if (!decimal.TryParse(textBoxCustCredit.Text.Trim(), out creditLimit))
+            {
+                // Parsing failed, handle the error as needed
+                // For example, you might display an error message to the user
+                MessageBox.Show("Invalid credit limit. Please enter a valid decimal value.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; // Return from the method or handle the error appropriately
+            }
+        }
+
+        private void buttonListCustomer_Click(object sender, EventArgs e)
+        {
+            StringBuilder message = new StringBuilder();
+
+            listViewCustomers.Items.Clear();
+            Customer cust = new Customer();
+            List<Customer> listC = cust.GetCustomerList();
+
+            foreach (Customer customer in listC)
+            {
+                message.AppendLine($"Name: {customer.FirstName} {customer.LastName}");
+                message.AppendLine($"Phone: {customer.PhoneNumber} | Fax: {customer.FaxNumber}");
+                message.AppendLine($"Street: {customer.Street} | City: {customer.City} | Zip: {customer.PostalCode}");
+                message.AppendLine($"Credit Limit: {customer.CreditLimit}");
+                message.AppendLine($"-----------------------------");
+            }
+
+            MessageBox.Show(message.ToString(), "Customer List", MessageBoxButtons.OK);
+        }
+
+        private void buttonCustomerDelete_Click(object sender, EventArgs e)
+        {
+            string Phone = textBoxCustPhone.Text.Trim();
+            if (string.IsNullOrEmpty(Phone))
+            {
+                MessageBox.Show("Please fill in the Phone Number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Customer custDeleted = new BLL.Customer();
+            var answer = MessageBox.Show("Do you really want to delete this employee?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes)
+            {
+                custDeleted.DeleteCustomer(textBoxCustPhone.Text.Trim());
+                MessageBox.Show("Customer data has been deleted successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            textBoxCustFN.Clear();
+            textBoxCustLN.Clear();
+            textBoxCustPhone.Clear();
+            textBoxCustFax.Clear();
+            textBoxCustStreet.Clear();
+            textBoxCustCity.Clear();
+            textBoxCustPC.Clear();
+            textBoxCustFN.Focus();
 
         }
     }

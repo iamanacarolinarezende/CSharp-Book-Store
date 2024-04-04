@@ -47,9 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\Customer.cs" />
     <Compile Include="BLL\Employee.cs" />
     <Compile Include="BLL\Positions.cs" />
     <Compile Include="BLL\User.cs" />
+    <Compile Include="DAL\CustomerDB.cs" />
     <Compile Include="DAL\EmployeeDB.cs" />
     <Compile Include="DAL\PositionsDB.cs" />
     <Compile Include="DAL\UserDB.cs" />

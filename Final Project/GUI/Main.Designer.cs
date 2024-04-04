@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControlCustomer = new System.Windows.Forms.TabControl();
+            this.tabControl = new System.Windows.Forms.TabControl();
             this.Employee = new System.Windows.Forms.TabPage();
             this.comboBoxEmpPositions = new System.Windows.Forms.ComboBox();
             this.buttonSearchEmp = new System.Windows.Forms.Button();
@@ -86,23 +86,61 @@
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxUserName = new System.Windows.Forms.TextBox();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabControlCustomer.SuspendLayout();
+            this.Customer = new System.Windows.Forms.TabPage();
+            this.textBoxCustCredit = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.textBoxCustPC = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.textBoxCustCity = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.textBoxCustPhone = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.textBoxCustStreet = new System.Windows.Forms.TextBox();
+            this.buttonSearchCust = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBoxSearchCLN = new System.Windows.Forms.TextBox();
+            this.textBoxSearchC = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.comboBoxSearchCustomer = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBoxCustFax = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.listViewCustomers = new System.Windows.Forms.ListView();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonExitCust = new System.Windows.Forms.Button();
+            this.buttonListCustomer = new System.Windows.Forms.Button();
+            this.buttonCustomerDelete = new System.Windows.Forms.Button();
+            this.buttonCustomerUpdate = new System.Windows.Forms.Button();
+            this.buttonCustomerSave = new System.Windows.Forms.Button();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.textBoxCustLN = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.textBoxCustFN = new System.Windows.Forms.TextBox();
+            this.tabControl.SuspendLayout();
             this.Employee.SuspendLayout();
             this.User.SuspendLayout();
+            this.Customer.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControlCustomer
+            // tabControl
             // 
-            this.tabControlCustomer.Controls.Add(this.Employee);
-            this.tabControlCustomer.Controls.Add(this.User);
-            this.tabControlCustomer.Controls.Add(this.tabPage1);
-            this.tabControlCustomer.Location = new System.Drawing.Point(9, 10);
-            this.tabControlCustomer.Margin = new System.Windows.Forms.Padding(2);
-            this.tabControlCustomer.Name = "tabControlCustomer";
-            this.tabControlCustomer.SelectedIndex = 0;
-            this.tabControlCustomer.Size = new System.Drawing.Size(750, 426);
-            this.tabControlCustomer.TabIndex = 0;
+            this.tabControl.Controls.Add(this.Employee);
+            this.tabControl.Controls.Add(this.User);
+            this.tabControl.Controls.Add(this.Customer);
+            this.tabControl.Location = new System.Drawing.Point(9, 10);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(2);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(750, 426);
+            this.tabControl.TabIndex = 0;
             // 
             // Employee
             // 
@@ -148,7 +186,7 @@
             this.comboBoxEmpPositions.Location = new System.Drawing.Point(457, 54);
             this.comboBoxEmpPositions.Name = "comboBoxEmpPositions";
             this.comboBoxEmpPositions.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxEmpPositions.TabIndex = 65;
+            this.comboBoxEmpPositions.TabIndex = 3;
             this.comboBoxEmpPositions.SelectedIndexChanged += new System.EventHandler(this.comboBoxEmpPositions_SelectedIndexChanged);
             // 
             // buttonSearchEmp
@@ -170,7 +208,7 @@
             this.labelLNE.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelLNE.Location = new System.Drawing.Point(606, 276);
             this.labelLNE.Name = "labelLNE";
-            this.labelLNE.Size = new System.Drawing.Size(0, 13);
+            this.labelLNE.Size = new System.Drawing.Size(0, 15);
             this.labelLNE.TabIndex = 63;
             // 
             // textBoxLNE
@@ -193,7 +231,7 @@
             this.labelSearchE.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSearchE.Location = new System.Drawing.Point(605, 229);
             this.labelSearchE.Name = "labelSearchE";
-            this.labelSearchE.Size = new System.Drawing.Size(0, 13);
+            this.labelSearchE.Size = new System.Drawing.Size(0, 15);
             this.labelSearchE.TabIndex = 60;
             // 
             // comboBox1
@@ -217,9 +255,9 @@
             this.label15.Location = new System.Drawing.Point(609, 77);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(73, 13);
+            this.label15.Size = new System.Drawing.Size(85, 15);
             this.label15.TabIndex = 58;
-            this.label15.Text = "555 555-5555";
+            this.label15.Text = "555-555-5555";
             // 
             // textBoxPhoneEmp
             // 
@@ -227,7 +265,7 @@
             this.textBoxPhoneEmp.Location = new System.Drawing.Point(609, 54);
             this.textBoxPhoneEmp.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxPhoneEmp.Name = "textBoxPhoneEmp";
-            this.textBoxPhoneEmp.Size = new System.Drawing.Size(106, 21);
+            this.textBoxPhoneEmp.Size = new System.Drawing.Size(106, 24);
             this.textBoxPhoneEmp.TabIndex = 4;
             // 
             // label14
@@ -237,7 +275,7 @@
             this.label14.Location = new System.Drawing.Point(606, 21);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(49, 17);
+            this.label14.Size = new System.Drawing.Size(56, 20);
             this.label14.TabIndex = 56;
             this.label14.Text = "Phone";
             // 
@@ -248,7 +286,7 @@
             this.label13.Location = new System.Drawing.Point(27, 77);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(40, 13);
+            this.label13.Size = new System.Drawing.Size(46, 15);
             this.label13.TabIndex = 55;
             this.label13.Text = "4 digits";
             // 
@@ -259,7 +297,7 @@
             this.labelLN.Location = new System.Drawing.Point(479, 252);
             this.labelLN.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelLN.Name = "labelLN";
-            this.labelLN.Size = new System.Drawing.Size(0, 13);
+            this.labelLN.Size = new System.Drawing.Size(0, 15);
             this.labelLN.TabIndex = 43;
             // 
             // label4
@@ -269,7 +307,7 @@
             this.label4.Location = new System.Drawing.Point(479, 206);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 13);
+            this.label4.Size = new System.Drawing.Size(0, 15);
             this.label4.TabIndex = 40;
             // 
             // label6
@@ -279,7 +317,7 @@
             this.label6.Location = new System.Drawing.Point(631, 168);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(73, 17);
+            this.label6.Size = new System.Drawing.Size(87, 20);
             this.label6.TabIndex = 39;
             this.label6.Text = "Search By";
             // 
@@ -395,7 +433,7 @@
             this.label7.Location = new System.Drawing.Point(469, 21);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(62, 17);
+            this.label7.Size = new System.Drawing.Size(73, 20);
             this.label7.TabIndex = 29;
             this.label7.Text = "Job Title";
             // 
@@ -406,7 +444,7 @@
             this.label8.Location = new System.Drawing.Point(317, 21);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(76, 17);
+            this.label8.Size = new System.Drawing.Size(91, 20);
             this.label8.TabIndex = 28;
             this.label8.Text = "Last Name";
             // 
@@ -416,7 +454,7 @@
             this.textBoxLastName.Location = new System.Drawing.Point(318, 54);
             this.textBoxLastName.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxLastName.Name = "textBoxLastName";
-            this.textBoxLastName.Size = new System.Drawing.Size(106, 21);
+            this.textBoxLastName.Size = new System.Drawing.Size(106, 24);
             this.textBoxLastName.TabIndex = 2;
             // 
             // label9
@@ -426,7 +464,7 @@
             this.label9.Location = new System.Drawing.Point(173, 21);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(76, 17);
+            this.label9.Size = new System.Drawing.Size(92, 20);
             this.label9.TabIndex = 26;
             this.label9.Text = "First Name";
             // 
@@ -436,7 +474,7 @@
             this.textBoxFirstName.Location = new System.Drawing.Point(174, 54);
             this.textBoxFirstName.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxFirstName.Name = "textBoxFirstName";
-            this.textBoxFirstName.Size = new System.Drawing.Size(106, 21);
+            this.textBoxFirstName.Size = new System.Drawing.Size(106, 24);
             this.textBoxFirstName.TabIndex = 1;
             // 
             // label10
@@ -446,7 +484,7 @@
             this.label10.Location = new System.Drawing.Point(25, 21);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(87, 17);
+            this.label10.Size = new System.Drawing.Size(104, 20);
             this.label10.TabIndex = 24;
             this.label10.Text = "Employee ID";
             // 
@@ -456,7 +494,7 @@
             this.textBoxEmployeeId.Location = new System.Drawing.Point(28, 54);
             this.textBoxEmployeeId.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxEmployeeId.Name = "textBoxEmployeeId";
-            this.textBoxEmployeeId.Size = new System.Drawing.Size(104, 21);
+            this.textBoxEmployeeId.Size = new System.Drawing.Size(104, 24);
             this.textBoxEmployeeId.TabIndex = 0;
             // 
             // User
@@ -498,7 +536,7 @@
             this.label12.Location = new System.Drawing.Point(355, 85);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(40, 13);
+            this.label12.Size = new System.Drawing.Size(46, 15);
             this.label12.TabIndex = 57;
             this.label12.Text = "8 digits";
             // 
@@ -533,7 +571,7 @@
             this.label11.Location = new System.Drawing.Point(594, 85);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(40, 13);
+            this.label11.Size = new System.Drawing.Size(46, 15);
             this.label11.TabIndex = 54;
             this.label11.Text = "4 digits";
             // 
@@ -543,7 +581,7 @@
             this.textBoxEID.Location = new System.Drawing.Point(595, 64);
             this.textBoxEID.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxEID.Name = "textBoxEID";
-            this.textBoxEID.Size = new System.Drawing.Size(61, 21);
+            this.textBoxEID.Size = new System.Drawing.Size(61, 24);
             this.textBoxEID.TabIndex = 2;
             // 
             // EmployeeID
@@ -553,7 +591,7 @@
             this.EmployeeID.Location = new System.Drawing.Point(592, 38);
             this.EmployeeID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.EmployeeID.Name = "EmployeeID";
-            this.EmployeeID.Size = new System.Drawing.Size(83, 17);
+            this.EmployeeID.Size = new System.Drawing.Size(99, 20);
             this.EmployeeID.TabIndex = 52;
             this.EmployeeID.Text = "EmployeeID";
             // 
@@ -575,7 +613,7 @@
             this.labelMessageU.Location = new System.Drawing.Point(89, 249);
             this.labelMessageU.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMessageU.Name = "labelMessageU";
-            this.labelMessageU.Size = new System.Drawing.Size(0, 13);
+            this.labelMessageU.Size = new System.Drawing.Size(0, 15);
             this.labelMessageU.TabIndex = 50;
             // 
             // label3
@@ -585,7 +623,7 @@
             this.label3.Location = new System.Drawing.Point(121, 196);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 17);
+            this.label3.Size = new System.Drawing.Size(87, 20);
             this.label3.TabIndex = 49;
             this.label3.Text = "Search By";
             // 
@@ -600,7 +638,7 @@
             "Employee ID"});
             this.comboBoxSearchOption.Location = new System.Drawing.Point(86, 219);
             this.comboBoxSearchOption.Name = "comboBoxSearchOption";
-            this.comboBoxSearchOption.Size = new System.Drawing.Size(140, 24);
+            this.comboBoxSearchOption.Size = new System.Drawing.Size(140, 28);
             this.comboBoxSearchOption.TabIndex = 7;
             this.comboBoxSearchOption.SelectedIndexChanged += new System.EventHandler(this.comboBoxSearchOption_SelectedIndexChanged);
             // 
@@ -610,7 +648,7 @@
             this.textBoxSearch.Location = new System.Drawing.Point(87, 268);
             this.textBoxSearch.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(140, 21);
+            this.textBoxSearch.Size = new System.Drawing.Size(140, 24);
             this.textBoxSearch.TabIndex = 8;
             // 
             // buttonExit
@@ -670,7 +708,7 @@
             this.label5.Location = new System.Drawing.Point(86, 85);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(79, 13);
+            this.label5.Size = new System.Drawing.Size(93, 15);
             this.label5.TabIndex = 43;
             this.label5.Text = "Type your email";
             // 
@@ -705,7 +743,7 @@
             this.label2.Location = new System.Drawing.Point(353, 38);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 17);
+            this.label2.Size = new System.Drawing.Size(83, 20);
             this.label2.TabIndex = 40;
             this.label2.Text = "Password";
             // 
@@ -715,7 +753,7 @@
             this.textBoxPassword.Location = new System.Drawing.Point(356, 64);
             this.textBoxPassword.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.Size = new System.Drawing.Size(167, 21);
+            this.textBoxPassword.Size = new System.Drawing.Size(167, 24);
             this.textBoxPassword.TabIndex = 1;
             // 
             // label1
@@ -725,7 +763,7 @@
             this.label1.Location = new System.Drawing.Point(84, 38);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 17);
+            this.label1.Size = new System.Drawing.Size(86, 20);
             this.label1.TabIndex = 38;
             this.label1.Text = "Username";
             // 
@@ -735,41 +773,447 @@
             this.textBoxUserName.Location = new System.Drawing.Point(86, 64);
             this.textBoxUserName.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxUserName.Name = "textBoxUserName";
-            this.textBoxUserName.Size = new System.Drawing.Size(198, 21);
+            this.textBoxUserName.Size = new System.Drawing.Size(198, 24);
             this.textBoxUserName.TabIndex = 0;
             // 
-            // tabPage1
+            // Customer
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(742, 400);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "Customer";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.Customer.Controls.Add(this.textBoxCustCredit);
+            this.Customer.Controls.Add(this.label31);
+            this.Customer.Controls.Add(this.textBoxCustPC);
+            this.Customer.Controls.Add(this.label29);
+            this.Customer.Controls.Add(this.textBoxCustCity);
+            this.Customer.Controls.Add(this.label25);
+            this.Customer.Controls.Add(this.label28);
+            this.Customer.Controls.Add(this.textBoxCustPhone);
+            this.Customer.Controls.Add(this.label20);
+            this.Customer.Controls.Add(this.textBoxCustStreet);
+            this.Customer.Controls.Add(this.buttonSearchCust);
+            this.Customer.Controls.Add(this.label16);
+            this.Customer.Controls.Add(this.textBoxSearchCLN);
+            this.Customer.Controls.Add(this.textBoxSearchC);
+            this.Customer.Controls.Add(this.label17);
+            this.Customer.Controls.Add(this.comboBoxSearchCustomer);
+            this.Customer.Controls.Add(this.label18);
+            this.Customer.Controls.Add(this.textBoxCustFax);
+            this.Customer.Controls.Add(this.label19);
+            this.Customer.Controls.Add(this.label21);
+            this.Customer.Controls.Add(this.label22);
+            this.Customer.Controls.Add(this.label23);
+            this.Customer.Controls.Add(this.listViewCustomers);
+            this.Customer.Controls.Add(this.buttonExitCust);
+            this.Customer.Controls.Add(this.buttonListCustomer);
+            this.Customer.Controls.Add(this.buttonCustomerDelete);
+            this.Customer.Controls.Add(this.buttonCustomerUpdate);
+            this.Customer.Controls.Add(this.buttonCustomerSave);
+            this.Customer.Controls.Add(this.label24);
+            this.Customer.Controls.Add(this.label26);
+            this.Customer.Controls.Add(this.textBoxCustLN);
+            this.Customer.Controls.Add(this.label27);
+            this.Customer.Controls.Add(this.textBoxCustFN);
+            this.Customer.Location = new System.Drawing.Point(4, 22);
+            this.Customer.Name = "Customer";
+            this.Customer.Padding = new System.Windows.Forms.Padding(3);
+            this.Customer.Size = new System.Drawing.Size(742, 400);
+            this.Customer.TabIndex = 2;
+            this.Customer.Text = "Customer";
+            this.Customer.UseVisualStyleBackColor = true;
+            // 
+            // textBoxCustCredit
+            // 
+            this.textBoxCustCredit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCustCredit.Location = new System.Drawing.Point(617, 44);
+            this.textBoxCustCredit.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCustCredit.Name = "textBoxCustCredit";
+            this.textBoxCustCredit.Size = new System.Drawing.Size(106, 24);
+            this.textBoxCustCredit.TabIndex = 5;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Location = new System.Drawing.Point(614, 15);
+            this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(96, 20);
+            this.label31.TabIndex = 100;
+            this.label31.Text = "Credit Limit";
+            // 
+            // textBoxCustPC
+            // 
+            this.textBoxCustPC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCustPC.Location = new System.Drawing.Point(467, 117);
+            this.textBoxCustPC.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCustPC.Name = "textBoxCustPC";
+            this.textBoxCustPC.Size = new System.Drawing.Size(106, 24);
+            this.textBoxCustPC.TabIndex = 8;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(464, 90);
+            this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(100, 20);
+            this.label29.TabIndex = 98;
+            this.label29.Text = "Postal Code";
+            // 
+            // textBoxCustCity
+            // 
+            this.textBoxCustCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCustCity.Location = new System.Drawing.Point(317, 117);
+            this.textBoxCustCity.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCustCity.Name = "textBoxCustCity";
+            this.textBoxCustCity.Size = new System.Drawing.Size(106, 24);
+            this.textBoxCustCity.TabIndex = 7;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(314, 90);
+            this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(38, 20);
+            this.label25.TabIndex = 96;
+            this.label25.Text = "City";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(314, 67);
+            this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(85, 15);
+            this.label28.TabIndex = 95;
+            this.label28.Text = "555-555-5555";
+            // 
+            // textBoxCustPhone
+            // 
+            this.textBoxCustPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCustPhone.Location = new System.Drawing.Point(317, 44);
+            this.textBoxCustPhone.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCustPhone.Name = "textBoxCustPhone";
+            this.textBoxCustPhone.Size = new System.Drawing.Size(106, 24);
+            this.textBoxCustPhone.TabIndex = 3;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(18, 90);
+            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(54, 20);
+            this.label20.TabIndex = 93;
+            this.label20.Text = "Street";
+            // 
+            // textBoxCustStreet
+            // 
+            this.textBoxCustStreet.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCustStreet.Location = new System.Drawing.Point(19, 117);
+            this.textBoxCustStreet.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCustStreet.Name = "textBoxCustStreet";
+            this.textBoxCustStreet.Size = new System.Drawing.Size(252, 24);
+            this.textBoxCustStreet.TabIndex = 6;
+            // 
+            // buttonSearchCust
+            // 
+            this.buttonSearchCust.BackColor = System.Drawing.Color.LightGray;
+            this.buttonSearchCust.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearchCust.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonSearchCust.Location = new System.Drawing.Point(617, 310);
+            this.buttonSearchCust.Name = "buttonSearchCust";
+            this.buttonSearchCust.Size = new System.Drawing.Size(103, 30);
+            this.buttonSearchCust.TabIndex = 15;
+            this.buttonSearchCust.Text = "S&earch";
+            this.buttonSearchCust.UseVisualStyleBackColor = false;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(609, 270);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(0, 15);
+            this.label16.TabIndex = 90;
+            // 
+            // textBoxSearchCLN
+            // 
+            this.textBoxSearchCLN.Location = new System.Drawing.Point(612, 284);
+            this.textBoxSearchCLN.Name = "textBoxSearchCLN";
+            this.textBoxSearchCLN.Size = new System.Drawing.Size(121, 20);
+            this.textBoxSearchCLN.TabIndex = 89;
+            // 
+            // textBoxSearchC
+            // 
+            this.textBoxSearchC.Location = new System.Drawing.Point(612, 242);
+            this.textBoxSearchC.Name = "textBoxSearchC";
+            this.textBoxSearchC.Size = new System.Drawing.Size(121, 20);
+            this.textBoxSearchC.TabIndex = 14;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(608, 223);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(0, 15);
+            this.label17.TabIndex = 87;
+            // 
+            // comboBoxSearchCustomer
+            // 
+            this.comboBoxSearchCustomer.FormattingEnabled = true;
+            this.comboBoxSearchCustomer.Items.AddRange(new object[] {
+            "",
+            "Phone Number",
+            "First Name",
+            "Last Name",
+            "City",
+            "Postal Code"});
+            this.comboBoxSearchCustomer.Location = new System.Drawing.Point(612, 192);
+            this.comboBoxSearchCustomer.Name = "comboBoxSearchCustomer";
+            this.comboBoxSearchCustomer.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxSearchCustomer.TabIndex = 13;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(464, 67);
+            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(85, 15);
+            this.label18.TabIndex = 85;
+            this.label18.Text = "555-555-5555";
+            // 
+            // textBoxCustFax
+            // 
+            this.textBoxCustFax.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCustFax.Location = new System.Drawing.Point(467, 44);
+            this.textBoxCustFax.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCustFax.Name = "textBoxCustFax";
+            this.textBoxCustFax.Size = new System.Drawing.Size(106, 24);
+            this.textBoxCustFax.TabIndex = 4;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(464, 15);
+            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(36, 20);
+            this.label19.TabIndex = 84;
+            this.label19.Text = "Fax";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(482, 246);
+            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(0, 15);
+            this.label21.TabIndex = 82;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(482, 200);
+            this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(0, 15);
+            this.label22.TabIndex = 81;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(634, 162);
+            this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(87, 20);
+            this.label23.TabIndex = 80;
+            this.label23.Text = "Search By";
+            // 
+            // listViewCustomers
+            // 
+            this.listViewCustomers.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.listViewCustomers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader5,
+            this.columnHeader6});
+            this.listViewCustomers.GridLines = true;
+            this.listViewCustomers.HideSelection = false;
+            this.listViewCustomers.Location = new System.Drawing.Point(9, 200);
+            this.listViewCustomers.Margin = new System.Windows.Forms.Padding(2);
+            this.listViewCustomers.Name = "listViewCustomers";
+            this.listViewCustomers.Size = new System.Drawing.Size(572, 182);
+            this.listViewCustomers.TabIndex = 79;
+            this.listViewCustomers.UseCompatibleStateImageBehavior = false;
+            this.listViewCustomers.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "First Name";
+            this.columnHeader2.Width = 143;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Last Name";
+            this.columnHeader3.Width = 137;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Phone";
+            this.columnHeader5.Width = 105;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Fax";
+            this.columnHeader6.Width = 85;
+            // 
+            // buttonExitCust
+            // 
+            this.buttonExitCust.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonExitCust.Location = new System.Drawing.Point(616, 356);
+            this.buttonExitCust.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonExitCust.Name = "buttonExitCust";
+            this.buttonExitCust.Size = new System.Drawing.Size(104, 30);
+            this.buttonExitCust.TabIndex = 16;
+            this.buttonExitCust.Text = "E&xit";
+            this.buttonExitCust.UseVisualStyleBackColor = true;
+            this.buttonExitCust.Click += new System.EventHandler(this.buttonExitCust_Click);
+            // 
+            // buttonListCustomer
+            // 
+            this.buttonListCustomer.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonListCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonListCustomer.Location = new System.Drawing.Point(9, 162);
+            this.buttonListCustomer.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonListCustomer.Name = "buttonListCustomer";
+            this.buttonListCustomer.Size = new System.Drawing.Size(166, 30);
+            this.buttonListCustomer.TabIndex = 12;
+            this.buttonListCustomer.Text = "&List Customer";
+            this.buttonListCustomer.UseVisualStyleBackColor = false;
+            this.buttonListCustomer.Click += new System.EventHandler(this.buttonListCustomer_Click);
+            // 
+            // buttonCustomerDelete
+            // 
+            this.buttonCustomerDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCustomerDelete.Location = new System.Drawing.Point(480, 162);
+            this.buttonCustomerDelete.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonCustomerDelete.Name = "buttonCustomerDelete";
+            this.buttonCustomerDelete.Size = new System.Drawing.Size(103, 30);
+            this.buttonCustomerDelete.TabIndex = 11;
+            this.buttonCustomerDelete.Text = "&Delete Employee";
+            this.buttonCustomerDelete.UseVisualStyleBackColor = true;
+            this.buttonCustomerDelete.Click += new System.EventHandler(this.buttonCustomerDelete_Click);
+            // 
+            // buttonCustomerUpdate
+            // 
+            this.buttonCustomerUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCustomerUpdate.Location = new System.Drawing.Point(340, 162);
+            this.buttonCustomerUpdate.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonCustomerUpdate.Name = "buttonCustomerUpdate";
+            this.buttonCustomerUpdate.Size = new System.Drawing.Size(103, 30);
+            this.buttonCustomerUpdate.TabIndex = 10;
+            this.buttonCustomerUpdate.Text = "&Update Employee";
+            this.buttonCustomerUpdate.UseVisualStyleBackColor = true;
+            this.buttonCustomerUpdate.Click += new System.EventHandler(this.buttonCustomerUpdate_Click);
+            // 
+            // buttonCustomerSave
+            // 
+            this.buttonCustomerSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCustomerSave.Location = new System.Drawing.Point(207, 162);
+            this.buttonCustomerSave.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonCustomerSave.Name = "buttonCustomerSave";
+            this.buttonCustomerSave.Size = new System.Drawing.Size(103, 30);
+            this.buttonCustomerSave.TabIndex = 9;
+            this.buttonCustomerSave.Text = "&Save Employee";
+            this.buttonCustomerSave.UseVisualStyleBackColor = true;
+            this.buttonCustomerSave.Click += new System.EventHandler(this.buttonCustomerSave_Click);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(314, 15);
+            this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(56, 20);
+            this.label24.TabIndex = 78;
+            this.label24.Text = "Phone";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(164, 15);
+            this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(91, 20);
+            this.label26.TabIndex = 76;
+            this.label26.Text = "Last Name";
+            // 
+            // textBoxCustLN
+            // 
+            this.textBoxCustLN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCustLN.Location = new System.Drawing.Point(167, 44);
+            this.textBoxCustLN.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCustLN.Name = "textBoxCustLN";
+            this.textBoxCustLN.Size = new System.Drawing.Size(106, 24);
+            this.textBoxCustLN.TabIndex = 1;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(16, 15);
+            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(92, 20);
+            this.label27.TabIndex = 75;
+            this.label27.Text = "First Name";
+            // 
+            // textBoxCustFN
+            // 
+            this.textBoxCustFN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCustFN.Location = new System.Drawing.Point(19, 44);
+            this.textBoxCustFN.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCustFN.Name = "textBoxCustFN";
+            this.textBoxCustFN.Size = new System.Drawing.Size(104, 24);
+            this.textBoxCustFN.TabIndex = 0;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(766, 440);
-            this.Controls.Add(this.tabControlCustomer);
+            this.Controls.Add(this.tabControl);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Main";
             this.Text = "Hi-Tech Order Management System";
             this.Load += new System.EventHandler(this.Main_Load);
-            this.tabControlCustomer.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
             this.Employee.ResumeLayout(false);
             this.Employee.PerformLayout();
             this.User.ResumeLayout(false);
             this.User.PerformLayout();
+            this.Customer.ResumeLayout(false);
+            this.Customer.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControlCustomer;
+        private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage Employee;
         private System.Windows.Forms.TabPage User;
         private System.Windows.Forms.Label labelMessageU;
@@ -820,7 +1264,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ColumnHeader colPhone;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage Customer;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBoxSearchE;
         private System.Windows.Forms.Label labelSearchE;
@@ -828,5 +1272,42 @@
         private System.Windows.Forms.Label labelLNE;
         private System.Windows.Forms.Button buttonSearchEmp;
         private System.Windows.Forms.ComboBox comboBoxEmpPositions;
+        private System.Windows.Forms.Button buttonSearchCust;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBoxSearchCLN;
+        private System.Windows.Forms.TextBox textBoxSearchC;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ComboBox comboBoxSearchCustomer;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox textBoxCustFax;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.ListView listViewCustomers;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.Button buttonExitCust;
+        private System.Windows.Forms.Button buttonListCustomer;
+        private System.Windows.Forms.Button buttonCustomerDelete;
+        private System.Windows.Forms.Button buttonCustomerUpdate;
+        private System.Windows.Forms.Button buttonCustomerSave;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox textBoxCustLN;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox textBoxCustFN;
+        private System.Windows.Forms.TextBox textBoxCustCredit;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.TextBox textBoxCustPC;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.TextBox textBoxCustCity;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox textBoxCustPhone;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox textBoxCustStreet;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
     }
 }
