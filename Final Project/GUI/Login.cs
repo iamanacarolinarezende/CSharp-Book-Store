@@ -29,25 +29,40 @@ namespace Final_Project.GUI
             }
         }
 
-
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            User user = new User();
             string username = textBoxLoginUser.Text.Trim();
             string password = textBoxLoginPass.Text;
 
+            User user = new User();
+
             if (user.UserLogin(username, password))
             {
+                int jobTitleNumber = Convert.ToInt32(User.GetEmployeeJob(username, password));
+                //MessageBox.Show($"Your Job Title Number is: {jobTitleNumber}", "Job Title Number", MessageBoxButtons.OK);
+
                 Main mainForm = new Main();
+
+                if (jobTitleNumber == 2)
+                {
+                    mainForm.tabControlMain.TabPages.RemoveAt(1);
+                    mainForm.tabControlMain.TabPages.RemoveAt(0);
+                }
+                else if (jobTitleNumber == 4)
+                {
+                    
+                }
+
                 mainForm.Show();
-                this.Hide(); // Optionally hide the login form
-                return;
+                this.Hide();
             }
             else
             {
-                // Login failed, show an error message
                 MessageBox.Show("Invalid username or password", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
+
+
 }

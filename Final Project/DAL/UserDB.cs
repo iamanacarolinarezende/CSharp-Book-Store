@@ -19,6 +19,7 @@ namespace Final_Project.DAL
         {
             SqlConnection conn = UtilityDB.GetDBConnection();
 
+            //Save the User info
             SqlCommand cmdInsert = new SqlCommand();
             cmdInsert.Connection = conn;
             cmdInsert.CommandText = "INSERT INTO Users (Username , Password, EmployeeIDUser) " +
@@ -180,15 +181,15 @@ namespace Final_Project.DAL
             return count > 0;
         }
 
-        //Check if username and Password is valid to login
+        //Check if Username and Password is correct
         public static bool UserExistsLogin(string username, string password)
         {
             SqlConnection conn = UtilityDB.GetDBConnection();
             SqlCommand cmdCheckExistence = new SqlCommand();
             cmdCheckExistence.Connection = conn;
-            cmdCheckExistence.CommandText = "SELECT COUNT(*) FROM Users WHERE Username = @Username AND Password = @Password";
+            cmdCheckExistence.CommandText = "SELECT COUNT(*) FROM Users WHERE Username COLLATE Latin1_General_CS_AS = @Username AND Password COLLATE Latin1_General_CS_AS = @Password";
             cmdCheckExistence.Parameters.AddWithValue("@Username", username);
-            cmdCheckExistence.Parameters.AddWithValue ("@Password", password);
+            cmdCheckExistence.Parameters.AddWithValue("@Password", password);
 
             int count = (int)cmdCheckExistence.ExecuteScalar();
 
@@ -198,5 +199,25 @@ namespace Final_Project.DAL
             return count > 0;
         }
 
+        public static string GetUserJobTitle(string username, string password)
+        {
+            string jobTitle = null;
+            SqlConnection conn = UtilityDB.GetDBConnection();
+            SqlCommand cmdGetJobTitle = new SqlCommand();
+            cmdGetJobTitle.Connection = conn;
+            cmdGetJobTitle.CommandText = "SELECT JobTitle FROM Employees INNER JOIN Users ON Employees.EmployeeID = Users.EmployeeIDUser WHERE Users.Username = @Username AND Users.Password = @Password";
+            cmdGetJobTitle.Parameters.AddWithValue("@Username", username);
+            cmdGetJobTitle.Parameters.AddWithValue("@Password", password);
+
+            SqlDataReader reader = cmdGetJobTitle.ExecuteReader();
+            if (reader.Read())
+            {
+                jobTitle = reader.GetInt32(0).ToString();
+            }
+            reader.Close();
+            conn.Close();
+
+            return jobTitle;
+        }
     }
 }

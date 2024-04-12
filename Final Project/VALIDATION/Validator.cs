@@ -80,6 +80,7 @@ namespace Final_Project.VALIDATION
             return true;
         }
 
+        //Validate Zip Code as Canada Format
         public static bool IsValidZip(string postalCode)
         {
             if (postalCode.Length == 0)

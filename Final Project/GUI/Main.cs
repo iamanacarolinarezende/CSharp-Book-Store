@@ -26,6 +26,11 @@ namespace Final_Project.GUI
             InitializeComponent();
         }
 
+        public TabControl tabControlMain
+        {
+            get { return tabControl; }
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
             SqlConnection conn = UtilityDB.GetDBConnection();
@@ -318,7 +323,6 @@ namespace Final_Project.GUI
             comboBoxEmpPositions.DisplayMember = "PositionName";
             comboBoxEmpPositions.ValueMember = "PositionID";
             comboBoxEmpPositions.SelectedIndex = -1;
-
         }
 
         private void buttonExitE_Click(object sender, EventArgs e)
@@ -657,13 +661,14 @@ namespace Final_Project.GUI
                         return;
                     }
 
+
                     emp = emp.SearchEmployeeID(Convert.ToInt32(input));
                     if (emp != null)
                     {
                         textBoxEmployeeId.Text = emp.EmployeeID.ToString();
                         textBoxFirstName.Text = emp.FirstName.ToString();
                         textBoxLastName.Text = emp.LastName.ToString();
-                        comboBoxEmpPositions.SelectedIndex = emp.JobTitle;
+                        comboBoxEmpPositions.SelectedValue = emp.JobTitle;
                         textBoxPhoneEmp.Text = emp.Phone.ToString();
                     }
                     else
