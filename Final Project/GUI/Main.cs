@@ -940,7 +940,6 @@ namespace Final_Project.GUI
         {
             StringBuilder message = new StringBuilder();
 
-            listViewCustomers.Items.Clear();
             Customer cust = new Customer();
             List<Customer> listC = cust.GetCustomerList();
 
@@ -981,6 +980,11 @@ namespace Final_Project.GUI
             textBoxCustCity.Clear();
             textBoxCustPC.Clear();
             textBoxCustFN.Focus();
+
+        }
+
+        private void buttonSearchCust_Click(object sender, EventArgs e)
+        {
 
         }
     }
