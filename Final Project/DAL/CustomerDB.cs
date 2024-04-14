@@ -1,10 +1,12 @@
 ﻿using Final_Project.BLL;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Final_Project.DAL
 {
@@ -16,8 +18,8 @@ namespace Final_Project.DAL
 
             SqlCommand cmdInsert = new SqlCommand();
             cmdInsert.Connection = conn;
-            cmdInsert.CommandText = "INSERT INTO Customers (firstname, lastname, street, city, postal_code, phone_number, fax_number, credit_limit) " +
-                           "VALUES (@Name, @Last, @Street, @City, @PostalCode, @PhoneNumber, @FaxNumber, @CreditLimit)";
+            cmdInsert.CommandText = "INSERT INTO Customers (firstname, lastname, street, city, postal_code, phone_number, fax_number, credit_limit, status, email) " +
+                           "VALUES (@Name, @Last, @Street, @City, @PostalCode, @PhoneNumber, @FaxNumber, @CreditLimit, @Status, @Email)";
 
             cmdInsert.Parameters.AddWithValue("@Name", customer.FirstName);
             cmdInsert.Parameters.AddWithValue("@Last", customer.LastName);
@@ -27,6 +29,8 @@ namespace Final_Project.DAL
             cmdInsert.Parameters.AddWithValue("@PhoneNumber", customer.PhoneNumber);
             cmdInsert.Parameters.AddWithValue("@FaxNumber", customer.FaxNumber);
             cmdInsert.Parameters.AddWithValue("@CreditLimit", customer.CreditLimit);
+            cmdInsert.Parameters.AddWithValue("@Email", customer.Email);
+            cmdInsert.Parameters.AddWithValue("@Status", 1);
             cmdInsert.ExecuteNonQuery();
 
             conn.Close();
@@ -37,7 +41,7 @@ namespace Final_Project.DAL
         {
             List<Customer> listCust = new List<Customer>();
             SqlConnection conn = UtilityDB.GetDBConnection();
-            SqlCommand cmdSelectAll = new SqlCommand("SELECT * FROM Customers", conn);
+            SqlCommand cmdSelectAll = new SqlCommand("SELECT * FROM Customers WHERE status = 1", conn);
             SqlDataReader reader = cmdSelectAll.ExecuteReader(); 
             Customer cust;
             while (reader.Read())
@@ -51,6 +55,8 @@ namespace Final_Project.DAL
                 cust.City = reader["city"].ToString() ;
                 cust.PostalCode = reader["postal_code"].ToString();
                 cust.CreditLimit = Convert.ToDecimal(reader["credit_limit"]);
+                cust.DateTimeSince = Convert.ToDateTime(reader["clientSince"]);
+                cust.Email = reader["email"].ToString();
                 listCust.Add(cust);
             }
             conn.Close();
@@ -58,21 +64,23 @@ namespace Final_Project.DAL
         }
 
         //Update Customer
-        public static void UpdateCustomer(Customer customer)
+        public static void UpdateCustomerInfo(Customer customer)
         {
             SqlConnection conn = UtilityDB.GetDBConnection();
             SqlCommand cmdUpdate = new SqlCommand();
             cmdUpdate.Connection = conn;
             cmdUpdate.CommandText = "UPDATE Customers " +
-                                    "SET fisrtname = @Name, " +
+                                    "SET firstname = @Name, " +
                                     "    lastname = @Last, " +
-                                    "    Street = @Street, " +
-                                    "    City = @City, " +
-                                    "    PostalCode = @PostalCode, " +
-                                    "    PhoneNumber = @PhoneNumber, " +
-                                    "    FaxNumber = @FaxNumber, " +
-                                    "    CreditLimit = @CreditLimit " +
-                                    "WHERE PhoneNumber = @PhoneNumber";
+                                    "    street = @Street, " +
+                                    "    city = @City, " +
+                                    "    postal_code = @PostalCode, " +
+                                    "    phone_number = @PhoneNumber, " +
+                                    "    fax_number = @FaxNumber, " +
+                                    "    credit_limit = @CreditLimit, " +
+                                    "    email = @Email," +
+                                    "    status = 1 " +
+                                    "WHERE phone_number = @PhoneNumber";
 
             cmdUpdate.Parameters.AddWithValue("@Name", customer.FirstName);
             cmdUpdate.Parameters.AddWithValue("@Last", customer.LastName);
@@ -82,22 +90,24 @@ namespace Final_Project.DAL
             cmdUpdate.Parameters.AddWithValue("@PhoneNumber", customer.PhoneNumber);
             cmdUpdate.Parameters.AddWithValue("@FaxNumber", customer.FaxNumber);
             cmdUpdate.Parameters.AddWithValue("@CreditLimit", customer.CreditLimit);
+            cmdUpdate.Parameters.AddWithValue("@Email", customer.Email);
 
             cmdUpdate.ExecuteNonQuery();
             conn.Close();
         }
 
         //Delete Customer
-        public static void DeleteRecord(string PhoneNumber)
+        public static void DeleteRecord(string Phone)
         {
             SqlConnection conn = UtilityDB.GetDBConnection();
 
-            SqlCommand cmdInsert = new SqlCommand();
-            cmdInsert.Connection = conn;
-            cmdInsert.CommandText = "DELETE Customers " +
+            SqlCommand cmdDelete = new SqlCommand();
+            cmdDelete.Connection = conn;
+            cmdDelete.CommandText = "UPDATE Customers " +
+                                    "SET status = 2" + //Change status to not delete the information
                                      "WHERE phone_number=@PhoneNumber";
-            cmdInsert.Parameters.AddWithValue("@PhoneNumber", PhoneNumber);
-            cmdInsert.ExecuteNonQuery();
+            cmdDelete.Parameters.AddWithValue("@PhoneNumber", Phone);
+            cmdDelete.ExecuteNonQuery();
 
             conn.Close();
         }
@@ -123,6 +133,7 @@ namespace Final_Project.DAL
                 cust.City = reader["city"].ToString();
                 cust.PostalCode = reader["postal_code"].ToString();
                 cust.CreditLimit = Convert.ToDecimal(reader["credit_limit"]);
+                cust.Email = reader["email"].ToString();
             }
             else
             {
@@ -132,7 +143,85 @@ namespace Final_Project.DAL
             return cust;
         }
 
-        //Is Unique
+        //Search by First or Last name
+        public static List<Customer> SearchRecordName(string input)
+        {
+            List<Customer> listC = new List<Customer>();
+            SqlConnection conn = UtilityDB.GetDBConnection();
+            SqlCommand cmdSearchByName = new SqlCommand();
+            cmdSearchByName.Connection = conn;
+            cmdSearchByName.CommandText = "SELECT * FROM Customers " +
+                                          "WHERE firstname LIKE '%' + @FirstName + '%' " +
+                                          "OR lastname LIKE '%' + @LastName + '%'" +
+                                          "OR city LIKE '%' + @City + '%' " +
+                                          "OR postal_code = @Zip"; ;
+
+            cmdSearchByName.Parameters.AddWithValue("@FirstName", input);
+            cmdSearchByName.Parameters.AddWithValue("@LastName", input);
+            cmdSearchByName.Parameters.AddWithValue("@City", input);
+            cmdSearchByName.Parameters.AddWithValue("@Zip", input);
+            SqlDataReader reader = cmdSearchByName.ExecuteReader();
+            Customer cust;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    cust = new Customer();
+                    cust.FirstName = reader["firstname"].ToString();
+                    cust.LastName = reader["lastname"].ToString();
+                    cust.PhoneNumber = reader["phone_number"].ToString();
+                    cust.FaxNumber = reader["fax_number"].ToString();
+                    cust.Street = reader["street"].ToString();
+                    cust.City = reader["city"].ToString();
+                    cust.PostalCode = reader["postal_code"].ToString();
+                    cust.CreditLimit = Convert.ToDecimal(reader["credit_limit"]);
+                    cust.Email = reader["email"].ToString();
+                    listC.Add(cust);
+                }
+            }
+            conn.Close();
+            return listC;
+        }
+
+        //Search by First AND Last Name
+        public static List<Customer> SearchRecordFLName(string FName, string LName)
+        {
+            List<Customer> listC = new List<Customer>();
+            SqlConnection conn = UtilityDB.GetDBConnection();
+            SqlCommand cmdSearchByName = new SqlCommand();
+            cmdSearchByName.Connection = conn;
+            cmdSearchByName.CommandText = "SELECT * FROM Customers " +
+                                          "WHERE firstname LIKE '%' + @FirstName + '%' " +
+                                          "AND lastname LIKE '%' + @LastName + '%'";
+
+            cmdSearchByName.Parameters.AddWithValue("@FirstName", FName);
+            cmdSearchByName.Parameters.AddWithValue("@LastName", LName);
+            SqlDataReader reader = cmdSearchByName.ExecuteReader();
+            Customer cust;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    cust = new Customer();
+                    cust.FirstName = reader["firstname"].ToString();
+                    cust.LastName = reader["lastname"].ToString();
+                    cust.PhoneNumber = reader["phone_number"].ToString();
+                    cust.FaxNumber = reader["fax_number"].ToString();
+                    cust.Street = reader["street"].ToString();
+                    cust.City = reader["city"].ToString();
+                    cust.PostalCode = reader["postal_code"].ToString();
+                    cust.CreditLimit = Convert.ToDecimal(reader["credit_limit"]);
+                    cust.Email = reader["email"].ToString();
+                    listC.Add(cust);
+                }
+            }
+            conn.Close();
+            return listC;
+        }
+
+        
+
+        //Is Unique by Phone
         public static bool IsUniquePhoneNumber(string Phone)
         {
             Customer cust = SearchRecord(Phone);
@@ -143,6 +232,29 @@ namespace Final_Project.DAL
             return true;
         }
         
+        //Customer status 1 = Active | 2 = Inactive/Deleted
+        public static bool IsCustomerActive (string Phone)
+        {
+            bool isValidCustomer = true; // Assume the customer is valid by default
+            SqlConnection conn = UtilityDB.GetDBConnection();
+            SqlCommand cmdSearchByPhone = new SqlCommand();
+            cmdSearchByPhone.Connection = conn;
+            cmdSearchByPhone.CommandText = "SELECT status FROM Customers " +
+                                           "WHERE phone_number=@PhoneNumber";
+            cmdSearchByPhone.Parameters.AddWithValue("@PhoneNumber", Phone);
+
+            SqlDataReader reader = cmdSearchByPhone.ExecuteReader();
+            if (reader.Read())
+            {
+                int status = Convert.ToInt32(reader["status"]);
+                if (status == 2)
+                {
+                    isValidCustomer = false; // Set to false if status is 2
+                }
+            }
+            conn.Close();
+            return isValidCustomer;
+        }
 
     }
 }

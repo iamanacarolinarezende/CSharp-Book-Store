@@ -112,11 +112,15 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBoxSearchCLN = new System.Windows.Forms.TextBox();
-            this.textBoxSearchC = new System.Windows.Forms.TextBox();
+            this.textBoxSearchCFN = new System.Windows.Forms.TextBox();
             this.buttonSearchCust = new System.Windows.Forms.Button();
+            this.labelSearchCLN = new System.Windows.Forms.Label();
+            this.labelSearchC = new System.Windows.Forms.Label();
+            this.comboBoxSearchCustomer = new System.Windows.Forms.ComboBox();
+            this.labelCDeleted = new System.Windows.Forms.Label();
+            this.textBoxCustEmail = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.comboBoxSearchCustomer = new System.Windows.Forms.ComboBox();
             this.Customer.SuspendLayout();
             this.User.SuspendLayout();
             this.Employee.SuspendLayout();
@@ -126,6 +130,10 @@
             // 
             // Customer
             // 
+            this.Customer.Controls.Add(this.textBoxCustEmail);
+            this.Customer.Controls.Add(this.label16);
+            this.Customer.Controls.Add(this.label17);
+            this.Customer.Controls.Add(this.labelCDeleted);
             this.Customer.Controls.Add(this.groupBox1);
             this.Customer.Controls.Add(this.textBoxCustCredit);
             this.Customer.Controls.Add(this.textBoxCustPC);
@@ -161,7 +169,7 @@
             // textBoxCustCredit
             // 
             this.textBoxCustCredit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCustCredit.Location = new System.Drawing.Point(617, 44);
+            this.textBoxCustCredit.Location = new System.Drawing.Point(624, 44);
             this.textBoxCustCredit.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCustCredit.Name = "textBoxCustCredit";
             this.textBoxCustCredit.Size = new System.Drawing.Size(106, 21);
@@ -170,7 +178,7 @@
             // textBoxCustPC
             // 
             this.textBoxCustPC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCustPC.Location = new System.Drawing.Point(467, 121);
+            this.textBoxCustPC.Location = new System.Drawing.Point(381, 121);
             this.textBoxCustPC.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCustPC.Name = "textBoxCustPC";
             this.textBoxCustPC.Size = new System.Drawing.Size(106, 21);
@@ -179,7 +187,7 @@
             // textBoxCustCity
             // 
             this.textBoxCustCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCustCity.Location = new System.Drawing.Point(317, 121);
+            this.textBoxCustCity.Location = new System.Drawing.Point(231, 121);
             this.textBoxCustCity.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCustCity.Name = "textBoxCustCity";
             this.textBoxCustCity.Size = new System.Drawing.Size(106, 21);
@@ -188,7 +196,7 @@
             // textBoxCustPhone
             // 
             this.textBoxCustPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCustPhone.Location = new System.Drawing.Point(317, 44);
+            this.textBoxCustPhone.Location = new System.Drawing.Point(324, 44);
             this.textBoxCustPhone.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCustPhone.Name = "textBoxCustPhone";
             this.textBoxCustPhone.Size = new System.Drawing.Size(106, 21);
@@ -197,16 +205,16 @@
             // textBoxCustStreet
             // 
             this.textBoxCustStreet.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCustStreet.Location = new System.Drawing.Point(19, 121);
+            this.textBoxCustStreet.Location = new System.Drawing.Point(15, 121);
             this.textBoxCustStreet.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCustStreet.Name = "textBoxCustStreet";
-            this.textBoxCustStreet.Size = new System.Drawing.Size(252, 21);
+            this.textBoxCustStreet.Size = new System.Drawing.Size(193, 21);
             this.textBoxCustStreet.TabIndex = 6;
             // 
             // textBoxCustFax
             // 
             this.textBoxCustFax.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCustFax.Location = new System.Drawing.Point(467, 44);
+            this.textBoxCustFax.Location = new System.Drawing.Point(477, 44);
             this.textBoxCustFax.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCustFax.Name = "textBoxCustFax";
             this.textBoxCustFax.Size = new System.Drawing.Size(106, 21);
@@ -216,40 +224,40 @@
             // 
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(614, 15);
+            this.label31.Location = new System.Drawing.Point(621, 15);
             this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(78, 17);
+            this.label31.Size = new System.Drawing.Size(83, 17);
             this.label31.TabIndex = 100;
-            this.label31.Text = "Credit Limit";
+            this.label31.Text = "Credit Limit*";
             // 
             // label29
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(464, 94);
+            this.label29.Location = new System.Drawing.Point(378, 94);
             this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(84, 17);
+            this.label29.Size = new System.Drawing.Size(89, 17);
             this.label29.TabIndex = 98;
-            this.label29.Text = "Postal Code";
+            this.label29.Text = "Postal Code*";
             // 
             // label25
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(314, 94);
+            this.label25.Location = new System.Drawing.Point(228, 94);
             this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(31, 17);
+            this.label25.Size = new System.Drawing.Size(36, 17);
             this.label25.TabIndex = 96;
-            this.label25.Text = "City";
+            this.label25.Text = "City*";
             // 
             // label28
             // 
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(314, 67);
+            this.label28.Location = new System.Drawing.Point(321, 67);
             this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(73, 13);
@@ -260,18 +268,18 @@
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(18, 94);
+            this.label20.Location = new System.Drawing.Point(14, 94);
             this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(46, 17);
+            this.label20.Size = new System.Drawing.Size(51, 17);
             this.label20.TabIndex = 93;
-            this.label20.Text = "Street";
+            this.label20.Text = "Street*";
             // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(464, 67);
+            this.label18.Location = new System.Drawing.Point(474, 67);
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(73, 13);
@@ -282,7 +290,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(464, 15);
+            this.label19.Location = new System.Drawing.Point(474, 15);
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(30, 17);
@@ -292,7 +300,7 @@
             // textBoxCustLN
             // 
             this.textBoxCustLN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCustLN.Location = new System.Drawing.Point(167, 44);
+            this.textBoxCustLN.Location = new System.Drawing.Point(164, 44);
             this.textBoxCustLN.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCustLN.Name = "textBoxCustLN";
             this.textBoxCustLN.Size = new System.Drawing.Size(106, 21);
@@ -301,7 +309,7 @@
             // textBoxCustFN
             // 
             this.textBoxCustFN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCustFN.Location = new System.Drawing.Point(19, 44);
+            this.textBoxCustFN.Location = new System.Drawing.Point(16, 44);
             this.textBoxCustFN.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCustFN.Name = "textBoxCustFN";
             this.textBoxCustFN.Size = new System.Drawing.Size(104, 21);
@@ -314,7 +322,7 @@
             this.buttonExitCust.Margin = new System.Windows.Forms.Padding(2);
             this.buttonExitCust.Name = "buttonExitCust";
             this.buttonExitCust.Size = new System.Drawing.Size(104, 30);
-            this.buttonExitCust.TabIndex = 16;
+            this.buttonExitCust.TabIndex = 31;
             this.buttonExitCust.Text = "E&xit";
             this.buttonExitCust.UseVisualStyleBackColor = true;
             this.buttonExitCust.Click += new System.EventHandler(this.buttonExitCust_Click);
@@ -327,7 +335,7 @@
             this.buttonListCustomer.Margin = new System.Windows.Forms.Padding(2);
             this.buttonListCustomer.Name = "buttonListCustomer";
             this.buttonListCustomer.Size = new System.Drawing.Size(166, 30);
-            this.buttonListCustomer.TabIndex = 12;
+            this.buttonListCustomer.TabIndex = 30;
             this.buttonListCustomer.Text = "&List All Customers";
             this.buttonListCustomer.UseVisualStyleBackColor = false;
             this.buttonListCustomer.Click += new System.EventHandler(this.buttonListCustomer_Click);
@@ -335,11 +343,11 @@
             // buttonCustomerDelete
             // 
             this.buttonCustomerDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCustomerDelete.Location = new System.Drawing.Point(480, 166);
+            this.buttonCustomerDelete.Location = new System.Drawing.Point(480, 174);
             this.buttonCustomerDelete.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCustomerDelete.Name = "buttonCustomerDelete";
             this.buttonCustomerDelete.Size = new System.Drawing.Size(103, 30);
-            this.buttonCustomerDelete.TabIndex = 11;
+            this.buttonCustomerDelete.TabIndex = 12;
             this.buttonCustomerDelete.Text = "&Delete Employee";
             this.buttonCustomerDelete.UseVisualStyleBackColor = true;
             this.buttonCustomerDelete.Click += new System.EventHandler(this.buttonCustomerDelete_Click);
@@ -347,11 +355,11 @@
             // buttonCustomerUpdate
             // 
             this.buttonCustomerUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCustomerUpdate.Location = new System.Drawing.Point(316, 166);
+            this.buttonCustomerUpdate.Location = new System.Drawing.Point(316, 174);
             this.buttonCustomerUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCustomerUpdate.Name = "buttonCustomerUpdate";
             this.buttonCustomerUpdate.Size = new System.Drawing.Size(103, 30);
-            this.buttonCustomerUpdate.TabIndex = 10;
+            this.buttonCustomerUpdate.TabIndex = 11;
             this.buttonCustomerUpdate.Text = "&Update Employee";
             this.buttonCustomerUpdate.UseVisualStyleBackColor = true;
             this.buttonCustomerUpdate.Click += new System.EventHandler(this.buttonCustomerUpdate_Click);
@@ -359,11 +367,11 @@
             // buttonCustomerSave
             // 
             this.buttonCustomerSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCustomerSave.Location = new System.Drawing.Point(159, 166);
+            this.buttonCustomerSave.Location = new System.Drawing.Point(159, 174);
             this.buttonCustomerSave.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCustomerSave.Name = "buttonCustomerSave";
             this.buttonCustomerSave.Size = new System.Drawing.Size(103, 30);
-            this.buttonCustomerSave.TabIndex = 9;
+            this.buttonCustomerSave.TabIndex = 10;
             this.buttonCustomerSave.Text = "&Save Employee";
             this.buttonCustomerSave.UseVisualStyleBackColor = true;
             this.buttonCustomerSave.Click += new System.EventHandler(this.buttonCustomerSave_Click);
@@ -372,34 +380,34 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(314, 15);
+            this.label24.Location = new System.Drawing.Point(321, 15);
             this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(49, 17);
+            this.label24.Size = new System.Drawing.Size(54, 17);
             this.label24.TabIndex = 78;
-            this.label24.Text = "Phone";
+            this.label24.Text = "Phone*";
             // 
             // label26
             // 
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(164, 15);
+            this.label26.Location = new System.Drawing.Point(161, 15);
             this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(76, 17);
+            this.label26.Size = new System.Drawing.Size(81, 17);
             this.label26.TabIndex = 76;
-            this.label26.Text = "Last Name";
+            this.label26.Text = "Last Name*";
             // 
             // label27
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(16, 15);
+            this.label27.Location = new System.Drawing.Point(13, 15);
             this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(76, 17);
+            this.label27.Size = new System.Drawing.Size(81, 17);
             this.label27.TabIndex = 75;
-            this.label27.Text = "First Name";
+            this.label27.Text = "First Name*";
             // 
             // User
             // 
@@ -491,7 +499,7 @@
             // textBoxSearch
             // 
             this.textBoxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxSearch.Location = new System.Drawing.Point(87, 268);
+            this.textBoxSearch.Location = new System.Drawing.Point(87, 274);
             this.textBoxSearch.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(140, 21);
@@ -523,7 +531,7 @@
             // 
             this.labelMessageU.AutoSize = true;
             this.labelMessageU.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMessageU.Location = new System.Drawing.Point(89, 249);
+            this.labelMessageU.Location = new System.Drawing.Point(89, 255);
             this.labelMessageU.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMessageU.Name = "labelMessageU";
             this.labelMessageU.Size = new System.Drawing.Size(0, 13);
@@ -637,7 +645,7 @@
             // buttonSearch
             // 
             this.buttonSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearch.Location = new System.Drawing.Point(102, 299);
+            this.buttonSearch.Location = new System.Drawing.Point(102, 306);
             this.buttonSearch.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(103, 32);
@@ -1050,31 +1058,31 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.textBoxSearchCLN);
-            this.groupBox1.Controls.Add(this.textBoxSearchC);
+            this.groupBox1.Controls.Add(this.textBoxSearchCFN);
             this.groupBox1.Controls.Add(this.buttonSearchCust);
-            this.groupBox1.Controls.Add(this.label16);
-            this.groupBox1.Controls.Add(this.label17);
+            this.groupBox1.Controls.Add(this.labelSearchCLN);
+            this.groupBox1.Controls.Add(this.labelSearchC);
             this.groupBox1.Controls.Add(this.comboBoxSearchCustomer);
             this.groupBox1.Location = new System.Drawing.Point(21, 223);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(516, 159);
             this.groupBox1.TabIndex = 101;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Search By";
+            this.groupBox1.Text = "  Search By  ";
             // 
             // textBoxSearchCLN
             // 
-            this.textBoxSearchCLN.Location = new System.Drawing.Point(370, 53);
+            this.textBoxSearchCLN.Location = new System.Drawing.Point(375, 53);
             this.textBoxSearchCLN.Name = "textBoxSearchCLN";
             this.textBoxSearchCLN.Size = new System.Drawing.Size(121, 20);
-            this.textBoxSearchCLN.TabIndex = 96;
+            this.textBoxSearchCLN.TabIndex = 22;
             // 
-            // textBoxSearchC
+            // textBoxSearchCFN
             // 
-            this.textBoxSearchC.Location = new System.Drawing.Point(204, 53);
-            this.textBoxSearchC.Name = "textBoxSearchC";
-            this.textBoxSearchC.Size = new System.Drawing.Size(121, 20);
-            this.textBoxSearchC.TabIndex = 92;
+            this.textBoxSearchCFN.Location = new System.Drawing.Point(222, 53);
+            this.textBoxSearchCFN.Name = "textBoxSearchCFN";
+            this.textBoxSearchCFN.Size = new System.Drawing.Size(121, 20);
+            this.textBoxSearchCFN.TabIndex = 21;
             // 
             // buttonSearchCust
             // 
@@ -1084,49 +1092,92 @@
             this.buttonSearchCust.Location = new System.Drawing.Point(213, 106);
             this.buttonSearchCust.Name = "buttonSearchCust";
             this.buttonSearchCust.Size = new System.Drawing.Size(103, 30);
-            this.buttonSearchCust.TabIndex = 93;
+            this.buttonSearchCust.TabIndex = 23;
             this.buttonSearchCust.Text = "S&earch";
             this.buttonSearchCust.UseVisualStyleBackColor = false;
             this.buttonSearchCust.Click += new System.EventHandler(this.buttonSearchCust_Click);
+            // 
+            // labelSearchCLN
+            // 
+            this.labelSearchCLN.AutoSize = true;
+            this.labelSearchCLN.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSearchCLN.Location = new System.Drawing.Point(372, 39);
+            this.labelSearchCLN.Name = "labelSearchCLN";
+            this.labelSearchCLN.Size = new System.Drawing.Size(0, 13);
+            this.labelSearchCLN.TabIndex = 97;
+            // 
+            // labelSearchC
+            // 
+            this.labelSearchC.AutoSize = true;
+            this.labelSearchC.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSearchC.Location = new System.Drawing.Point(218, 34);
+            this.labelSearchC.Name = "labelSearchC";
+            this.labelSearchC.Size = new System.Drawing.Size(0, 13);
+            this.labelSearchC.TabIndex = 95;
+            // 
+            // comboBoxSearchCustomer
+            // 
+            this.comboBoxSearchCustomer.FormattingEnabled = true;
+            this.comboBoxSearchCustomer.ItemHeight = 13;
+            this.comboBoxSearchCustomer.Items.AddRange(new object[] {
+            "",
+            "Phone Number",
+            "First Name OR Last Name",
+            "First Name AND Last Name",
+            "City",
+            "Postal Code"});
+            this.comboBoxSearchCustomer.Location = new System.Drawing.Point(21, 53);
+            this.comboBoxSearchCustomer.Name = "comboBoxSearchCustomer";
+            this.comboBoxSearchCustomer.Size = new System.Drawing.Size(160, 21);
+            this.comboBoxSearchCustomer.TabIndex = 13;
+            this.comboBoxSearchCustomer.SelectedIndexChanged += new System.EventHandler(this.comboBoxSearchCustomer_SelectedIndexChanged);
+            // 
+            // labelCDeleted
+            // 
+            this.labelCDeleted.AutoSize = true;
+            this.labelCDeleted.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCDeleted.ForeColor = System.Drawing.Color.Red;
+            this.labelCDeleted.Location = new System.Drawing.Point(34, 202);
+            this.labelCDeleted.Name = "labelCDeleted";
+            this.labelCDeleted.Size = new System.Drawing.Size(0, 13);
+            this.labelCDeleted.TabIndex = 102;
+            // 
+            // textBoxCustEmail
+            // 
+            this.textBoxCustEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCustEmail.Location = new System.Drawing.Point(531, 121);
+            this.textBoxCustEmail.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCustEmail.Name = "textBoxCustEmail";
+            this.textBoxCustEmail.Size = new System.Drawing.Size(198, 21);
+            this.textBoxCustEmail.TabIndex = 9;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(367, 39);
+            this.label16.Location = new System.Drawing.Point(531, 142);
+            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(0, 13);
-            this.label16.TabIndex = 97;
+            this.label16.Size = new System.Drawing.Size(80, 13);
+            this.label16.TabIndex = 105;
+            this.label16.Text = "abc@email.com";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(200, 34);
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(529, 95);
+            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(0, 13);
-            this.label17.TabIndex = 95;
-            // 
-            // comboBoxSearchCustomer
-            // 
-            this.comboBoxSearchCustomer.FormattingEnabled = true;
-            this.comboBoxSearchCustomer.Items.AddRange(new object[] {
-            "",
-            "Phone Number",
-            "First Name",
-            "Last Name",
-            "City",
-            "Postal Code"});
-            this.comboBoxSearchCustomer.Location = new System.Drawing.Point(25, 53);
-            this.comboBoxSearchCustomer.Name = "comboBoxSearchCustomer";
-            this.comboBoxSearchCustomer.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxSearchCustomer.TabIndex = 91;
+            this.label17.Size = new System.Drawing.Size(47, 17);
+            this.label17.TabIndex = 104;
+            this.label17.Text = "Email*";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(766, 440);
+            this.ClientSize = new System.Drawing.Size(760, 440);
             this.Controls.Add(this.tabControl);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Main";
@@ -1231,10 +1282,14 @@
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox textBoxSearchCLN;
-        private System.Windows.Forms.TextBox textBoxSearchC;
+        private System.Windows.Forms.TextBox textBoxSearchCFN;
         private System.Windows.Forms.Button buttonSearchCust;
+        private System.Windows.Forms.Label labelSearchCLN;
+        private System.Windows.Forms.Label labelSearchC;
+        private System.Windows.Forms.ComboBox comboBoxSearchCustomer;
+        private System.Windows.Forms.Label labelCDeleted;
+        private System.Windows.Forms.TextBox textBoxCustEmail;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ComboBox comboBoxSearchCustomer;
     }
 }

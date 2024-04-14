@@ -109,8 +109,8 @@ namespace Final_Project.DAL
             SqlCommand cmdSearchByName = new SqlCommand();
             cmdSearchByName.Connection = conn;
             cmdSearchByName.CommandText = "SELECT * FROM Employees " +
-                                          "WHERE FirstName = @FirstName " +
-                                          "or LastName = @LastName ";
+                                          "WHERE firstname LIKE '%' + @FirstName + '%' " +
+                                          "OR lastname LIKE '%' + @LastName + '%'";
 
             cmdSearchByName.Parameters.AddWithValue("@FirstName", input);
             cmdSearchByName.Parameters.AddWithValue("@LastName", input);
@@ -141,8 +141,8 @@ namespace Final_Project.DAL
             SqlCommand cmdSearchByName = new SqlCommand();
             cmdSearchByName.Connection = conn;
             cmdSearchByName.CommandText = "SELECT * FROM Employees " +
-                                          "WHERE FirstName = @FirstName " +
-                                          "and LastName = @LastName ";
+                                          "WHERE firstname LIKE '%' + @FirstName + '%' " +
+                                          "AND lastname LIKE '%' + @LastName + '%'";
 
             cmdSearchByName.Parameters.AddWithValue("@FirstName", input1);
             cmdSearchByName.Parameters.AddWithValue("@LastName", input2);

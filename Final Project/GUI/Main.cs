@@ -62,7 +62,7 @@ namespace Final_Project.GUI
             //Check Email format
             if (!Validator.IsValidEmailFormat(userName))
             {
-                MessageBox.Show("Invalid Email format.", "Invalid UserName", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Invalid Email format. Use the format abd@email.com", "Invalid UserName", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBoxUserName.Clear();
                 textBoxUserName.Focus();
                 return;
@@ -184,7 +184,7 @@ namespace Final_Project.GUI
             User userDel = new User();
             if (userDel.IsUniqueUName(userName))
             {
-                MessageBox.Show("This UserName already exists.\nPlease enter another one.", "Invalid UserName", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("This UserName do not exists.\nPlease enter another one.", "Invalid UserName", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBoxUserName.Clear();
                 textBoxUserName.Focus();
                 return;
@@ -227,7 +227,7 @@ namespace Final_Project.GUI
                 return;
             }
 
-            // search by UserName
+            // search by 
             User uName = new User();
             string input = "";
             switch (comboBoxSearchOption.SelectedIndex)
@@ -289,8 +289,17 @@ namespace Final_Project.GUI
             int indexSelected = comboBoxSearchOption.SelectedIndex;
             switch (indexSelected)
             {
+                case 0:
+                    textBoxSearch.Visible = false;
+                    labelMessageU.Visible = false;
+
+                    textBoxUserName.Clear();
+                    textBoxPassword.Clear();
+                    textBoxEID.Clear();
+                    break;
                 case 1:
-                    labelMessageU.Text = "Please enter the UserName";
+                    textBoxSearch.Visible = true;
+                    labelMessageU.Text = "Please enter the Username";
                     textBoxSearch.Clear();
                     textBoxSearch.Focus();
 
@@ -299,6 +308,7 @@ namespace Final_Project.GUI
                     textBoxEID.Clear();
                     break;
                 case 2:
+                    textBoxSearch.Visible = true;
                     labelMessageU.Text = "Please enter the Employee ID";
                     textBoxSearch.Clear();
                     textBoxSearch.Focus();
@@ -314,8 +324,16 @@ namespace Final_Project.GUI
         //===================================== EMPLOYEE FORM ==========================================
         private void Main_Load(object sender, EventArgs e)
         {
+            //Hide Last Name employee textbox
             textBoxLNE.Visible = false;
             textBoxSearchE.Visible = false;
+
+            //Hide Last Name User textbox
+            textBoxSearch.Visible = false;
+
+            //Hide Last Name customer textbox
+            textBoxSearchCLN.Visible = false;
+
 
             // Populate the comboBoxEmpPositions with positions from the Positions table
             List<Positions> positions = PositionsDB.GetAllPositions();
@@ -599,7 +617,7 @@ namespace Final_Project.GUI
                     listViewEmployee.Items.Clear();
                     labelSearchE.Visible = true;
                     textBoxSearchE.Visible = true;
-                    labelSearchE.Text = "Enter the First OR Last Name";
+                    labelSearchE.Text = "Enter First OR Last Name";
                     labelLNE.Visible = false;
                     textBoxLNE.Visible = false;
                     textBoxSearchE.Clear();
@@ -770,6 +788,7 @@ namespace Final_Project.GUI
             string CStreet = textBoxCustStreet.Text.Trim();
             string CCity = textBoxCustCity.Text.Trim();
             string CZip = textBoxCustPC.Text.Trim();
+            string CEmail = textBoxCustEmail.Text.Trim();
             decimal creditLimit;
 
             //Check Empty textbox
@@ -778,9 +797,19 @@ namespace Final_Project.GUI
             string.IsNullOrEmpty(CPhone) ||
             string.IsNullOrEmpty(CStreet) ||
             string.IsNullOrEmpty(CCity) ||
-            string.IsNullOrEmpty(CZip))
+            string.IsNullOrEmpty(CZip) ||
+            string.IsNullOrEmpty(CEmail))
             {
                 MessageBox.Show("Please fill in all required fields (*).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //Validate the email
+            if (!Validator.IsValidEmailFormat(CEmail))
+            {
+                MessageBox.Show("Invalid Email format. Use the format abd@email.com", "Invalid Customer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxCustEmail.Clear();
+                textBoxCustEmail.Focus();
                 return;
             }
 
@@ -841,14 +870,15 @@ namespace Final_Project.GUI
 
             //Save Customer
 
-            cust.FirstName = textBoxCustFN.Text.Trim();
-            cust.LastName = textBoxCustLN.Text.Trim();
-            cust.PhoneNumber = textBoxCustPhone.Text.Trim();
-            cust.FaxNumber = textBoxCustFax.Text.Trim();
-            cust.Street = textBoxCustStreet.Text.Trim();
-            cust.City = textBoxCustCity.Text.Trim();
-            cust.PostalCode = textBoxCustPC.Text.Trim();
+            cust.FirstName = CFName;
+            cust.LastName = CLName;
+            cust.PhoneNumber = CPhone;
+            cust.FaxNumber = CFax;
+            cust.Street = CStreet;
+            cust.City = CCity;
+            cust.PostalCode = CZip;
             cust.CreditLimit = creditLimit;
+            cust.Email = CEmail;
             cust.SaveCustomer(cust);
 
             MessageBox.Show("Customer Data has been saved successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -857,13 +887,15 @@ namespace Final_Project.GUI
             textBoxCustLN.Clear();
             textBoxCustPhone.Clear();
             textBoxCustFax.Clear();
+            textBoxCustCredit.Clear();
             textBoxCustStreet.Clear();
             textBoxCustCity.Clear();
             textBoxCustPC.Clear();
+            textBoxCustEmail.Clear();
             textBoxCustFN.Focus();
         }
 
-        // Update the customer (Falta)
+        // Update the customer
         private void buttonCustomerUpdate_Click(object sender, EventArgs e)
         {
             string CFName = textBoxCustFN.Text.Trim();
@@ -873,6 +905,7 @@ namespace Final_Project.GUI
             string CStreet = textBoxCustStreet.Text.Trim();
             string CCity = textBoxCustCity.Text.Trim();
             string CZip = textBoxCustPC.Text.Trim();
+            string CEmail = textBoxCustEmail.Text.Trim();
             decimal creditLimit;
 
             //Check Empty textbox
@@ -881,9 +914,19 @@ namespace Final_Project.GUI
             string.IsNullOrEmpty(CPhone) ||
             string.IsNullOrEmpty(CStreet) ||
             string.IsNullOrEmpty(CCity) ||
-            string.IsNullOrEmpty(CZip))
+            string.IsNullOrEmpty(CZip) ||
+            string.IsNullOrEmpty(CEmail))
             {
                 MessageBox.Show("Please fill in all required fields (*).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //Validate the email
+            if (!Validator.IsValidEmailFormat(CEmail))
+            {
+                MessageBox.Show("Invalid Email format. Use the format abd@email.com", "Invalid Customer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxCustEmail.Clear();
+                textBoxCustEmail.Focus();
                 return;
             }
 
@@ -934,10 +977,61 @@ namespace Final_Project.GUI
                 MessageBox.Show("Invalid credit limit. Please enter a valid decimal value.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return; // Return from the method or handle the error appropriately
             }
+
+
+            Customer custUp = new Customer();
+            if (custUp.IsUniqueCustomer(CPhone))
+            {
+                MessageBox.Show("This Customer do not exists.\nPlease enter another one.", "Invalid UserName", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxCustPhone.Clear();
+                textBoxCustPhone.Focus();
+                return;
+            }
+
+            //Update Customer
+
+            custUp.FirstName = CFName;
+            custUp.LastName = CLName;
+            custUp.PhoneNumber = CPhone;
+            custUp.FaxNumber = CFax;
+            custUp.Street = CStreet;
+            custUp.City = CCity;
+            custUp.PostalCode = CZip;
+            custUp.CreditLimit = creditLimit;
+            custUp.Email = CEmail;
+            custUp.UpdateCustomer(custUp);
+
+            MessageBox.Show("Customer Data has been updated successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            textBoxCustFN.Clear();
+            textBoxCustLN.Clear();
+            textBoxCustPhone.Clear();
+            textBoxCustFax.Clear();
+            textBoxCustCredit.Clear();
+            textBoxCustStreet.Clear();
+            textBoxCustCity.Clear();
+            textBoxCustPC.Clear();
+            textBoxCustEmail.Clear();
+            textBoxCustFN.Focus();
+            labelCDeleted.Text = ""; ;
         }
 
         private void buttonListCustomer_Click(object sender, EventArgs e)
         {
+            //clean the tab
+            textBoxCustFN.Clear();
+            textBoxCustLN.Clear();
+            textBoxCustPhone.Clear();
+            textBoxCustFax.Clear();
+            textBoxCustCredit.Clear();
+            textBoxCustStreet.Clear();
+            textBoxCustCity.Clear();
+            textBoxCustPC.Clear();
+            textBoxCustEmail.Clear();
+            textBoxSearchCFN.Clear();
+            textBoxSearchCLN.Clear();
+
+
             StringBuilder message = new StringBuilder();
 
             Customer cust = new Customer();
@@ -947,8 +1041,10 @@ namespace Final_Project.GUI
             {
                 message.AppendLine($"Name: {customer.FirstName} {customer.LastName}");
                 message.AppendLine($"Phone: {customer.PhoneNumber} | Fax: {customer.FaxNumber}");
+                message.AppendLine($"Email: {customer.Email}");
                 message.AppendLine($"Street: {customer.Street} | City: {customer.City} | Zip: {customer.PostalCode}");
                 message.AppendLine($"Credit Limit: {customer.CreditLimit}");
+                message.AppendLine($"Cliente Since: {customer.DateTimeSince}");
                 message.AppendLine($"-----------------------------");
             }
 
@@ -964,11 +1060,20 @@ namespace Final_Project.GUI
                 return;
             }
 
-            Customer custDeleted = new BLL.Customer();
-            var answer = MessageBox.Show("Do you really want to delete this employee?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            Customer custDel = new Customer();
+            if (custDel.IsUniqueCustomer(Phone))
+            {
+                MessageBox.Show("This Customer do not exists.\nPlease enter another one.", "Invalid UserName", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxCustPhone.Clear();
+                textBoxCustPhone.Focus();
+                return;
+            }
+
+            Customer custDeleted = new Customer();
+            var answer = MessageBox.Show("Do you really want to delete this customer?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (answer == DialogResult.Yes)
             {
-                custDeleted.DeleteCustomer(textBoxCustPhone.Text.Trim());
+                custDeleted.DeleteCustomer(Phone);
                 MessageBox.Show("Customer data has been deleted successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
@@ -976,16 +1081,359 @@ namespace Final_Project.GUI
             textBoxCustLN.Clear();
             textBoxCustPhone.Clear();
             textBoxCustFax.Clear();
+            textBoxCustCredit.Clear();
             textBoxCustStreet.Clear();
             textBoxCustCity.Clear();
             textBoxCustPC.Clear();
+            textBoxCustEmail.Clear();
             textBoxCustFN.Focus();
 
         }
 
+        private void comboBoxSearchCustomer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int indexselect = comboBoxSearchCustomer.SelectedIndex;
+            switch (indexselect)
+            {
+                case 0:
+                    textBoxSearchCFN.Visible = false;
+                    textBoxSearchCLN.Visible = false;
+                    labelSearchC.Visible = false;
+                    labelSearchCLN.Visible = false;
+
+                    textBoxCustFN.Clear();
+                    textBoxCustLN.Clear();
+                    textBoxCustPhone.Clear();
+                    textBoxCustFax.Clear();
+                    textBoxCustCredit.Clear();
+                    textBoxCustStreet.Clear();
+                    textBoxCustCity.Clear();
+                    textBoxCustPC.Clear();
+                    textBoxCustEmail.Clear();
+                    textBoxSearchCFN.Focus();
+                    break;
+
+                case 1:
+                    textBoxSearchCFN.Visible = true;
+                    textBoxSearchCLN.Visible = false;
+                    labelSearchC.Visible = true ;
+                    labelSearchCLN.Visible = false;
+                    labelSearchC.Text = "Enter the Phone Number";
+                    textBoxSearchCFN.Clear();
+
+                    textBoxCustFN.Clear();
+                    textBoxCustLN.Clear();
+                    textBoxCustPhone.Clear();
+                    textBoxCustFax.Clear();
+                    textBoxCustCredit.Clear();
+                    textBoxCustStreet.Clear();
+                    textBoxCustCity.Clear();
+                    textBoxCustPC.Clear();
+                    textBoxCustEmail.Clear();
+                    textBoxSearchCFN.Focus();
+                    break;
+
+                case 2:
+                    textBoxSearchCFN.Visible = true;
+                    textBoxSearchCLN.Visible = false;
+                    labelSearchC.Visible = true;
+                    labelSearchCLN.Visible = false;
+                    labelSearchC.Text = "Enter First OR Last Name";
+                    textBoxSearchCFN.Clear();
+
+                    textBoxCustFN.Clear();
+                    textBoxCustLN.Clear();
+                    textBoxCustPhone.Clear();
+                    textBoxCustFax.Clear();
+                    textBoxCustCredit.Clear();
+                    textBoxCustStreet.Clear();
+                    textBoxCustCity.Clear();
+                    textBoxCustPC.Clear();
+                    textBoxCustEmail.Clear();
+                    textBoxSearchCFN.Focus();
+                    break;
+
+                case 3:
+                    textBoxSearchCFN.Visible = true;
+                    textBoxSearchCLN.Visible = true;
+                    labelSearchC.Visible = true;
+                    labelSearchCLN.Visible = true;
+                    labelSearchC.Text = "Enter the First Name";
+                    labelSearchCLN.Text = "Enter the Last Name";
+                    textBoxSearchCFN.Clear();
+
+                    textBoxCustFN.Clear();
+                    textBoxCustLN.Clear();
+                    textBoxCustPhone.Clear();
+                    textBoxCustFax.Clear();
+                    textBoxCustCredit.Clear();
+                    textBoxCustStreet.Clear();
+                    textBoxCustCity.Clear();
+                    textBoxCustPC.Clear();
+                    textBoxCustEmail.Clear();
+                    textBoxSearchCFN.Focus();
+                    break;
+
+                case 4:
+                    textBoxSearchCFN.Visible = true;
+                    textBoxSearchCLN.Visible = false;
+                    labelSearchC.Visible = true;
+                    labelSearchCLN.Visible = false;
+                    labelSearchC.Text = "Enter the City";
+                    textBoxSearchCFN.Clear();
+
+                    textBoxCustFN.Clear();
+                    textBoxCustLN.Clear();
+                    textBoxCustPhone.Clear();
+                    textBoxCustFax.Clear();
+                    textBoxCustCredit.Clear();
+                    textBoxCustStreet.Clear();
+                    textBoxCustCity.Clear();
+                    textBoxCustPC.Clear();
+                    textBoxCustEmail.Clear();
+                    textBoxSearchCFN.Focus();
+                    break;
+
+                case 5:
+                    textBoxSearchCFN.Visible = true;
+                    textBoxSearchCLN.Visible = false;
+                    labelSearchC.Visible = true;
+                    labelSearchCLN.Visible = false;
+                    labelSearchC.Text = "Enter the Postal Code";
+                    textBoxSearchCFN.Clear();
+
+                    textBoxCustFN.Clear();
+                    textBoxCustLN.Clear();
+                    textBoxCustPhone.Clear();
+                    textBoxCustFax.Clear();
+                    textBoxCustCredit.Clear();
+                    textBoxCustStreet.Clear();
+                    textBoxCustCity.Clear();
+                    textBoxCustPC.Clear();
+                    textBoxCustEmail.Clear();
+                    textBoxSearchCFN.Focus();
+                    break;
+            }
+        }
+
         private void buttonSearchCust_Click(object sender, EventArgs e)
         {
+            if (comboBoxSearchCustomer.SelectedIndex == -1 || comboBoxSearchCustomer.SelectedIndex == 0)
+            {
+                MessageBox.Show("Please select one option first", "Search option", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
+            // search by 
+            Customer cust = new Customer();
+            string input = "";
+            switch (comboBoxSearchCustomer.SelectedIndex)
+            {
+                case 1: //Search by Phone Number
+                    input = textBoxSearchCFN.Text.Trim();
+                    if (!Validator.IsValidPhone(input))
+                    {
+                        listViewUser.Items.Clear();
+                        MessageBox.Show("Invalid Phone Number. Must be: 123-456-7890", "Invalid Employee Phone", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBoxCustPhone.Clear();
+                        textBoxCustPhone.Focus();
+                        return;
+                    }
+                    cust = cust.SearchCustomerPhone(input);
+                    if (cust != null)
+                    {
+                        textBoxCustFN.Text = cust.FirstName.ToString();
+                        textBoxCustLN.Text = cust.LastName.ToString();
+                        textBoxCustPhone.Text = cust.PhoneNumber.ToString();
+                        textBoxCustFax.Text = cust.FaxNumber.ToString();
+                        textBoxCustCredit.Text = cust.CreditLimit.ToString();
+                        textBoxCustStreet.Text = cust.Street.ToString();
+                        textBoxCustCity.Text = cust.City.ToString();
+                        textBoxCustPC.Text = cust.PostalCode.ToString();
+                        textBoxCustEmail.Text = cust.Email.ToString();
+                        textBoxSearchCFN.Focus();
+
+                        //Check Customer status
+                        if (!cust.ActiveCustomer(input)){
+                            labelCDeleted.Text = "This Customer has been deleted. Click at UPDATE button to set as ACTIVE again";
+                        }
+                        else
+                        {
+                            labelCDeleted.Text = "";
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Customer not found!", "Invalid Customer Phone", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBoxSearch.Clear();
+                        textBoxSearch.Focus();
+
+                    }
+                    break;
+
+                case 2:
+                    input = textBoxSearchCFN.Text.Trim();
+                    StringBuilder message = new StringBuilder();
+
+                    if (cust != null)
+                    {
+                        List<Customer> listC = cust.SearchCustomerby(input);
+                        foreach (Customer customer in listC)
+                        {
+                            message.AppendLine($"Name: {customer.FirstName} {customer.LastName}");
+                            message.AppendLine($"Phone: {customer.PhoneNumber} | Fax: {customer.FaxNumber}");
+                            message.AppendLine($"Email: {customer.Email}");
+                            message.AppendLine($"Street: {customer.Street} | City: {customer.City} | Zip: {customer.PostalCode}");
+                            message.AppendLine($"Credit Limit: {customer.CreditLimit}");
+                            message.AppendLine($"Cliente Since: {customer.DateTimeSince}");
+                            message.AppendLine($"-----------------------------");
+                        }
+                        MessageBox.Show(message.ToString(), "Customer List", MessageBoxButtons.OK);
+
+                        //Clean the tab
+                        textBoxCustFN.Clear();
+                        textBoxCustLN.Clear();
+                        textBoxCustPhone.Clear();
+                        textBoxCustFax.Clear();
+                        textBoxCustCredit.Clear();
+                        textBoxCustStreet.Clear();
+                        textBoxCustCity.Clear();
+                        textBoxCustPC.Clear();
+                        textBoxCustEmail.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Customer not found!", "Invalid Customer Name", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBoxSearch.Clear();
+                        textBoxSearch.Focus();
+
+                    }
+                    break;
+
+                case 3:
+                    string inputFN = textBoxSearchCFN.Text.Trim();
+                    string inputLN = textBoxSearchCLN.Text.Trim();
+
+                    StringBuilder messageFL = new StringBuilder();
+
+                    if (cust != null)
+                    {
+                        List<Customer> listC = cust.SearchCustomerbyFullName(inputFN, inputLN);
+                        foreach (Customer customer in listC)
+                        {
+                            messageFL.AppendLine($"Name: {customer.FirstName} {customer.LastName}");
+                            messageFL.AppendLine($"Phone: {customer.PhoneNumber} | Fax: {customer.FaxNumber}");
+                            messageFL.AppendLine($"Email: {customer.Email}");
+                            messageFL.AppendLine($"Street: {customer.Street} | City: {customer.City} | Zip: {customer.PostalCode}");
+                            messageFL.AppendLine($"Credit Limit: {customer.CreditLimit}");
+                            messageFL.AppendLine($"Cliente Since: {customer.DateTimeSince}");
+                            messageFL.AppendLine($"-----------------------------");
+                        }
+                        MessageBox.Show(messageFL.ToString(), "Customer List", MessageBoxButtons.OK);
+
+                        //Clean the tab
+                        textBoxCustFN.Clear();
+                        textBoxCustLN.Clear();
+                        textBoxCustPhone.Clear();
+                        textBoxCustFax.Clear();
+                        textBoxCustCredit.Clear();
+                        textBoxCustStreet.Clear();
+                        textBoxCustCity.Clear();
+                        textBoxCustPC.Clear();
+                        textBoxCustEmail.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Customer not found!", "Invalid Customer Name", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBoxSearch.Clear();
+                        textBoxSearch.Focus();
+
+                    }
+                    break;
+
+                case 4:
+                    string inputC = textBoxSearchCFN.Text.Trim();
+
+                    StringBuilder messageC = new StringBuilder();
+
+                    if (cust != null)
+                    {
+                        List<Customer> listC = cust.SearchCustomerby(inputC);
+                        foreach (Customer customer in listC)
+                        {
+                            messageC.AppendLine($"Name: {customer.FirstName} {customer.LastName}");
+                            messageC.AppendLine($"Phone: {customer.PhoneNumber} | Fax: {customer.FaxNumber}");
+                            messageC.AppendLine($"Email: {customer.Email}");
+                            messageC.AppendLine($"Street: {customer.Street} | City: {customer.City} | Zip: {customer.PostalCode}");
+                            messageC.AppendLine($"Credit Limit: {customer.CreditLimit}");
+                            messageC.AppendLine($"Cliente Since: {customer.DateTimeSince}");
+                            messageC.AppendLine($"-----------------------------");
+                        }
+                        MessageBox.Show(messageC.ToString(), "Customer List", MessageBoxButtons.OK);
+
+                        //Clean the tab
+                        textBoxCustFN.Clear();
+                        textBoxCustLN.Clear();
+                        textBoxCustPhone.Clear();
+                        textBoxCustFax.Clear();
+                        textBoxCustCredit.Clear();
+                        textBoxCustStreet.Clear();
+                        textBoxCustCity.Clear();
+                        textBoxCustPC.Clear();
+                        textBoxCustEmail.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Customer not found!", "Invalid Customer Name", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBoxSearch.Clear();
+                        textBoxSearch.Focus();
+
+                    }
+                    break;
+
+                case 5:
+                    string inputZ = textBoxSearchCFN.Text.Trim();
+
+                    StringBuilder messageZ = new StringBuilder();
+
+                    if (cust != null)
+                    {
+                        List<Customer> listC = cust.SearchCustomerby(inputZ);
+                        foreach (Customer customer in listC)
+                        {
+                            messageZ.AppendLine($"Name: {customer.FirstName} {customer.LastName}");
+                            messageZ.AppendLine($"Phone: {customer.PhoneNumber} | Fax: {customer.FaxNumber}");
+                            messageZ.AppendLine($"Email: {customer.Email}");
+                            messageZ.AppendLine($"Street: {customer.Street} | City: {customer.City} | Zip: {customer.PostalCode}");
+                            messageZ.AppendLine($"Credit Limit: {customer.CreditLimit}");
+                            messageZ.AppendLine($"Cliente Since: {customer.DateTimeSince}");
+                            messageZ.AppendLine($"-----------------------------");
+                        }
+                        MessageBox.Show(messageZ.ToString(), "Customer List", MessageBoxButtons.OK);
+
+                        //Clean the tab
+                        textBoxCustFN.Clear();
+                        textBoxCustLN.Clear();
+                        textBoxCustPhone.Clear();
+                        textBoxCustFax.Clear();
+                        textBoxCustCredit.Clear();
+                        textBoxCustStreet.Clear();
+                        textBoxCustCity.Clear();
+                        textBoxCustPC.Clear();
+                        textBoxCustEmail.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Customer not found!", "Invalid Customer Name", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBoxSearch.Clear();
+                        textBoxSearch.Focus();
+
+                    }
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 }

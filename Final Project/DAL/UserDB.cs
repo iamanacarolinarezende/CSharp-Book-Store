@@ -125,12 +125,12 @@ namespace Final_Project.DAL
         {
             SqlConnection conn = UtilityDB.GetDBConnection();
 
-            SqlCommand cmdInsert = new SqlCommand();
-            cmdInsert.Connection = conn;
-            cmdInsert.CommandText = "DELETE Users " +
+            SqlCommand cmdDelete = new SqlCommand();
+            cmdDelete.Connection = conn;
+            cmdDelete.CommandText = "DELETE Users " +
                                      "WHERE Username=@Username";
-            cmdInsert.Parameters.AddWithValue("@Username", Username);
-            cmdInsert.ExecuteNonQuery();
+            cmdDelete.Parameters.AddWithValue("@Username", Username);
+            cmdDelete.ExecuteNonQuery();
            
             conn.Close();
         }
