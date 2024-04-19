@@ -28,5 +28,20 @@ namespace Final_Project.DAL
             conn.Close();
             return listP;
         }
+
+        //Add a new position
+        public static void SaveNewPosition(Positions position)
+        {
+            SqlConnection conn = UtilityDB.GetDBConnection();
+
+            SqlCommand cmdInsert = new SqlCommand();
+            cmdInsert.Connection = conn;
+            cmdInsert.CommandText = "INSERT INTO Positions (PositionName) " + "VALUES (@PositionName)";
+
+            cmdInsert.Parameters.AddWithValue("@PositionName", position.PositionName);
+            cmdInsert.ExecuteNonQuery();
+
+            conn.Close();
+        }
     }
 }

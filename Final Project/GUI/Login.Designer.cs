@@ -36,6 +36,7 @@
             this.textBoxLoginPass = new System.Windows.Forms.TextBox();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.buttonLoginExit = new System.Windows.Forms.Button();
+            this.checkBoxShowPass = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,9 +44,10 @@
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(157, 41);
+            this.pictureBox1.Location = new System.Drawing.Point(209, 50);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(202, 86);
+            this.pictureBox1.Size = new System.Drawing.Size(269, 106);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -53,7 +55,8 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(115, 175);
+            this.label1.Location = new System.Drawing.Point(153, 215);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 17);
             this.label1.TabIndex = 1;
@@ -63,7 +66,8 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(115, 212);
+            this.label2.Location = new System.Drawing.Point(153, 261);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 17);
             this.label2.TabIndex = 2;
@@ -71,26 +75,29 @@
             // 
             // textBoxLoginUser
             // 
-            this.textBoxLoginUser.Location = new System.Drawing.Point(218, 175);
+            this.textBoxLoginUser.Location = new System.Drawing.Point(291, 215);
+            this.textBoxLoginUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBoxLoginUser.Name = "textBoxLoginUser";
-            this.textBoxLoginUser.Size = new System.Drawing.Size(208, 20);
+            this.textBoxLoginUser.Size = new System.Drawing.Size(276, 22);
             this.textBoxLoginUser.TabIndex = 3;
             this.textBoxLoginUser.Tag = "wfwgw";
             this.textBoxLoginUser.Text = "Enter your Email";
             // 
             // textBoxLoginPass
             // 
-            this.textBoxLoginPass.Location = new System.Drawing.Point(218, 209);
+            this.textBoxLoginPass.Location = new System.Drawing.Point(291, 257);
+            this.textBoxLoginPass.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBoxLoginPass.Name = "textBoxLoginPass";
-            this.textBoxLoginPass.Size = new System.Drawing.Size(141, 20);
+            this.textBoxLoginPass.Size = new System.Drawing.Size(187, 22);
             this.textBoxLoginPass.TabIndex = 4;
-            this.textBoxLoginPass.Text = "8 digits";
+            this.textBoxLoginPass.UseSystemPasswordChar = true;
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(300, 249);
+            this.buttonLogin.Location = new System.Drawing.Point(400, 318);
+            this.buttonLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
+            this.buttonLogin.Size = new System.Drawing.Size(100, 28);
             this.buttonLogin.TabIndex = 5;
             this.buttonLogin.Text = "Login";
             this.buttonLogin.UseVisualStyleBackColor = true;
@@ -98,19 +105,33 @@
             // 
             // buttonLoginExit
             // 
-            this.buttonLoginExit.Location = new System.Drawing.Point(142, 249);
+            this.buttonLoginExit.Location = new System.Drawing.Point(189, 318);
+            this.buttonLoginExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonLoginExit.Name = "buttonLoginExit";
-            this.buttonLoginExit.Size = new System.Drawing.Size(75, 23);
+            this.buttonLoginExit.Size = new System.Drawing.Size(100, 28);
             this.buttonLoginExit.TabIndex = 6;
             this.buttonLoginExit.Text = "Exit";
             this.buttonLoginExit.UseVisualStyleBackColor = true;
             this.buttonLoginExit.Click += new System.EventHandler(this.buttonLoginExit_Click);
             // 
+            // checkBoxShowPass
+            // 
+            this.checkBoxShowPass.AutoSize = true;
+            this.checkBoxShowPass.Location = new System.Drawing.Point(291, 289);
+            this.checkBoxShowPass.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBoxShowPass.Name = "checkBoxShowPass";
+            this.checkBoxShowPass.Size = new System.Drawing.Size(59, 20);
+            this.checkBoxShowPass.TabIndex = 8;
+            this.checkBoxShowPass.Text = "Show";
+            this.checkBoxShowPass.UseVisualStyleBackColor = true;
+            this.checkBoxShowPass.CheckedChanged += new System.EventHandler(this.checkBoxShowPass_CheckedChanged);
+            // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(517, 293);
+            this.ClientSize = new System.Drawing.Size(689, 361);
+            this.Controls.Add(this.checkBoxShowPass);
             this.Controls.Add(this.buttonLoginExit);
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.textBoxLoginPass);
@@ -118,6 +139,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Login";
             this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -135,5 +157,6 @@
         private System.Windows.Forms.TextBox textBoxLoginPass;
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.Button buttonLoginExit;
+        private System.Windows.Forms.CheckBox checkBoxShowPass;
     }
 }

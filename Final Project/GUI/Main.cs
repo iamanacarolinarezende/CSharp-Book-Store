@@ -423,7 +423,6 @@ namespace Final_Project.GUI
                 // Get the selected position from the combobox
                 Positions selectedPosition = (Positions)comboBoxEmpPositions.SelectedItem;
 
-                // Now you can use the selectedPosition object
                 // Save Employee
                 emp.EmployeeID = Convert.ToInt32(textBoxEmployeeId.Text.Trim());
                 emp.FirstName = textBoxFirstName.Text.Trim();
@@ -761,6 +760,13 @@ namespace Final_Project.GUI
                     break;
                     break;
             }
+        }
+
+        private void labelAddJob_Click(object sender, EventArgs e)
+        {
+            AddJobTitle formAdd = new AddJobTitle();
+            formAdd.Show();
+            this.Hide();
         }
 
         private void comboBoxEmpPositions_SelectedIndexChanged(object sender, EventArgs e)

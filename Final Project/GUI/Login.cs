@@ -28,6 +28,17 @@ namespace Final_Project.GUI
                 Application.Exit();
             }
         }
+        private void checkBoxShowPass_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxShowPass.Checked == true)
+            {
+                textBoxLoginPass.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                textBoxLoginPass.UseSystemPasswordChar= true;
+            }
+        }
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
@@ -58,10 +69,11 @@ namespace Final_Project.GUI
             }
             else
             {
-                MessageBox.Show("Invalid username or password", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        
     }
 
 

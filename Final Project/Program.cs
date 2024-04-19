@@ -19,6 +19,7 @@ namespace Final_Project
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Login());
             Application.Run(new Main());
+            //Application.Run(new AddJobTitle());
         }
     }
 }

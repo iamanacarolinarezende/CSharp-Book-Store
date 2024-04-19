@@ -14,5 +14,8 @@ namespace Final_Project.BLL
 
         //List all Positions
         public List<Positions> GetPositionList() => PositionsDB.GetAllPositions();
+
+        //Add Position
+        public void AddPosition(Positions position) => PositionsDB.SaveNewPosition(position);
     }
 }

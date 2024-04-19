@@ -219,8 +219,6 @@ namespace Final_Project.DAL
             return listC;
         }
 
-        
-
         //Is Unique by Phone
         public static bool IsUniquePhoneNumber(string Phone)
         {

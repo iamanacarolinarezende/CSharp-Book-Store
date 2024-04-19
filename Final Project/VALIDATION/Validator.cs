@@ -101,6 +101,26 @@ namespace Final_Project.VALIDATION
                 return false;
             }
         }
+
+        //Validate Job role
+        public static bool IsValidJobRole(string input)
+        {
+            if (string.IsNullOrEmpty(input) || input.Length > 50)
+            {
+                return false;
+            }
+
+            foreach (char c in input)
+            {
+                if (!(char.IsLetter(c) || char.IsWhiteSpace(c) || c == '-' || c == '\''))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
     }
-    
+
 }
