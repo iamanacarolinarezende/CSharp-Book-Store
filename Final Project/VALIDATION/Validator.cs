@@ -121,6 +121,74 @@ namespace Final_Project.VALIDATION
             return true;
         }
 
+        //Validate ISBN
+        public static bool IsValidISBN(string isbn)
+        {
+            isbn = isbn.Replace(" ", "").Replace("-", "");
+
+            if (isbn.Length != 10 && isbn.Length != 13)
+            {
+                return false;
+            }
+
+            if (isbn.Length == 10)
+            {
+                int checksum = 0;
+                for (int i = 0; i < 9; i++)
+                {
+                    int digit = 0;
+                    if (!int.TryParse(isbn[i].ToString(), out digit))
+                    {
+                        return false;
+                    }
+                    checksum += (digit * (10 - i));
+                }
+
+                char lastDigit = isbn[9];
+                if (lastDigit == 'X')
+                {
+                    checksum += 10;
+                }
+                else
+                {
+                    int digit = 0;
+                    if (!int.TryParse(lastDigit.ToString(), out digit))
+                    {
+                        return false;
+                    }
+                    checksum += digit;
+                }
+
+                return (checksum % 11 == 0);
+            }
+            else if (isbn.Length == 13)
+            {
+                int checksum = 0;
+                for (int i = 0; i < 12; i++)
+                {
+                    int digit = 0;
+                    if (!int.TryParse(isbn[i].ToString(), out digit))
+                    {
+                        return false;
+                    }
+                    checksum += (i % 2 == 0) ? digit : digit * 3;
+                }
+
+                int lastDigit = 0;
+                if (!int.TryParse(isbn[12].ToString(), out lastDigit))
+                {
+                    return false;
+                }
+
+                int remainder = checksum % 10;
+                int checkDigit = (remainder == 0) ? 0 : (10 - remainder);
+                return (lastDigit == checkDigit);
+            }
+
+            return false;
+        }
+
+
     }
 
 }

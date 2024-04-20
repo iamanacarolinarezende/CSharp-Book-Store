@@ -88,6 +88,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.Employee = new System.Windows.Forms.TabPage();
+            this.labelAddJob = new System.Windows.Forms.Label();
             this.comboBoxEmpPositions = new System.Windows.Forms.ComboBox();
             this.buttonSearchEmp = new System.Windows.Forms.Button();
             this.labelLNE = new System.Windows.Forms.Label();
@@ -121,12 +122,48 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.labelAddJob = new System.Windows.Forms.Label();
+            this.Book = new System.Windows.Forms.TabPage();
+            this.buttonBookSearch = new System.Windows.Forms.Button();
+            this.textBoxBookSearch = new System.Windows.Forms.TextBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.comboBoxBookSearch = new System.Windows.Forms.ComboBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.listViewBook = new System.Windows.Forms.ListView();
+            this.columnISBN = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnBookName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnYearPublished = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnPublisher = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnAuthors = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonBookExit = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.comboBoxBookPublisher = new System.Windows.Forms.ComboBox();
+            this.buttonBookDelete = new System.Windows.Forms.Button();
+            this.buttonBookUpdate = new System.Windows.Forms.Button();
+            this.textBoxBookQty = new System.Windows.Forms.TextBox();
+            this.textBoxBookName = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.textBoxBookYear = new System.Windows.Forms.TextBox();
+            this.textBoxBookPrice = new System.Windows.Forms.TextBox();
+            this.buttonBookSave = new System.Windows.Forms.Button();
+            this.textBoxBookISBN = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.listBoxBookAuthors = new System.Windows.Forms.CheckedListBox();
             this.Customer.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.User.SuspendLayout();
             this.Employee.SuspendLayout();
             this.tabControl.SuspendLayout();
+            this.Book.SuspendLayout();
             this.SuspendLayout();
             // 
             // Customer
@@ -160,9 +197,9 @@
             this.Customer.Controls.Add(this.label26);
             this.Customer.Controls.Add(this.label27);
             this.Customer.Location = new System.Drawing.Point(4, 25);
-            this.Customer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Customer.Margin = new System.Windows.Forms.Padding(4);
             this.Customer.Name = "Customer";
-            this.Customer.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Customer.Padding = new System.Windows.Forms.Padding(4);
             this.Customer.Size = new System.Drawing.Size(992, 495);
             this.Customer.TabIndex = 2;
             this.Customer.Text = "Customer";
@@ -217,9 +254,9 @@
             this.groupBox1.Controls.Add(this.labelSearchC);
             this.groupBox1.Controls.Add(this.comboBoxSearchCustomer);
             this.groupBox1.Location = new System.Drawing.Point(28, 274);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(688, 196);
             this.groupBox1.TabIndex = 101;
             this.groupBox1.TabStop = false;
@@ -228,7 +265,7 @@
             // textBoxSearchCLN
             // 
             this.textBoxSearchCLN.Location = new System.Drawing.Point(500, 65);
-            this.textBoxSearchCLN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxSearchCLN.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxSearchCLN.Name = "textBoxSearchCLN";
             this.textBoxSearchCLN.Size = new System.Drawing.Size(160, 22);
             this.textBoxSearchCLN.TabIndex = 22;
@@ -236,7 +273,7 @@
             // textBoxSearchCFN
             // 
             this.textBoxSearchCFN.Location = new System.Drawing.Point(296, 65);
-            this.textBoxSearchCFN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxSearchCFN.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxSearchCFN.Name = "textBoxSearchCFN";
             this.textBoxSearchCFN.Size = new System.Drawing.Size(160, 22);
             this.textBoxSearchCFN.TabIndex = 21;
@@ -247,7 +284,7 @@
             this.buttonSearchCust.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSearchCust.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.buttonSearchCust.Location = new System.Drawing.Point(284, 130);
-            this.buttonSearchCust.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonSearchCust.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSearchCust.Name = "buttonSearchCust";
             this.buttonSearchCust.Size = new System.Drawing.Size(137, 37);
             this.buttonSearchCust.TabIndex = 23;
@@ -287,7 +324,7 @@
             "City",
             "Postal Code"});
             this.comboBoxSearchCustomer.Location = new System.Drawing.Point(28, 65);
-            this.comboBoxSearchCustomer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxSearchCustomer.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxSearchCustomer.Name = "comboBoxSearchCustomer";
             this.comboBoxSearchCustomer.Size = new System.Drawing.Size(212, 24);
             this.comboBoxSearchCustomer.TabIndex = 13;
@@ -670,7 +707,7 @@
             "Username",
             "Employee ID"});
             this.comboBoxSearchOption.Location = new System.Drawing.Point(115, 270);
-            this.comboBoxSearchOption.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxSearchOption.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxSearchOption.Name = "comboBoxSearchOption";
             this.comboBoxSearchOption.Size = new System.Drawing.Size(185, 24);
             this.comboBoxSearchOption.TabIndex = 7;
@@ -697,7 +734,7 @@
             this.listViewUser.GridLines = true;
             this.listViewUser.HideSelection = false;
             this.listViewUser.Location = new System.Drawing.Point(572, 260);
-            this.listViewUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listViewUser.Margin = new System.Windows.Forms.Padding(4);
             this.listViewUser.Name = "listViewUser";
             this.listViewUser.Size = new System.Drawing.Size(373, 147);
             this.listViewUser.TabIndex = 45;
@@ -838,11 +875,22 @@
             this.Employee.Text = "Employee";
             this.Employee.UseVisualStyleBackColor = true;
             // 
+            // labelAddJob
+            // 
+            this.labelAddJob.AutoSize = true;
+            this.labelAddJob.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAddJob.Location = new System.Drawing.Point(611, 95);
+            this.labelAddJob.Name = "labelAddJob";
+            this.labelAddJob.Size = new System.Drawing.Size(76, 13);
+            this.labelAddJob.TabIndex = 65;
+            this.labelAddJob.Text = "+ Add Job Title";
+            this.labelAddJob.Click += new System.EventHandler(this.labelAddJob_Click);
+            // 
             // comboBoxEmpPositions
             // 
             this.comboBoxEmpPositions.FormattingEnabled = true;
             this.comboBoxEmpPositions.Location = new System.Drawing.Point(609, 66);
-            this.comboBoxEmpPositions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxEmpPositions.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxEmpPositions.Name = "comboBoxEmpPositions";
             this.comboBoxEmpPositions.Size = new System.Drawing.Size(160, 24);
             this.comboBoxEmpPositions.TabIndex = 3;
@@ -854,7 +902,7 @@
             this.buttonSearchEmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSearchEmp.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.buttonSearchEmp.Location = new System.Drawing.Point(819, 394);
-            this.buttonSearchEmp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonSearchEmp.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSearchEmp.Name = "buttonSearchEmp";
             this.buttonSearchEmp.Size = new System.Drawing.Size(137, 37);
             this.buttonSearchEmp.TabIndex = 64;
@@ -875,7 +923,7 @@
             // textBoxLNE
             // 
             this.textBoxLNE.Location = new System.Drawing.Point(812, 357);
-            this.textBoxLNE.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxLNE.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxLNE.Name = "textBoxLNE";
             this.textBoxLNE.Size = new System.Drawing.Size(160, 22);
             this.textBoxLNE.TabIndex = 62;
@@ -883,7 +931,7 @@
             // textBoxSearchE
             // 
             this.textBoxSearchE.Location = new System.Drawing.Point(812, 305);
-            this.textBoxSearchE.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxSearchE.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxSearchE.Name = "textBoxSearchE";
             this.textBoxSearchE.Size = new System.Drawing.Size(160, 22);
             this.textBoxSearchE.TabIndex = 61;
@@ -916,7 +964,7 @@
             "First First OR Last Name",
             "First AND Last Name"});
             this.comboBox1.Location = new System.Drawing.Point(812, 244);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(160, 24);
             this.comboBox1.TabIndex = 59;
@@ -1157,6 +1205,7 @@
             this.tabControl.Controls.Add(this.Employee);
             this.tabControl.Controls.Add(this.User);
             this.tabControl.Controls.Add(this.Customer);
+            this.tabControl.Controls.Add(this.Book);
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl.Name = "tabControl";
@@ -1164,16 +1213,378 @@
             this.tabControl.Size = new System.Drawing.Size(1000, 524);
             this.tabControl.TabIndex = 0;
             // 
-            // labelAddJob
+            // Book
             // 
-            this.labelAddJob.AutoSize = true;
-            this.labelAddJob.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAddJob.Location = new System.Drawing.Point(611, 95);
-            this.labelAddJob.Name = "labelAddJob";
-            this.labelAddJob.Size = new System.Drawing.Size(76, 13);
-            this.labelAddJob.TabIndex = 65;
-            this.labelAddJob.Text = "+ Add Job Title";
-            this.labelAddJob.Click += new System.EventHandler(this.labelAddJob_Click);
+            this.Book.Controls.Add(this.listBoxBookAuthors);
+            this.Book.Controls.Add(this.buttonBookSearch);
+            this.Book.Controls.Add(this.textBoxBookSearch);
+            this.Book.Controls.Add(this.label38);
+            this.Book.Controls.Add(this.comboBoxBookSearch);
+            this.Book.Controls.Add(this.label39);
+            this.Book.Controls.Add(this.label40);
+            this.Book.Controls.Add(this.label41);
+            this.Book.Controls.Add(this.listViewBook);
+            this.Book.Controls.Add(this.buttonBookExit);
+            this.Book.Controls.Add(this.button7);
+            this.Book.Controls.Add(this.label36);
+            this.Book.Controls.Add(this.label35);
+            this.Book.Controls.Add(this.label34);
+            this.Book.Controls.Add(this.comboBoxBookPublisher);
+            this.Book.Controls.Add(this.buttonBookDelete);
+            this.Book.Controls.Add(this.buttonBookUpdate);
+            this.Book.Controls.Add(this.textBoxBookQty);
+            this.Book.Controls.Add(this.textBoxBookName);
+            this.Book.Controls.Add(this.label33);
+            this.Book.Controls.Add(this.textBoxBookYear);
+            this.Book.Controls.Add(this.textBoxBookPrice);
+            this.Book.Controls.Add(this.buttonBookSave);
+            this.Book.Controls.Add(this.textBoxBookISBN);
+            this.Book.Controls.Add(this.label32);
+            this.Book.Controls.Add(this.label30);
+            this.Book.Controls.Add(this.label23);
+            this.Book.Controls.Add(this.label22);
+            this.Book.Controls.Add(this.label21);
+            this.Book.Location = new System.Drawing.Point(4, 25);
+            this.Book.Name = "Book";
+            this.Book.Padding = new System.Windows.Forms.Padding(3);
+            this.Book.Size = new System.Drawing.Size(992, 495);
+            this.Book.TabIndex = 3;
+            this.Book.Text = "Book";
+            this.Book.UseVisualStyleBackColor = true;
+            // 
+            // buttonBookSearch
+            // 
+            this.buttonBookSearch.BackColor = System.Drawing.Color.LightGray;
+            this.buttonBookSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBookSearch.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonBookSearch.Location = new System.Drawing.Point(817, 395);
+            this.buttonBookSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonBookSearch.Name = "buttonBookSearch";
+            this.buttonBookSearch.Size = new System.Drawing.Size(137, 37);
+            this.buttonBookSearch.TabIndex = 82;
+            this.buttonBookSearch.Text = "S&earch";
+            this.buttonBookSearch.UseVisualStyleBackColor = false;
+            // 
+            // textBoxBookSearch
+            // 
+            this.textBoxBookSearch.Location = new System.Drawing.Point(809, 365);
+            this.textBoxBookSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxBookSearch.Name = "textBoxBookSearch";
+            this.textBoxBookSearch.Size = new System.Drawing.Size(160, 22);
+            this.textBoxBookSearch.TabIndex = 79;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.Location = new System.Drawing.Point(804, 342);
+            this.label38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(0, 13);
+            this.label38.TabIndex = 78;
+            // 
+            // comboBoxBookSearch
+            // 
+            this.comboBoxBookSearch.FormattingEnabled = true;
+            this.comboBoxBookSearch.Items.AddRange(new object[] {
+            "",
+            "Employee ID",
+            "First First OR Last Name",
+            "First AND Last Name"});
+            this.comboBoxBookSearch.Location = new System.Drawing.Point(809, 304);
+            this.comboBoxBookSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxBookSearch.Name = "comboBoxBookSearch";
+            this.comboBoxBookSearch.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxBookSearch.TabIndex = 77;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.Location = new System.Drawing.Point(637, 323);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(0, 13);
+            this.label39.TabIndex = 76;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.Location = new System.Drawing.Point(637, 267);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(0, 13);
+            this.label40.TabIndex = 75;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.Location = new System.Drawing.Point(838, 267);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(73, 17);
+            this.label41.TabIndex = 74;
+            this.label41.Text = "Search By";
+            // 
+            // listViewBook
+            // 
+            this.listViewBook.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.listViewBook.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnISBN,
+            this.columnBookName,
+            this.columnPrice,
+            this.columnYearPublished,
+            this.columnPublisher,
+            this.columnAuthors});
+            this.listViewBook.GridLines = true;
+            this.listViewBook.HideSelection = false;
+            this.listViewBook.Location = new System.Drawing.Point(6, 267);
+            this.listViewBook.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.listViewBook.Name = "listViewBook";
+            this.listViewBook.Size = new System.Drawing.Size(761, 223);
+            this.listViewBook.TabIndex = 73;
+            this.listViewBook.UseCompatibleStateImageBehavior = false;
+            this.listViewBook.View = System.Windows.Forms.View.Details;
+            // 
+            // columnISBN
+            // 
+            this.columnISBN.Text = "ISBN";
+            this.columnISBN.Width = 75;
+            // 
+            // columnBookName
+            // 
+            this.columnBookName.Text = "Book Name";
+            this.columnBookName.Width = 143;
+            // 
+            // columnPrice
+            // 
+            this.columnPrice.Text = "Price";
+            this.columnPrice.Width = 137;
+            // 
+            // columnYearPublished
+            // 
+            this.columnYearPublished.Text = "Year";
+            this.columnYearPublished.Width = 107;
+            // 
+            // columnPublisher
+            // 
+            this.columnPublisher.Text = "Publisher";
+            this.columnPublisher.Width = 105;
+            // 
+            // columnAuthors
+            // 
+            this.columnAuthors.Text = "Author";
+            this.columnAuthors.Width = 193;
+            // 
+            // buttonBookExit
+            // 
+            this.buttonBookExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBookExit.Location = new System.Drawing.Point(815, 453);
+            this.buttonBookExit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonBookExit.Name = "buttonBookExit";
+            this.buttonBookExit.Size = new System.Drawing.Size(139, 37);
+            this.buttonBookExit.TabIndex = 72;
+            this.buttonBookExit.Text = "E&xit";
+            this.buttonBookExit.UseVisualStyleBackColor = true;
+            this.buttonBookExit.Click += new System.EventHandler(this.buttonBookExit_Click);
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.Location = new System.Drawing.Point(6, 226);
+            this.button7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(221, 37);
+            this.button7.TabIndex = 71;
+            this.button7.Text = "&List Books";
+            this.button7.UseVisualStyleBackColor = false;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Location = new System.Drawing.Point(809, 99);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(81, 13);
+            this.label36.TabIndex = 70;
+            this.label36.Text = "+ Add Publisher";
+            this.label36.Click += new System.EventHandler(this.label36_Click);
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.Location = new System.Drawing.Point(287, 218);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(69, 13);
+            this.label35.TabIndex = 69;
+            this.label35.Text = "+ Add Author";
+            this.label35.Click += new System.EventHandler(this.label35_Click);
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(809, 26);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(67, 17);
+            this.label34.TabIndex = 68;
+            this.label34.Text = "Publisher";
+            // 
+            // comboBoxBookPublisher
+            // 
+            this.comboBoxBookPublisher.FormattingEnabled = true;
+            this.comboBoxBookPublisher.Location = new System.Drawing.Point(811, 63);
+            this.comboBoxBookPublisher.Name = "comboBoxBookPublisher";
+            this.comboBoxBookPublisher.Size = new System.Drawing.Size(158, 24);
+            this.comboBoxBookPublisher.TabIndex = 67;
+            // 
+            // buttonBookDelete
+            // 
+            this.buttonBookDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBookDelete.Location = new System.Drawing.Point(812, 177);
+            this.buttonBookDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonBookDelete.Name = "buttonBookDelete";
+            this.buttonBookDelete.Size = new System.Drawing.Size(137, 37);
+            this.buttonBookDelete.TabIndex = 65;
+            this.buttonBookDelete.Text = "&Delete Employee";
+            this.buttonBookDelete.UseVisualStyleBackColor = true;
+            // 
+            // buttonBookUpdate
+            // 
+            this.buttonBookUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBookUpdate.Location = new System.Drawing.Point(620, 177);
+            this.buttonBookUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonBookUpdate.Name = "buttonBookUpdate";
+            this.buttonBookUpdate.Size = new System.Drawing.Size(137, 37);
+            this.buttonBookUpdate.TabIndex = 64;
+            this.buttonBookUpdate.Text = "&Update Employee";
+            this.buttonBookUpdate.UseVisualStyleBackColor = true;
+            // 
+            // textBoxBookQty
+            // 
+            this.textBoxBookQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxBookQty.Location = new System.Drawing.Point(684, 66);
+            this.textBoxBookQty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxBookQty.Name = "textBoxBookQty";
+            this.textBoxBookQty.Size = new System.Drawing.Size(83, 21);
+            this.textBoxBookQty.TabIndex = 63;
+            // 
+            // textBoxBookName
+            // 
+            this.textBoxBookName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxBookName.Location = new System.Drawing.Point(161, 66);
+            this.textBoxBookName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxBookName.Name = "textBoxBookName";
+            this.textBoxBookName.Size = new System.Drawing.Size(218, 21);
+            this.textBoxBookName.TabIndex = 62;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.Location = new System.Drawing.Point(21, 94);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(46, 13);
+            this.label33.TabIndex = 61;
+            this.label33.Text = "13 digits";
+            // 
+            // textBoxBookYear
+            // 
+            this.textBoxBookYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxBookYear.Location = new System.Drawing.Point(557, 66);
+            this.textBoxBookYear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxBookYear.Name = "textBoxBookYear";
+            this.textBoxBookYear.Size = new System.Drawing.Size(83, 21);
+            this.textBoxBookYear.TabIndex = 57;
+            // 
+            // textBoxBookPrice
+            // 
+            this.textBoxBookPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxBookPrice.Location = new System.Drawing.Point(423, 66);
+            this.textBoxBookPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxBookPrice.Name = "textBoxBookPrice";
+            this.textBoxBookPrice.Size = new System.Drawing.Size(90, 21);
+            this.textBoxBookPrice.TabIndex = 56;
+            // 
+            // buttonBookSave
+            // 
+            this.buttonBookSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBookSave.Location = new System.Drawing.Point(422, 177);
+            this.buttonBookSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonBookSave.Name = "buttonBookSave";
+            this.buttonBookSave.Size = new System.Drawing.Size(137, 37);
+            this.buttonBookSave.TabIndex = 58;
+            this.buttonBookSave.Text = "&Save Book";
+            this.buttonBookSave.UseVisualStyleBackColor = true;
+            this.buttonBookSave.Click += new System.EventHandler(this.buttonBookSave_Click);
+            // 
+            // textBoxBookISBN
+            // 
+            this.textBoxBookISBN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxBookISBN.Location = new System.Drawing.Point(24, 66);
+            this.textBoxBookISBN.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxBookISBN.Name = "textBoxBookISBN";
+            this.textBoxBookISBN.Size = new System.Drawing.Size(105, 21);
+            this.textBoxBookISBN.TabIndex = 30;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.Location = new System.Drawing.Point(681, 26);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(61, 17);
+            this.label32.TabIndex = 29;
+            this.label32.Text = "Quantity";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label30.Location = new System.Drawing.Point(554, 26);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(38, 17);
+            this.label30.TabIndex = 28;
+            this.label30.Text = "Year";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(420, 26);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(69, 17);
+            this.label23.TabIndex = 27;
+            this.label23.Text = "Unit Price";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(21, 26);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(39, 17);
+            this.label22.TabIndex = 26;
+            this.label22.Text = "ISBN";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(158, 26);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(81, 17);
+            this.label21.TabIndex = 25;
+            this.label21.Text = "Book Name";
+            // 
+            // listBoxBookAuthors
+            // 
+            this.listBoxBookAuthors.FormattingEnabled = true;
+            this.listBoxBookAuthors.Location = new System.Drawing.Point(24, 129);
+            this.listBoxBookAuthors.Name = "listBoxBookAuthors";
+            this.listBoxBookAuthors.Size = new System.Drawing.Size(355, 89);
+            this.listBoxBookAuthors.TabIndex = 83;
             // 
             // Main
             // 
@@ -1194,6 +1605,8 @@
             this.Employee.ResumeLayout(false);
             this.Employee.PerformLayout();
             this.tabControl.ResumeLayout(false);
+            this.Book.ResumeLayout(false);
+            this.Book.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1294,5 +1707,41 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label labelAddJob;
+        private System.Windows.Forms.TabPage Book;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox textBoxBookISBN;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.TextBox textBoxBookQty;
+        private System.Windows.Forms.TextBox textBoxBookName;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.TextBox textBoxBookYear;
+        private System.Windows.Forms.TextBox textBoxBookPrice;
+        private System.Windows.Forms.Button buttonBookSave;
+        private System.Windows.Forms.Button buttonBookDelete;
+        private System.Windows.Forms.Button buttonBookUpdate;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.ComboBox comboBoxBookPublisher;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Button buttonBookSearch;
+        private System.Windows.Forms.TextBox textBoxBookSearch;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.ComboBox comboBoxBookSearch;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.ListView listViewBook;
+        private System.Windows.Forms.ColumnHeader columnISBN;
+        private System.Windows.Forms.ColumnHeader columnBookName;
+        private System.Windows.Forms.ColumnHeader columnPrice;
+        private System.Windows.Forms.ColumnHeader columnYearPublished;
+        private System.Windows.Forms.ColumnHeader columnPublisher;
+        private System.Windows.Forms.Button buttonBookExit;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.ColumnHeader columnAuthors;
+        private System.Windows.Forms.CheckedListBox listBoxBookAuthors;
     }
 }

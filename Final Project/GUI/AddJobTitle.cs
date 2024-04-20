@@ -23,9 +23,10 @@ namespace Final_Project.GUI
         private void buttonExitE_Click(object sender, EventArgs e)
         {
             Main mainForm = new Main();
-            var answer = MessageBox.Show("Do you really want to exit the application?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var answer = MessageBox.Show("Do you really want to exit?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (answer == DialogResult.Yes)
             {
+                mainForm.tabControlMain.SelectedTab = mainForm.ShowTab("Employee");
                 mainForm.Show();
                 this.Hide();
             }

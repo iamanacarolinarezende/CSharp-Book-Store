@@ -26,9 +26,23 @@ namespace Final_Project.GUI
             InitializeComponent();
         }
 
+        //Turn Tabs Public
         public TabControl tabControlMain
         {
             get { return tabControl; }
+        }
+
+        //Method to get a tabPage by name
+        public TabPage ShowTab(string tabPageName)
+        {
+            foreach (TabPage tabPage in tabControlMain.TabPages)
+            {
+                if (tabPage.Name == tabPageName)
+                {
+                    return tabPage;
+                }
+            }
+            return null;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -334,13 +348,26 @@ namespace Final_Project.GUI
             //Hide Last Name customer textbox
             textBoxSearchCLN.Visible = false;
 
-
             // Populate the comboBoxEmpPositions with positions from the Positions table
-            List<Positions> positions = PositionsDB.GetAllPositions();
+            List<Positions> positions = Positions.GetPositionList();
             comboBoxEmpPositions.DataSource = positions;
             comboBoxEmpPositions.DisplayMember = "PositionName";
             comboBoxEmpPositions.ValueMember = "PositionID";
             comboBoxEmpPositions.SelectedIndex = -1;
+
+            // Populate the listBoxBookAuthors with authors from Authors Table
+            List<Author> authors = Author.GetAuthorList();
+            listBoxBookAuthors.DataSource = authors;
+            listBoxBookAuthors.DisplayMember = "LastNameFirstName"; 
+            listBoxBookAuthors.ValueMember = "AuthorID"; 
+            listBoxBookAuthors.SelectedIndex = -1;
+
+            // Populate the comboBoxEmpPositions with positions from the Positions table
+            List<Publisher> publishers = Publisher.GetPublisherList();
+            comboBoxBookPublisher.DataSource = publishers;
+            comboBoxBookPublisher.DisplayMember = "PublisherName";
+            comboBoxBookPublisher.ValueMember = "PublisherID";
+            comboBoxBookPublisher.SelectedIndex = -1;
         }
 
         private void buttonExitE_Click(object sender, EventArgs e)
@@ -562,11 +589,11 @@ namespace Final_Project.GUI
             Employee employee = new Employee();
             
             List<Employee> listE = employee.GetEmployeeList();
-            List<Positions> positions = new Positions().GetPositionList();
+            List<Positions> listP = Positions.GetPositionList();
 
             foreach (Employee emp in listE)
             {
-                string jobTitleName = positions.FirstOrDefault(p => p.PositionID == emp.JobTitle)?.PositionName;
+                string jobTitleName = listP.FirstOrDefault(p => p.PositionID == emp.JobTitle)?.PositionName;
 
                 ListViewItem item = new ListViewItem(emp.EmployeeID.ToString());
                 item.SubItems.Add(emp.FirstName);
@@ -653,7 +680,7 @@ namespace Final_Project.GUI
             listViewEmployee.Items.Clear();
 
             Employee emp = new Employee();
-            List<Positions> pos = new Positions().GetPositionList();
+            List<Positions> pos = Positions.GetPositionList();
 
             string input = "";
             switch (comboBox1.SelectedIndex)
@@ -1440,6 +1467,35 @@ namespace Final_Project.GUI
                 default:
                     break;
             }
+        }
+
+        //===================================== BOOK FORM ==========================================
+        private void buttonBookExit_Click(object sender, EventArgs e)
+        {
+            var answer = MessageBox.Show("Do you really want to exit the application?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void label36_Click(object sender, EventArgs e)
+        {
+            AddPublisher formAdd = new AddPublisher();
+            formAdd.Show();
+            this.Hide();
+        }
+
+        private void label35_Click(object sender, EventArgs e)
+        {
+            AddAuthor formAdd = new AddAuthor();
+            formAdd.Show();
+            this.Hide();
+        }
+
+        private void buttonBookSave_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

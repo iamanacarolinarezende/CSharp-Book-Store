@@ -13,7 +13,7 @@ namespace Final_Project.BLL
         public string PositionName { get; set; }
 
         //List all Positions
-        public List<Positions> GetPositionList() => PositionsDB.GetAllPositions();
+        public static List<Positions> GetPositionList() => PositionsDB.GetAllPositions();
 
         //Add Position
         public void AddPosition(Positions position) => PositionsDB.SaveNewPosition(position);
