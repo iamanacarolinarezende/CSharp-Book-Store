@@ -145,27 +145,6 @@ namespace Final_Project.DAL
             return listB;
         }
 
-
-        //Check if ISBN is unique
-        //public static bool List<Book> (string bISBN)
-        //{
-        //    List<Book> listB = new List<Book>();
-        //    SqlConnection conn = UtilityDB.GetDBConnection();
-        //    SqlCommand cmdSearchBy = new SqlCommand();
-        //    cmdSearchBy.Connection = conn;
-        //    cmdSearchBy.CommandText = "SELECT FROM Books WHERE ISBN = @ISBN;";
-        //    cmdSearchBy.Parameters.AddWithValue("@ISBN", bISBN);
-
-        //    SqlDataReader reader = cmdSearchBy.ExecuteReader();
-        //    Book book;
-        //    if (book != null)
-        //    {
-        //        return false;
-        //    }
-        //    conn.Close();
-        //    return listB;
-        //}
-
         public static bool IsUniqueISBN(string isbn)
         {
             bool isUnique = false;
@@ -183,6 +162,35 @@ namespace Final_Project.DAL
 
             return isUnique;
         }
+
+        public static List<Book> GetAllRecords()
+        {
+            List<Book> listB = new List<Book>();
+            using (SqlConnection conn = UtilityDB.GetDBConnection())
+            {
+                SqlCommand cmdSelectAll = new SqlCommand(
+                    "SELECT b.ISBN, b.Title, b.UnitPrice, b.YearPublished, b.QOH, b.Publisher, ba.AuthorID " +
+                    "FROM Books b " +
+                    "JOIN BookAuthors ba ON b.ISBN = ba.ISBN", conn);
+
+                SqlDataReader reader = cmdSelectAll.ExecuteReader();
+                while (reader.Read())
+                {
+                    Book book = new Book();
+                    book.ISBN = reader["ISBN"].ToString();
+                    book.Title = reader["Title"].ToString();
+                    book.UnitPrice = Convert.ToDecimal(reader["UnitPrice"]);
+                    book.YearPublished = Convert.ToInt32(reader["YearPublished"]);
+                    book.QOH = Convert.ToInt32(reader["QOH"]);
+                    book.Publisher = Convert.ToInt32(reader["Publisher"]);
+                    book.AuthorID = Convert.ToInt32(reader["AuthorID"]);
+                    listB.Add(book);
+                }
+            }
+
+            return listB;
+        }
+
 
     }
 }

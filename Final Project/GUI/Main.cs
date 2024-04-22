@@ -16,6 +16,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Security.Cryptography;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Collections;
 
 namespace Final_Project.GUI
 {
@@ -347,6 +348,9 @@ namespace Final_Project.GUI
 
             //Hide Last Name customer textbox
             textBoxSearchCLN.Visible = false;
+
+            //Hide Book search textbox
+            textBoxBookSearch.Visible = false;
 
             // Populate the comboBoxEmpPositions with positions from the Positions table
             List<Positions> positions = Positions.GetPositionList();
@@ -1703,5 +1707,236 @@ namespace Final_Project.GUI
             comboBoxBookPublisher.SelectedIndex = -1;
             listViewBookAuthors.SelectedIndices.Clear();
         }
+
+        private string GetAuthorName(int authorID, List<Author> authorsList)
+        {
+            var author = authorsList.FirstOrDefault(a => a.AuthorID == authorID);
+            return author != null ? author.LastNameFirstName : "";
+        }
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+            listViewBook.Items.Clear();
+            Book books = new Book();
+            List<Book> allBooks = books.GetBookList();
+            List<Publisher> listP = Publisher.GetPublisherList();
+            List<Author> authorsList = Author.GetAuthorList();
+
+            // Agrupando os livros por ISBN
+            var groupedBooks = allBooks.GroupBy(b => b.ISBN);
+
+            foreach (var group in groupedBooks)
+            {
+                Book book = group.First(); // Geting just one book
+
+                string publisherName = listP.FirstOrDefault(pub => pub.PublisherID == book.Publisher)?.PublisherName;
+                var authorNames = string.Join(",", group.Select(b => GetAuthorName(b.AuthorID, authorsList)).Distinct());
+
+                ListViewItem item = new ListViewItem(book.ISBN);
+                item.SubItems.Add(book.Title);
+                item.SubItems.Add(book.UnitPrice.ToString());
+                item.SubItems.Add(book.YearPublished.ToString());
+                item.SubItems.Add(book.QOH.ToString());
+                item.SubItems.Add(publisherName);
+                item.SubItems.Add(authorNames);
+
+                listViewBook.Items.Add(item);
+            }
+            
+        }
+
+        private void comboBoxBookSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int indexselect = comboBoxBookSearch.SelectedIndex;
+            switch (indexselect)
+            {
+                case 0:
+                    listViewBook.Items.Clear();
+                    labelBookSearch.Visible = false;
+                    textBoxBookSearch.Visible = false;
+
+                    textBoxBookISBN.Clear();
+                    textBoxBookName.Clear();
+                    textBoxBookPrice.Clear();
+                    textBoxBookYear.Clear();
+                    textBoxBookQty.Clear();
+                    comboBoxBookPublisher.SelectedIndex = -1;
+                    listViewBookAuthors.SelectedIndices.Clear();
+                    break;
+
+                case 1:
+                    listViewBook.Items.Clear();
+                    labelBookSearch.Visible = true;
+                    textBoxBookSearch.Visible = true;
+                    labelBookSearch.Text = "Enter the Book ISBN";
+                    textBoxBookSearch.Clear();
+
+                    textBoxBookISBN.Clear();
+                    textBoxBookName.Clear();
+                    textBoxBookPrice.Clear();
+                    textBoxBookYear.Clear();
+                    textBoxBookQty.Clear();
+                    comboBoxBookPublisher.SelectedIndex = -1;
+                    listViewBookAuthors.SelectedIndices.Clear();
+                    break;
+
+                case 2:
+                    listViewBook.Items.Clear();
+                    labelBookSearch.Visible = true;
+                    textBoxBookSearch.Visible = true;
+                    labelBookSearch.Text = "Enter the Book Title";
+                    textBoxBookSearch.Clear();
+
+                    textBoxBookISBN.Clear();
+                    textBoxBookName.Clear();
+                    textBoxBookPrice.Clear();
+                    textBoxBookYear.Clear();
+                    textBoxBookQty.Clear();
+                    comboBoxBookPublisher.SelectedIndex = -1;
+                    listViewBookAuthors.SelectedIndices.Clear();
+                    break;
+
+                case 3:
+                    listViewBook.Items.Clear();
+                    labelBookSearch.Visible = true;
+                    textBoxBookSearch.Visible = true;
+                    labelBookSearch.Text = "Enter the Book Year";
+                    textBoxBookSearch.Clear();
+
+                    textBoxBookISBN.Clear();
+                    textBoxBookName.Clear();
+                    textBoxBookPrice.Clear();
+                    textBoxBookYear.Clear();
+                    textBoxBookQty.Clear();
+                    comboBoxBookPublisher.SelectedIndex = -1;
+                    listViewBookAuthors.SelectedIndices.Clear();
+                    break;
+            }
+        }
+
+        private void buttonBookSearch_Click(object sender, EventArgs e)
+        {
+            Book books = new Book();
+            List<Book> allBooks = new List<Book>();
+            List<Publisher> listP = Publisher.GetPublisherList();
+            List<Author> authorsList = Author.GetAuthorList();
+
+            string input = textBoxBookSearch.Text.Trim();
+
+            switch (comboBoxBookSearch.SelectedIndex)
+            {
+                //Search by ISBN
+                case 1:
+                    if (!Validator.IsValidISBN(input))
+                    {
+                        MessageBox.Show("Invalid ISBN, please enter a 10 or 13-digit number without spaces or hyphens.", "Invalid USBN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBoxBookISBN.Clear();
+                        textBoxBookISBN.Focus();
+                        return;
+                    }
+
+                    allBooks = books.SearchBooks(input);
+
+                    if (allBooks != null && allBooks.Count > 0)
+                    {
+                        var groupedBooks = allBooks.GroupBy(b => b.ISBN);
+                        foreach (var group in groupedBooks)
+                        {
+                            Book book = group.First(); 
+
+                            string publisherName = listP.FirstOrDefault(pub => pub.PublisherID == book.Publisher)?.PublisherName;
+                            var authorNames = string.Join(",", group.Select(b => GetAuthorName(b.AuthorID, authorsList)).Distinct());
+
+                            ListViewItem item = new ListViewItem(book.ISBN);
+                            item.SubItems.Add(book.Title);
+                            item.SubItems.Add(book.UnitPrice.ToString());
+                            item.SubItems.Add(book.YearPublished.ToString());
+                            item.SubItems.Add(book.QOH.ToString());
+                            item.SubItems.Add(publisherName);
+                            item.SubItems.Add(authorNames);
+
+                            listViewBook.Items.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No books found!", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        listViewBook.Items.Clear();
+                    }
+                    break;
+
+                // Search by Title
+                case 2: 
+                    input = textBoxBookSearch.Text.Trim();
+
+                    allBooks = books.SearchBooks(input);
+
+                    if (allBooks != null && allBooks.Count > 0)
+                    {
+                        var groupedBooks = allBooks.GroupBy(b => b.ISBN);
+                        foreach (var group in groupedBooks)
+                        {
+                            Book book = group.First();
+
+                            string publisherName = listP.FirstOrDefault(pub => pub.PublisherID == book.Publisher)?.PublisherName;
+                            var authorNames = string.Join(",", group.Select(b => GetAuthorName(b.AuthorID, authorsList)).Distinct());
+
+                            ListViewItem item = new ListViewItem(book.ISBN);
+                            item.SubItems.Add(book.Title);
+                            item.SubItems.Add(book.UnitPrice.ToString());
+                            item.SubItems.Add(book.YearPublished.ToString());
+                            item.SubItems.Add(book.QOH.ToString());
+                            item.SubItems.Add(publisherName);
+                            item.SubItems.Add(authorNames);
+
+                            listViewBook.Items.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No books found!", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        listViewBook.Items.Clear();
+                    }
+                    break;
+                case 3:
+                    input = textBoxBookSearch.Text.Trim();
+
+                    allBooks = books.SearchBooks(input);
+
+                    if (allBooks != null && allBooks.Count > 0)
+                    {
+                        var groupedBooks = allBooks.GroupBy(b => b.ISBN);
+                        foreach (var group in groupedBooks)
+                        {
+                            Book book = group.First();
+
+                            string publisherName = listP.FirstOrDefault(pub => pub.PublisherID == book.Publisher)?.PublisherName;
+                            var authorNames = string.Join(",", group.Select(b => GetAuthorName(b.AuthorID, authorsList)).Distinct());
+
+                            ListViewItem item = new ListViewItem(book.ISBN);
+                            item.SubItems.Add(book.Title);
+                            item.SubItems.Add(book.UnitPrice.ToString());
+                            item.SubItems.Add(book.YearPublished.ToString());
+                            item.SubItems.Add(book.QOH.ToString());
+                            item.SubItems.Add(publisherName);
+                            item.SubItems.Add(authorNames);
+
+                            listViewBook.Items.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No books found!", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        listViewBook.Items.Clear();
+                    }
+                    break;
+
+                default:
+                    MessageBox.Show("Please select a valid search type.", "Invalid Search Type", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
+        }
+            
+
     }
 }

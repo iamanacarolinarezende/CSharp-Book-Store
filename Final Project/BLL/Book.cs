@@ -29,6 +29,8 @@ namespace Final_Project.BLL
         //Unique ISBN
         public bool UniqueISBN(string ISBN) => BookDB.IsUniqueISBN(ISBN);
 
+        //List all Books
+        public List<Book> GetBookList() => BookDB.GetAllRecords();
 
         //Search books
         public List<Book> SearchBooks(string inputBook) => BookDB.SearchRecord(inputBook);

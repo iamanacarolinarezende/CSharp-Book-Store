@@ -127,7 +127,7 @@
             this.listViewBookAuthors = new System.Windows.Forms.ListView();
             this.buttonBookSearch = new System.Windows.Forms.Button();
             this.textBoxBookSearch = new System.Windows.Forms.TextBox();
-            this.label38 = new System.Windows.Forms.Label();
+            this.labelBookSearch = new System.Windows.Forms.Label();
             this.comboBoxBookSearch = new System.Windows.Forms.ComboBox();
             this.label39 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
@@ -137,10 +137,11 @@
             this.columnBookName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnYearPublished = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnQOH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnPublisher = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnAuthors = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonBookExit = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.buttonListBooks = new System.Windows.Forms.Button();
             this.label36 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
@@ -1232,14 +1233,14 @@
             this.Book.Controls.Add(this.listViewBookAuthors);
             this.Book.Controls.Add(this.buttonBookSearch);
             this.Book.Controls.Add(this.textBoxBookSearch);
-            this.Book.Controls.Add(this.label38);
+            this.Book.Controls.Add(this.labelBookSearch);
             this.Book.Controls.Add(this.comboBoxBookSearch);
             this.Book.Controls.Add(this.label39);
             this.Book.Controls.Add(this.label40);
             this.Book.Controls.Add(this.label41);
             this.Book.Controls.Add(this.listViewBook);
             this.Book.Controls.Add(this.buttonBookExit);
-            this.Book.Controls.Add(this.button7);
+            this.Book.Controls.Add(this.buttonListBooks);
             this.Book.Controls.Add(this.label36);
             this.Book.Controls.Add(this.label35);
             this.Book.Controls.Add(this.label34);
@@ -1297,38 +1298,40 @@
             this.buttonBookSearch.Location = new System.Drawing.Point(613, 321);
             this.buttonBookSearch.Name = "buttonBookSearch";
             this.buttonBookSearch.Size = new System.Drawing.Size(103, 30);
-            this.buttonBookSearch.TabIndex = 82;
+            this.buttonBookSearch.TabIndex = 12;
             this.buttonBookSearch.Text = "S&earch";
             this.buttonBookSearch.UseVisualStyleBackColor = false;
+            this.buttonBookSearch.Click += new System.EventHandler(this.buttonBookSearch_Click);
             // 
             // textBoxBookSearch
             // 
             this.textBoxBookSearch.Location = new System.Drawing.Point(607, 297);
             this.textBoxBookSearch.Name = "textBoxBookSearch";
             this.textBoxBookSearch.Size = new System.Drawing.Size(121, 20);
-            this.textBoxBookSearch.TabIndex = 79;
+            this.textBoxBookSearch.TabIndex = 11;
             // 
-            // label38
+            // labelBookSearch
             // 
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.Location = new System.Drawing.Point(603, 278);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(0, 13);
-            this.label38.TabIndex = 78;
+            this.labelBookSearch.AutoSize = true;
+            this.labelBookSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBookSearch.Location = new System.Drawing.Point(603, 278);
+            this.labelBookSearch.Name = "labelBookSearch";
+            this.labelBookSearch.Size = new System.Drawing.Size(0, 13);
+            this.labelBookSearch.TabIndex = 78;
             // 
             // comboBoxBookSearch
             // 
             this.comboBoxBookSearch.FormattingEnabled = true;
             this.comboBoxBookSearch.Items.AddRange(new object[] {
             "",
-            "Employee ID",
-            "First First OR Last Name",
-            "First AND Last Name"});
+            "Book ISBN",
+            "Book Title",
+            "Year"});
             this.comboBoxBookSearch.Location = new System.Drawing.Point(607, 247);
             this.comboBoxBookSearch.Name = "comboBoxBookSearch";
             this.comboBoxBookSearch.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxBookSearch.TabIndex = 77;
+            this.comboBoxBookSearch.TabIndex = 10;
+            this.comboBoxBookSearch.SelectedIndexChanged += new System.EventHandler(this.comboBoxBookSearch_SelectedIndexChanged);
             // 
             // label39
             // 
@@ -1369,14 +1372,15 @@
             this.columnBookName,
             this.columnPrice,
             this.columnYearPublished,
+            this.columnQOH,
             this.columnPublisher,
             this.columnAuthors});
             this.listViewBook.GridLines = true;
             this.listViewBook.HideSelection = false;
-            this.listViewBook.Location = new System.Drawing.Point(4, 217);
+            this.listViewBook.Location = new System.Drawing.Point(4, 214);
             this.listViewBook.Margin = new System.Windows.Forms.Padding(2);
             this.listViewBook.Name = "listViewBook";
-            this.listViewBook.Size = new System.Drawing.Size(572, 182);
+            this.listViewBook.Size = new System.Drawing.Size(594, 182);
             this.listViewBook.TabIndex = 73;
             this.listViewBook.UseCompatibleStateImageBehavior = false;
             this.listViewBook.View = System.Windows.Forms.View.Details;
@@ -1394,12 +1398,16 @@
             // columnPrice
             // 
             this.columnPrice.Text = "Price";
-            this.columnPrice.Width = 137;
+            this.columnPrice.Width = 52;
             // 
             // columnYearPublished
             // 
             this.columnYearPublished.Text = "Year";
-            this.columnYearPublished.Width = 107;
+            this.columnYearPublished.Width = 48;
+            // 
+            // columnQOH
+            // 
+            this.columnQOH.Text = "QTY";
             // 
             // columnPublisher
             // 
@@ -1409,7 +1417,7 @@
             // columnAuthors
             // 
             this.columnAuthors.Text = "Author";
-            this.columnAuthors.Width = 193;
+            this.columnAuthors.Width = 104;
             // 
             // buttonBookExit
             // 
@@ -1418,22 +1426,23 @@
             this.buttonBookExit.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBookExit.Name = "buttonBookExit";
             this.buttonBookExit.Size = new System.Drawing.Size(104, 30);
-            this.buttonBookExit.TabIndex = 72;
+            this.buttonBookExit.TabIndex = 13;
             this.buttonBookExit.Text = "E&xit";
             this.buttonBookExit.UseVisualStyleBackColor = true;
             this.buttonBookExit.Click += new System.EventHandler(this.buttonBookExit_Click);
             // 
-            // button7
+            // buttonListBooks
             // 
-            this.button7.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.Location = new System.Drawing.Point(4, 184);
-            this.button7.Margin = new System.Windows.Forms.Padding(2);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(166, 30);
-            this.button7.TabIndex = 71;
-            this.button7.Text = "&List Books";
-            this.button7.UseVisualStyleBackColor = false;
+            this.buttonListBooks.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonListBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonListBooks.Location = new System.Drawing.Point(4, 183);
+            this.buttonListBooks.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonListBooks.Name = "buttonListBooks";
+            this.buttonListBooks.Size = new System.Drawing.Size(166, 30);
+            this.buttonListBooks.TabIndex = 9;
+            this.buttonListBooks.Text = "&List Books";
+            this.buttonListBooks.UseVisualStyleBackColor = false;
+            this.buttonListBooks.Click += new System.EventHandler(this.button7_Click);
             // 
             // label36
             // 
@@ -1477,7 +1486,7 @@
             this.comboBoxBookPublisher.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxBookPublisher.Name = "comboBoxBookPublisher";
             this.comboBoxBookPublisher.Size = new System.Drawing.Size(120, 21);
-            this.comboBoxBookPublisher.TabIndex = 67;
+            this.comboBoxBookPublisher.TabIndex = 5;
             // 
             // buttonBookDelete
             // 
@@ -1486,7 +1495,7 @@
             this.buttonBookDelete.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBookDelete.Name = "buttonBookDelete";
             this.buttonBookDelete.Size = new System.Drawing.Size(103, 30);
-            this.buttonBookDelete.TabIndex = 65;
+            this.buttonBookDelete.TabIndex = 8;
             this.buttonBookDelete.Text = "&Delete Employee";
             this.buttonBookDelete.UseVisualStyleBackColor = true;
             this.buttonBookDelete.Click += new System.EventHandler(this.buttonBookDelete_Click);
@@ -1498,7 +1507,7 @@
             this.buttonBookUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBookUpdate.Name = "buttonBookUpdate";
             this.buttonBookUpdate.Size = new System.Drawing.Size(103, 30);
-            this.buttonBookUpdate.TabIndex = 64;
+            this.buttonBookUpdate.TabIndex = 7;
             this.buttonBookUpdate.Text = "&Update Employee";
             this.buttonBookUpdate.UseVisualStyleBackColor = true;
             this.buttonBookUpdate.Click += new System.EventHandler(this.buttonBookUpdate_Click);
@@ -1510,7 +1519,7 @@
             this.textBoxBookQty.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxBookQty.Name = "textBoxBookQty";
             this.textBoxBookQty.Size = new System.Drawing.Size(63, 21);
-            this.textBoxBookQty.TabIndex = 63;
+            this.textBoxBookQty.TabIndex = 4;
             // 
             // textBoxBookName
             // 
@@ -1519,7 +1528,7 @@
             this.textBoxBookName.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxBookName.Name = "textBoxBookName";
             this.textBoxBookName.Size = new System.Drawing.Size(164, 21);
-            this.textBoxBookName.TabIndex = 62;
+            this.textBoxBookName.TabIndex = 1;
             // 
             // label33
             // 
@@ -1539,7 +1548,7 @@
             this.textBoxBookYear.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxBookYear.Name = "textBoxBookYear";
             this.textBoxBookYear.Size = new System.Drawing.Size(63, 21);
-            this.textBoxBookYear.TabIndex = 57;
+            this.textBoxBookYear.TabIndex = 3;
             // 
             // textBoxBookPrice
             // 
@@ -1548,7 +1557,7 @@
             this.textBoxBookPrice.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxBookPrice.Name = "textBoxBookPrice";
             this.textBoxBookPrice.Size = new System.Drawing.Size(68, 21);
-            this.textBoxBookPrice.TabIndex = 56;
+            this.textBoxBookPrice.TabIndex = 2;
             // 
             // buttonBookSave
             // 
@@ -1557,7 +1566,7 @@
             this.buttonBookSave.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBookSave.Name = "buttonBookSave";
             this.buttonBookSave.Size = new System.Drawing.Size(103, 30);
-            this.buttonBookSave.TabIndex = 58;
+            this.buttonBookSave.TabIndex = 6;
             this.buttonBookSave.Text = "&Save Book";
             this.buttonBookSave.UseVisualStyleBackColor = true;
             this.buttonBookSave.Click += new System.EventHandler(this.buttonBookSave_Click);
@@ -1569,7 +1578,7 @@
             this.textBoxBookISBN.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxBookISBN.Name = "textBoxBookISBN";
             this.textBoxBookISBN.Size = new System.Drawing.Size(99, 21);
-            this.textBoxBookISBN.TabIndex = 30;
+            this.textBoxBookISBN.TabIndex = 0;
             // 
             // label32
             // 
@@ -1768,7 +1777,7 @@
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Button buttonBookSearch;
         private System.Windows.Forms.TextBox textBoxBookSearch;
-        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label labelBookSearch;
         private System.Windows.Forms.ComboBox comboBoxBookSearch;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label40;
@@ -1780,9 +1789,10 @@
         private System.Windows.Forms.ColumnHeader columnYearPublished;
         private System.Windows.Forms.ColumnHeader columnPublisher;
         private System.Windows.Forms.Button buttonBookExit;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button buttonListBooks;
         private System.Windows.Forms.ColumnHeader columnAuthors;
         private System.Windows.Forms.ListView listViewBookAuthors;
         private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.ColumnHeader columnQOH;
     }
 }
