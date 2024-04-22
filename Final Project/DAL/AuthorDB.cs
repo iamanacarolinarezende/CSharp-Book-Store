@@ -40,6 +40,7 @@ namespace Final_Project.DAL
             while (reader.Read())
             {
                 aut = new Author();
+                aut.AuthorID = Convert.ToInt32(reader["AuthorID"]);
                 aut.FirstName = reader["FirstName"].ToString();
                 aut.LastName = reader["LastName"].ToString();
                 aut.Email = reader["email"].ToString();

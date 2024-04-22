@@ -188,6 +188,28 @@ namespace Final_Project.VALIDATION
             return false;
         }
 
+        //Book Year validation
+            public static bool IsValidYear(string year)
+            {
+                if (year.Length != 4)
+                {
+                    return false;
+                }
+
+                if (!int.TryParse(year, out int yearValue)) //string to int
+                {
+                    return false;
+                }
+
+                int currentYear = DateTime.Now.Year;
+                if (yearValue < currentYear)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
 
     }
 

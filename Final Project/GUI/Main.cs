@@ -355,14 +355,20 @@ namespace Final_Project.GUI
             comboBoxEmpPositions.ValueMember = "PositionID";
             comboBoxEmpPositions.SelectedIndex = -1;
 
-            // Populate the listBoxBookAuthors with authors from Authors Table
+            // Populate the listViewBookAuthors with authors from Authors Table
             List<Author> authors = Author.GetAuthorList();
-            listBoxBookAuthors.DataSource = authors;
-            listBoxBookAuthors.DisplayMember = "LastNameFirstName"; 
-            listBoxBookAuthors.ValueMember = "AuthorID"; 
-            listBoxBookAuthors.SelectedIndex = -1;
+            if (authors != null && authors.Count > 0)
+            {
+                foreach (Author author in authors)
+                {
+                    ListViewItem item = new ListViewItem(author.LastNameFirstName); 
+                    item.Tag = author.AuthorID;
+                    listViewBookAuthors.Items.Add(item);
+                }
+            }
+            listViewBookAuthors.SelectedIndices.Clear();
 
-            // Populate the comboBoxEmpPositions with positions from the Positions table
+            // Populate the comboBoxBookPublisher with Publisher Names
             List<Publisher> publishers = Publisher.GetPublisherList();
             comboBoxBookPublisher.DataSource = publishers;
             comboBoxBookPublisher.DisplayMember = "PublisherName";
@@ -478,7 +484,6 @@ namespace Final_Project.GUI
             string EID = textBoxEmployeeId.Text.Trim();
             string FName = textBoxFirstName.Text.Trim();
             string LName = textBoxLastName.Text.Trim();
-            int JTitle;
             string Phone = textBoxPhoneEmp.Text.Trim();
 
             // Check if employee ID is exist
@@ -1495,7 +1500,208 @@ namespace Final_Project.GUI
 
         private void buttonBookSave_Click(object sender, EventArgs e)
         {
+            string ISBN = textBoxBookISBN.Text.Trim();
+            string Book = textBoxBookName.Text.Trim();
+            string Price = textBoxBookPrice.Text.Trim();
+            string Year = textBoxBookYear.Text.Trim();
+            string Qty = textBoxBookQty.Text.Trim();
 
+            //Check Empty textbox
+            if (string.IsNullOrEmpty(ISBN) || string.IsNullOrEmpty(Book) || string.IsNullOrEmpty(Price) || string.IsNullOrEmpty(Year) || string.IsNullOrEmpty(Qty))
+            {
+                MessageBox.Show("Please fill in all required fields (*).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //Check ISBN format
+            if (!Validator.IsValidISBN(ISBN))
+            {
+                MessageBox.Show("Invalid ISBN, please enter a 10 or 13-digit number without spaces or hyphens.", "Invalid USBN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxBookISBN.Clear();
+                textBoxBookISBN.Focus();
+                return;
+            }
+
+            // Check if Book ID is unique
+            Book books = new Book();
+            if (!books.UniqueISBN(ISBN))
+            {
+                MessageBox.Show("The book ISBN must be unique.\n" + "Please enter another ISBN.", "Duplicate Book ISBN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxBookISBN.Clear();
+                textBoxBookISBN.Focus();
+                return;
+
+            }
+
+            //Year Validation
+            if (!Validator.IsValidYear(Year))
+            {
+                MessageBox.Show("The year provided is not valid. Please make sure it contains 4 digits and is the current year or earlier.", "Invalid Year", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxBookYear.Clear();
+                textBoxBookYear.Focus();
+                return;
+            }
+
+            if (comboBoxBookPublisher.SelectedItem != null && listViewBookAuthors.SelectedItems.Count > 0)
+            {
+                // Get the selected publisher from combobox
+                Publisher selectedPublisher = (Publisher)comboBoxBookPublisher.SelectedItem;
+
+                // Get the selected authors from ListView
+
+                List<int> selectedAuthorIDs = new List<int>();
+                foreach (ListViewItem item in listViewBookAuthors.Items)
+                {
+                    if (item.Selected)
+                    {
+                        int authorID = (int)item.Tag;
+                        selectedAuthorIDs.Add(authorID);
+                    }
+                }
+
+                books.ISBN = ISBN;
+                books.Title = Book;
+                books.UnitPrice = Convert.ToDecimal(Price);
+                books.YearPublished = Convert.ToInt32(Year);
+                books.QOH = Convert.ToInt32(Qty);
+                books.Publisher = selectedPublisher.PublisherID;
+
+                books.SaveBooks(books, selectedAuthorIDs);
+
+
+                MessageBox.Show("This Book data has been saved successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                textBoxBookISBN.Clear();
+                textBoxBookName.Clear();
+                textBoxBookPrice.Clear();
+                textBoxBookYear.Clear();
+                textBoxBookQty.Clear();
+                comboBoxBookPublisher.SelectedIndex = -1;
+                listViewBookAuthors.SelectedIndices.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Please select a publisher and/or at least one author.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        //Update Book
+        private void buttonBookUpdate_Click(object sender, EventArgs e)
+        {
+            string ISBN = textBoxBookISBN.Text.Trim();
+            string Book = textBoxBookName.Text.Trim();
+            string Price = textBoxBookPrice.Text.Trim();
+            string Year = textBoxBookYear.Text.Trim();
+            string Qty = textBoxBookQty.Text.Trim();
+
+            //Check Empty textbox
+            if (string.IsNullOrEmpty(ISBN) || string.IsNullOrEmpty(Book) || string.IsNullOrEmpty(Price) || string.IsNullOrEmpty(Year) || string.IsNullOrEmpty(Qty))
+            {
+                MessageBox.Show("Please fill in all required fields (*).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            // Check if Book ID Exist
+            Book booksUpdate = new Book();
+            if (booksUpdate.UniqueISBN(ISBN))
+            {
+                MessageBox.Show("The book ISBN does not exist.\n" + "Please enter another ISBN.", "Invalid Book ISBN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxBookISBN.Clear();
+                textBoxBookISBN.Focus();
+                return;
+            }
+            //Year Validation
+            if (!Validator.IsValidYear(Year))
+            {
+                MessageBox.Show("The year provided is not valid. Please make sure it contains 4 digits and is the current year or earlier.", "Invalid Year", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxBookYear.Clear();
+                textBoxBookYear.Focus();
+                return;
+            }
+            
+            //Update
+            if (comboBoxBookPublisher.SelectedItem != null && listViewBookAuthors.SelectedItems.Count > 0)
+            {
+                // Get the selected publisher from combobox
+                Publisher selectedPublisher = (Publisher)comboBoxBookPublisher.SelectedItem;
+
+                // Get the selected authors from ListView
+                List<int> selectedAuthorIDs = new List<int>();
+                foreach (ListViewItem item in listViewBookAuthors.Items)
+                {
+                    if (item.Selected)
+                    {
+                        int authorID = (int)item.Tag;
+                        selectedAuthorIDs.Add(authorID);
+                    }
+                }
+
+                booksUpdate.ISBN = ISBN;
+                booksUpdate.Title = Book;
+                booksUpdate.UnitPrice = Convert.ToDecimal(Price);
+                booksUpdate.YearPublished = Convert.ToInt32(Year);
+                booksUpdate.QOH = Convert.ToInt32(Qty);
+                booksUpdate.Publisher = selectedPublisher.PublisherID;
+
+                booksUpdate.UpdateBooks(booksUpdate, selectedAuthorIDs);
+
+
+                MessageBox.Show("This Book data has been updated successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                textBoxBookISBN.Clear();
+                textBoxBookName.Clear();
+                textBoxBookPrice.Clear();
+                textBoxBookYear.Clear();
+                textBoxBookQty.Clear();
+                comboBoxBookPublisher.SelectedIndex = -1;
+                listViewBookAuthors.SelectedIndices.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Please select a publisher and/or at least one author.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonBookDelete_Click(object sender, EventArgs e)
+        {
+            string ISBN = textBoxBookISBN.Text.Trim();
+            if (string.IsNullOrEmpty(ISBN))
+            {
+                MessageBox.Show("Please fill in the Book ISBN.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            //Check ISBN format
+            if (!Validator.IsValidISBN(ISBN))
+            {
+                MessageBox.Show("Invalid ISBN, please enter a 10 or 13-digit number without spaces or hyphens.", "Invalid USBN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxBookISBN.Clear();
+                textBoxBookISBN.Focus();
+                return;
+            }
+            // Check if Book ID Exist
+            Book bookDelete = new Book();
+            if (bookDelete.UniqueISBN(ISBN))
+            {
+                MessageBox.Show("The book ISBN does not exist.\n" + "Please enter another ISBN.", "Invalid Book ISBN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxBookISBN.Clear();
+                textBoxBookISBN.Focus();
+                return;
+            }
+
+            var answer = MessageBox.Show("Do you really want to delete this Book?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (answer == DialogResult.Yes)
+            {
+                bookDelete.DeleteBooks(ISBN);
+                MessageBox.Show("The book data has been deleted successfully.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            textBoxBookISBN.Clear();
+            textBoxBookName.Clear();
+            textBoxBookPrice.Clear();
+            textBoxBookYear.Clear();
+            textBoxBookQty.Clear();
+            comboBoxBookPublisher.SelectedIndex = -1;
+            listViewBookAuthors.SelectedIndices.Clear();
         }
     }
 }
